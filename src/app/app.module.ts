@@ -15,7 +15,6 @@ import { ProgressComponent } from './pages/progress/progress.component';
 import { Graficas1Component } from './pages/graficas1/graficas1.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component';
 import { PagesComponent } from './pages/pages.component';
 import { RegisterComponent } from './login/register.component';
 import { PortalComponent } from './portal/portal.component';
@@ -31,7 +30,6 @@ import { FooterComponent } from './shared/footer/footer.component';
     Graficas1Component,
     HeaderComponent,
     SidebarComponent,
-    BreadcrumbsComponent,
     PagesComponent,
     RegisterComponent,
     PortalComponent,
