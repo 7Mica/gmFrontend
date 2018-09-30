@@ -19,6 +19,7 @@ import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component
 import { PagesComponent } from './pages/pages.component';
 import { RegisterComponent } from './login/register.component';
 import { PortalComponent } from './portal/portal.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { PortalComponent } from './portal/portal.component';
     PagesComponent,
     RegisterComponent,
     PortalComponent,
+    FooterComponent,
     
   ],
   imports: [
