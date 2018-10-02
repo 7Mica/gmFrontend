@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 
 import { RegisterComponent } from './login/register.component';
 import { PortalComponent } from './portal/portal.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { PortalComponent } from './portal/portal.component';
     BrowserModule,
     APP_ROUTES,
     PagesModule,
+    FormsModule,
     CarouselModule.forRoot()
   ],
   providers: [],

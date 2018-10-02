@@ -1,3 +1,62 @@
-<p>
-  progress works!
-</p>
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="card">
+      <div class="card-content">
+
+        <div class="card-body">
+          <div class="progress progress-line-primary">
+            <div class="progress-bar" role="progressbar" [attr.ariaValueNow]="progreso" aria-valuenow="60"
+              aria-valuemin="0" aria-valuemax="100" [style.width]="progreso1 + '%'">
+              <span class="sr-only">60% Complete</span>
+            </div>
+          </div>
+          <br>
+          <div class="progress progress-line-primary">
+            <div class="progress-bar progress-bar-success" role="progressbar" [attr.ariaValueNow]="progreso"
+              aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" [style.width]="progreso2 + '%'">
+              <span class="sr-only">60% Complete</span>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+
+      <div class="card">
+        <div class="card-content">
+
+          <div class="card-body">
+
+
+           <app-incrementador (cambioValor)="actualizar(progreso1 = $event)" nombre="Progress Azul"  [progreso]="progreso1"></app-incrementador>
+
+
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+
+      <div class="card">
+        <div class="card-content">
+
+          <div class="card-body">
+              <app-incrementador (cambioValor)="actualizar(progreso2 = $event)" nombre="Progress Verde" [progreso]="progreso2"></app-incrementador>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
