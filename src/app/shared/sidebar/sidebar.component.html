@@ -13,39 +13,26 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
         </a>
     </div>
     <div class="sidebar-wrapper">
-        
+
         <ul class="nav">
-            <li class="active">
+            <!-- <li class="active">
                 <a href="./dashboard.html">
                     <i class="material-icons">dashboard</i>
                     <p> Eventos </p>
                 </a>
+            </li> -->
+
+            <li *ngFor="let menu of _sidebar.menu">
+                <a [routerLink]="[menu.url]" routerLinkActive="active">
+                    <i [class]="menu.icono">dashboard</i>
+                    <p> {{menu.titulo}} </p>
+                </a>
+            </li>
+
+            <li>
+                <a routerLink="/login">Salir</a>
             </li>
             
-            <li>
-                <a href="./widgets.html">
-                    <i class="material-icons">widgets</i>
-                    <p> Usuarios </p>
-                </a>
-            </li>
-            <li>
-                <a href="./charts.html">
-                    <i class="material-icons">timeline</i>
-                    <p> Mensajes </p>
-                </a>
-            </li>
-            <li>
-                <a href="./calendar.html">
-                    <i class="material-icons">date_range</i>
-                    <p> Portal </p>
-                </a>
-            </li>
-            <li>
-                <a href="./calendar.html">
-                    <i class="material-icons">date_range</i>
-                    <p> Papelera </p>
-                </a>
-            </li>
         </ul>
     </div>
 </div>
