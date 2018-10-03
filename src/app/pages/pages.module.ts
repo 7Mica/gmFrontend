@@ -11,6 +11,7 @@ import { PAGES_ROUTES } from "./pages.routes";
 import { ChartsModule } from 'ng2-charts';
 import { IncrementadorComponent } from "../components/incrementador/incrementador.component";
 import { GraficaComponent } from "../components/grafica/grafica.component";
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 //temporal
 
@@ -21,7 +22,8 @@ import { GraficaComponent } from "../components/grafica/grafica.component";
         ProgressComponent,
         Graficas1Component,
         IncrementadorComponent,
-        GraficaComponent
+        GraficaComponent,
+        AccountSettingsComponent
     ],
     exports: [
         DashboardComponent,
