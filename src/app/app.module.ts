@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CarouselModule } from 'ngx-bootstrap';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+
 
 
 // Rutas
@@ -16,7 +17,8 @@ import { ServiceModule } from './services/service.module';
 
 import { RegisterComponent } from './login/register.component';
 import { PortalComponent } from './portal/portal.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -27,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     PortalComponent,
     
     
+    
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,10 @@ import { FormsModule } from '@angular/forms';
     PagesModule,
     FormsModule,
     ServiceModule,
-    CarouselModule.forRoot()
+    SharedModule,
+    ReactiveFormsModule,
+    SweetAlert2Module,
+    PagesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

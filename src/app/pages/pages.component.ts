@@ -3,17 +3,12 @@ declare function init_plugins();
 @Component({
   selector: 'app-pages',
   templateUrl: './pages.component.html',
-  styles: []
+  styleUrls: []
 })
 export class PagesComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    setTimeout(()=>{
-      init_plugins();
-      
-    },5000);
-  }
+  ngOnInit() {  }
 
 }
