@@ -1,6 +1,10 @@
 body {
     font-size: .875rem;
   }
+
+  .pointer {
+    cursor: pointer;
+  }
   
   .feather {
     width: 16px;

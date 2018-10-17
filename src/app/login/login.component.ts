@@ -10,10 +10,16 @@ import { Usuario } from '../models/usuario.model';
 })
 export class LoginComponent implements OnInit {
 
+  email: string;
+  recuerdame: boolean = false;
   constructor(public router: Router, public _usuarioService: UsuarioService) { }
 
   ngOnInit() {
 
+    this.email = localStorage.getItem('email') || '';
+    if(this.email.length > 1){
+      this.recuerdame = true;
+    }
    
   }
 
@@ -26,7 +32,7 @@ export class LoginComponent implements OnInit {
 
     this._usuarioService.login(usuario, form.value.recuerdame).subscribe(resp =>{
 
-      console.log(resp);
+      this.router.navigate(['dashboard']);
       
 
     }, error => {

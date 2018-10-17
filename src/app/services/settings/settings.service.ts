@@ -20,7 +20,7 @@ export class SettingsService {
    */
   guardarAjustes(){
     // console.log('guardado en local storage');
-    localStorage.setItem('ajustes', JSON.stringify(this.ajustes));
+    //localStorage.setItem('ajustes', JSON.stringify(this.ajustes));
   }
 
   cargarAjustes(){
