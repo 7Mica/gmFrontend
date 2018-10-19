@@ -18,7 +18,8 @@ export class DashboardComponent implements OnInit {
       this.titulo = event.titulo;
       //Agregar titulo de la pagina
       this.title.setTitle(this.titulo);
-    })
+    });
+    
    }
 
   ngOnInit() {

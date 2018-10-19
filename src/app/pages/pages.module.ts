@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 
 import { PagesComponent } from "./pages.component";
@@ -12,8 +12,12 @@ import { ChartsModule } from 'ng2-charts';
 import { IncrementadorComponent } from "../components/incrementador/incrementador.component";
 import { GraficaComponent } from "../components/grafica/grafica.component";
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
-import { PromesasComponent } from './promesas/promesas.component';
-import { RxjsComponent } from './rxjs/rxjs.component';
+import { EventosComponent } from './eventos/eventos.component';
+import {DataTableModule} from "angular2-datatable";
+import { BrowserModule } from "@angular/platform-browser";
+import { HttpModule } from "@angular/http";
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { UsuarioscuComponent } from "./usuarios/usuarioscu.component";
 
 //temporal
 
@@ -26,8 +30,9 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         IncrementadorComponent,
         GraficaComponent,
         AccountSettingsComponent,
-        PromesasComponent,
-        RxjsComponent
+        EventosComponent,
+        UsuariosComponent,
+        UsuarioscuComponent
     ],
     exports: [
         DashboardComponent,
@@ -39,7 +44,11 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         SharedModule,
         PAGES_ROUTES,
         FormsModule,
-        ChartsModule
+        ChartsModule,
+        DataTableModule,
+        BrowserModule,
+        HttpModule,
+        ReactiveFormsModule
     ]
 })
 

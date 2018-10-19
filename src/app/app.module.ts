@@ -19,6 +19,7 @@ import { RegisterComponent } from './login/register.component';
 import { PortalComponent } from './portal/portal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
+import { UsuarioscuComponent } from './usuarios/usuarioscu/usuarioscu.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { SharedModule } from './shared/shared.module';
     LoginComponent,
     RegisterComponent,
     PortalComponent,
+    UsuarioscuComponent,
     
     
     
