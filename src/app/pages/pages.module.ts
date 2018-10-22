@@ -1,21 +1,25 @@
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpModule } from "@angular/http";
+import { BrowserModule } from "@angular/platform-browser";
+
+//Modulos 3ros
+import {DataTableModule} from "angular2-datatable";
+import { ChartsModule } from 'ng2-charts';
+import { ModalModule } from 'ngx-bootstrap';
 
 
+//Pages
 import { PagesComponent } from "./pages.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ProgressComponent } from "./progress/progress.component";
 import { Graficas1Component } from "./graficas1/graficas1.component";
 import { SharedModule } from "../shared/shared.module";
 import { PAGES_ROUTES } from "./pages.routes";
-import { ChartsModule } from 'ng2-charts';
 import { IncrementadorComponent } from "../components/incrementador/incrementador.component";
 import { GraficaComponent } from "../components/grafica/grafica.component";
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { EventosComponent } from './eventos/eventos.component';
-import {DataTableModule} from "angular2-datatable";
-import { BrowserModule } from "@angular/platform-browser";
-import { HttpModule } from "@angular/http";
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { UsuarioscuComponent } from "./usuarios/usuarioscu.component";
 
@@ -48,7 +52,16 @@ import { UsuarioscuComponent } from "./usuarios/usuarioscu.component";
         DataTableModule,
         BrowserModule,
         HttpModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        ModalModule.forRoot()
+    ],
+
+    entryComponents: [
+        UsuarioscuComponent
+    ],
+
+    providers: [
+        
     ]
 })
 

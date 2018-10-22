@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { UsuarioscuComponent } from './usuarioscu.component';
+import { UsuarioService } from 'src/app/services/service.index';
 
 @Component({
   selector: 'app-usuarios',
@@ -9,26 +11,53 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class UsuariosComponent implements OnInit {
 
-  public data: any[];
+  public data: any[] = [];
   public filterQuery = "";
   public rowsOnPage = 5;
   public sortBy = "email";
   public sortOrder = "asc";
 
-  forma: FormGroup;
+  modalRef: BsModalRef;
 
-  constructor(private _http: Http) { }
+
+  constructor(private _http: Http, private modalService: BsModalService, public _usuarioService: UsuarioService) { 
+
+    this.getUsuarios();
+  }
 
   ngOnInit() {
-    
+  
+  }
 
-    
-    this._http.get("assets/data.json")
-      .subscribe((data)=> {
-        setTimeout(()=> {
-          this.data = data.json();
-        }, 2000);
+  getUsuarios(){
+    this.data = [];
+
+    this._usuarioService.listaUsuarios().subscribe((res: any) => {
+
+      res.data.forEach(element => {
+
+        this.data.push(element);
+        
+        
       });
+      
+
+    }, err=> {
+      console.log(err);
+      
+    });
+
+
+  }
+
+
+  openModal() {
+    this.modalRef = this.modalService.show(UsuarioscuComponent, { class: 'modal-lg',
+      initialState: {
+        title: 'Registrar nuevo usuario',
+        data: {}
+      }
+    });
   }
 
 }

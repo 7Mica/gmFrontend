@@ -63,6 +63,12 @@ export class UsuarioService {
 
   }
 
+  listaUsuarios(){
+    let url = URL_SERVICIOS + '/usuario';
+
+    return this.http.get(url);
+  }
+
 
 
   

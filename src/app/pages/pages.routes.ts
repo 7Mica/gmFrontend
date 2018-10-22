@@ -9,7 +9,6 @@ import { AccountSettingsComponent } from "./account-settings/account-settings.co
 import { LoginGuardGuard } from "../services/service.index";
 import { EventosComponent } from "./eventos/eventos.component";
 import { UsuariosComponent } from "./usuarios/usuarios.component";
-import { UsuarioscuComponent } from "./usuarios/usuarioscu.component";
 
 const pagesRoutes: Routes = [
 
@@ -22,7 +21,6 @@ const pagesRoutes: Routes = [
             { path: 'graficas1', component: Graficas1Component, data: { titulo: 'Graficas'} },
             { path: 'eventos', component: EventosComponent, data: { titulo: 'Eventos'} },
             { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Usuarios'} },
-            { path: 'editarusuarios', component: UsuarioscuComponent, data: { titulo: 'UsuariosCu'} },
             { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes de cuenta'} },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
         ]

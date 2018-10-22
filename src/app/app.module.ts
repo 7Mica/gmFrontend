@@ -11,6 +11,7 @@ import { APP_ROUTES } from './app.routes';
 import { PagesModule } from "./pages/pages.module";
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { ModalModule } from 'ngx-bootstrap';
 
 //Servicios
 import { ServiceModule } from './services/service.module';
@@ -19,7 +20,6 @@ import { RegisterComponent } from './login/register.component';
 import { PortalComponent } from './portal/portal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
-import { UsuarioscuComponent } from './usuarios/usuarioscu/usuarioscu.component';
 
 
 @NgModule({
@@ -28,7 +28,6 @@ import { UsuarioscuComponent } from './usuarios/usuarioscu/usuarioscu.component'
     LoginComponent,
     RegisterComponent,
     PortalComponent,
-    UsuarioscuComponent,
     
     
     
@@ -42,7 +41,8 @@ import { UsuarioscuComponent } from './usuarios/usuarioscu/usuarioscu.component'
     SharedModule,
     ReactiveFormsModule,
     SweetAlert2Module,
-    PagesModule
+    ModalModule.forRoot()
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
