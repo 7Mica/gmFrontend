@@ -1,5 +1,7 @@
 body {
     font-size: .875rem;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
   }
 
   .pointer {

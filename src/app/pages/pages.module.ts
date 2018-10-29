@@ -21,7 +21,11 @@ import { GraficaComponent } from "../components/grafica/grafica.component";
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { UsuariosComponent as UsuariosCliente } from './eventos/clientes/usuarios/usuarios.component';
 import { UsuarioscuComponent } from "./usuarios/usuarioscu.component";
+import { EventocuComponent } from './eventos/eventocu.component';
+import { SubmenuComponent } from './submenu/submenu.component';
+import { MenuclienteComponent } from './menucliente/menucliente.component';
 
 //temporal
 
@@ -36,7 +40,11 @@ import { UsuarioscuComponent } from "./usuarios/usuarioscu.component";
         AccountSettingsComponent,
         EventosComponent,
         UsuariosComponent,
-        UsuarioscuComponent
+        UsuarioscuComponent,
+        EventocuComponent,
+        SubmenuComponent,
+        MenuclienteComponent,
+        UsuariosCliente
     ],
     exports: [
         DashboardComponent,
@@ -53,11 +61,12 @@ import { UsuarioscuComponent } from "./usuarios/usuarioscu.component";
         BrowserModule,
         HttpModule,
         ReactiveFormsModule,
-        ModalModule.forRoot()
+        ModalModule.forRoot(),
     ],
 
     entryComponents: [
-        UsuarioscuComponent
+        UsuarioscuComponent,
+        EventocuComponent
     ],
 
     providers: [

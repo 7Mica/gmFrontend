@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsuarioService } from '../services/service.index';
-import { Usuario } from '../models/usuario.model';
 import { Router } from '@angular/router';
+import { Usuario } from '../models/usuario.model';
 
 
 @Component({
@@ -52,11 +52,21 @@ export class RegisterComponent implements OnInit {
     }
 
     let usuario = new Usuario(
-      this.forma.value.email,
-      this.forma.value.password,
       this.forma.value.nombre,
       this.forma.value.appaterno,
-      this.forma.value.apmaterno
+      this.forma.value.apmaterno,
+      'asd',
+      'asd',
+      'asd',
+      'asd',
+      'asd',
+      'asd',
+      'asd',
+      'asd',
+      'asd',
+      'asd',
+      this.forma.value.email,
+      this.forma.value.password,
 
     );
 

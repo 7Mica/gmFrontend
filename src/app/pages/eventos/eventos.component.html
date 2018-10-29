@@ -1,55 +1,30 @@
 <br>
 <br>
-
 <div class="row">
-  <div class="card col-md-4">
-    <img class="card-img-top" src="https://picsum.photos/362/200" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card col-md-4">
-    <img class="card-img-top" src="https://picsum.photos/362/200" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card col-md-4">
-    <img class="card-img-top" src="https://picsum.photos/362/200" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card col-md-4">
-    <img class="card-img-top" src="https://picsum.photos/362/200" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card col-md-4">
-    <img class="card-img-top" src="https://picsum.photos/362/200" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card col-md-4">
-    <img class="card-img-top" src="https://picsum.photos/362/200" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
+<div class="col-md-6">
+<h2>Eventos</h2>
+</div>
+  <div class="col-md-6 text-right">
+    
+    <button class="circulo amarillo pointer" (click)="openModal()">
+      <span class="add"><i class="fa fa-plus"></i></span>
+    </button>
+    <h5>Agregar nuevo evento</h5>
   </div>
 
+</div>
+<hr>
+<div class="row">
+  
+  <div *ngFor="let item of eventos" class="card pointer" style="width: 18rem; margin-left: 1%;" (click)="abrirSubMenu(item._id)">
+      <img class="card-img-top" src="https://picsum.photos/400/200" alt="Card image cap">
+      <div class="card-body">
+        <h4 class="card-title">{{item.titulo}}</h4>
+        <p class="card-text">{{item.descripcion}}</p>
+        <p class="card-text">{{item.fechainicio}}</p>
+        <p class="card-text">{{item.fechadefinalizacion}}</p>
+        <p class="card-text">{{item.cliente}}</p>
+      </div>
+    </div>
 
 </div>

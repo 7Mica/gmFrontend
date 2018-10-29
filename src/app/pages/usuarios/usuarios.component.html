@@ -8,7 +8,6 @@
 </div>
 
 <br>
-
 <div class="row">
   <div class="col-md-12 mx-auto">
     <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage">
@@ -42,10 +41,10 @@
           <td>{{item.email}}</td>
           <td>{{item.rol}}</td>
           <td>
-            <button class='btn table-action-btn'>
+            <button class="btn table-action-btn" style="color:red" (click)="eliminarUsuario(item._id)">
               <i class="fa fa-trash-o"></i> 
             </button>
-            <button class='btn table-action-btn'>
+            <button class="btn table-action-btn" style="color:green" (click)="editarUsuario(item._id)">
                 <i class="fa fa-pencil-square-o"></i>
             </button>
           </td>

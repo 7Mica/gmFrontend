@@ -5,6 +5,7 @@ import { URL_SERVICIOS } from 'src/app/config/config';
 import { map } from "rxjs/operators";
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { Login } from 'src/app/models/login.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class UsuarioService {
     this.router.navigate(['/login']);
   }
 
-  login(usuario: Usuario, recordar: boolean = false){
+  login(usuario: Login, recordar: boolean = false){
     let url = URL_SERVICIOS+'/login';
 
     if(recordar){
@@ -62,9 +63,22 @@ export class UsuarioService {
     }));
 
   }
+  
+
+  eliminarUsuario(id){
+    let url = URL_SERVICIOS + '/usuario/'+id;
+
+    return this.http.delete(url);
+  }
 
   listaUsuarios(){
     let url = URL_SERVICIOS + '/usuario';
+
+    return this.http.get(url);
+  }
+
+  getUsuarioById(id){
+    let url = URL_SERVICIOS +'/usuario/'+id;
 
     return this.http.get(url);
   }

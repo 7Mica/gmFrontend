@@ -1,17 +1,21 @@
 export class Usuario {
     constructor(
+        public nombre: string,
+        public apellidoPaterno: string,
+        public apellidoMaterno: string,
+        public fechadenacimiento: string,
+        public calle: string,
+        public estado: string,
+        public ciudad: string,
+        public referencias: string,
+        public codigopostal: string,
+        public colonia: string,
+        public numeroexterior: string,
+        public numerointerior: string,
+        public rol='USER_ROLE',
         public email: string,
         public password: string,
-        public nombre?: string,
-        public apellidoPaterno?: string,
-        public apellidoMaterno?: string,
         public img?: string,
-        public fechadenacimiento?: string,
-        public direccion?: string,
-        public estado?: string,
-        public cp?: string,
-        public ciudad?: string,
-        public rol='USER_ROLE',
         ){
         
     }
