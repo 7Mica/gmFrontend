@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { EventoService } from "src/app/services/service.index";
+import { EventoService, SharedService } from "src/app/services/service.index";
 import { BsModalRef, BsModalService } from "ngx-bootstrap";
 import { EventocuComponent } from "./eventocu.component";
 import { Router } from "@angular/router";
@@ -12,20 +12,35 @@ import { Router } from "@angular/router";
 export class EventosComponent implements OnInit {
   eventos: any[] = [];
   modalRef: BsModalRef;
-
+  menuActivado = false;
+  evento = false;
+  url = ['/eventos'];
   constructor(
     private _eventoService: EventoService,
     private modalService: BsModalService,
-    private router: Router
+    private router: Router,
   ) {
+    if(this.router.url === '/eventos') { this.menuActivado = true;}
+    
     this.listaEventos();
+    
+  }
+
+  displayCounter(count) {
+    
+    this.url = count.router.url.split('/');
+}
+
+  displayDesactivate(some){
+
+    if(some.router.url === '/eventos'){
+      this.menuActivado = true;
+    }
+    this.url = some.router.url.split('/');
+    
   }
 
   ngOnInit() {}
-
-  abrirSubMenu(id) {
-    this.router.navigate(['/subevento/'+id]);
-  }
 
   openModal() {
     let modalRef = this.modalService.show(EventocuComponent, {

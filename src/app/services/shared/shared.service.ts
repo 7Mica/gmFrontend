@@ -7,8 +7,6 @@ export class SharedService {
   constructor() {    
     
 
-  }
-
- 
+  } 
 
 }

@@ -28,4 +28,13 @@ export class EventoService {
 
     }));
   }
+
+  getEventoById(id){
+
+    let url = URL_SERVICIOS + '/evento/'+id;
+    return this.http.get(url);
+  }
+
+
+
 }

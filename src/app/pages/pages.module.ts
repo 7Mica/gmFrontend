@@ -9,6 +9,7 @@ import { ChartsModule } from 'ng2-charts';
 import { ModalModule } from 'ngx-bootstrap';
 
 
+
 //Pages
 import { PagesComponent } from "./pages.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
@@ -24,7 +25,6 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { UsuariosComponent as UsuariosCliente } from './eventos/clientes/usuarios/usuarios.component';
 import { UsuarioscuComponent } from "./usuarios/usuarioscu.component";
 import { EventocuComponent } from './eventos/eventocu.component';
-import { SubmenuComponent } from './submenu/submenu.component';
 import { MenuclienteComponent } from './menucliente/menucliente.component';
 
 //temporal
@@ -42,7 +42,6 @@ import { MenuclienteComponent } from './menucliente/menucliente.component';
         UsuariosComponent,
         UsuarioscuComponent,
         EventocuComponent,
-        SubmenuComponent,
         MenuclienteComponent,
         UsuariosCliente
     ],

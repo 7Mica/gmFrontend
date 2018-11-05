@@ -8,7 +8,6 @@ import { AccountSettingsComponent } from "./account-settings/account-settings.co
 import { LoginGuardGuard } from "../services/service.index";
 import { EventosComponent } from "./eventos/eventos.component";
 import { UsuariosComponent } from "./usuarios/usuarios.component";
-import { SubmenuComponent } from "./submenu/submenu.component";
 import { MenuclienteComponent } from "./menucliente/menucliente.component";
 import { UsuariosComponent as UsuariosCliente } from "./eventos/clientes/usuarios/usuarios.component";
 
@@ -34,11 +33,6 @@ const pagesRoutes: Routes = [
         data: { titulo: "Graficas" }
       },
       {
-        path: "eventos",
-        component: EventosComponent,
-        data: { titulo: "Eventos" }
-      },
-      {
         path: "usuarios",
         component: UsuariosComponent,
         data: { titulo: "Usuarios" }
@@ -49,21 +43,21 @@ const pagesRoutes: Routes = [
         data: { titulo: "Ajustes de cuenta" }
       },
       {
-        path: "subevento",
-        component: SubmenuComponent,
-        data: { titulo: "Subevento" },
+        path: "eventos",
+        component: EventosComponent,
+        data: { titulo: "Eventos" },
         children: [
-            {
-                path: ":idevento",
-                component: MenuclienteComponent,
-                data: { titulo: "Menu Cliente" }
-              },
+          {
+            path: ":idevento",
+            component: MenuclienteComponent,
+            data: { titulo: "Menu Cliente", breadcrumb: "menucliente" }
+          },
           {
             path: ":idevento/usuarios",
             component: UsuariosCliente,
-            data: { titulo: "Usuario Cliente" }
+            data: { titulo: "Usuario Cliente", breadcrumb: "usuarios" }
           },
-          
+
           {
             path: "",
             pathMatch: "full",

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedService } from 'src/app/services/service.index';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuarios',
@@ -8,8 +8,7 @@ import { SharedService } from 'src/app/services/service.index';
 })
 export class UsuariosComponent implements OnInit {
 
-  constructor(private sharedService: SharedService) { 
-   
+  constructor(private router: Router) { 
    
   }
 
