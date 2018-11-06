@@ -32,7 +32,8 @@ export class EventosComponent implements OnInit {
 }
 
   displayDesactivate(some){
-
+    console.log(some);
+    
     if(some.router.url === '/eventos'){
       this.menuActivado = true;
     }

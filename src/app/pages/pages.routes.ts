@@ -9,7 +9,13 @@ import { LoginGuardGuard } from "../services/service.index";
 import { EventosComponent } from "./eventos/eventos.component";
 import { UsuariosComponent } from "./usuarios/usuarios.component";
 import { MenuclienteComponent } from "./menucliente/menucliente.component";
-import { UsuariosComponent as UsuariosCliente } from "./eventos/clientes/usuarios/usuarios.component";
+import { UsuariosComponent as UsuariosCliente } from "./menucliente/usuarios/usuarios.component";
+import { ConferenciasComponent } from "./menucliente/conferencias/conferencias.component";
+import { EstadisticasComponent } from "./menucliente/estadisticas/estadisticas.component";
+import { MapasComponent } from "./menucliente/mapas/mapas.component";
+import { MarcasComponent } from "./menucliente/marcas/marcas.component";
+import { PaseentradaComponent } from "./menucliente/paseentrada/paseentrada.component";
+import { ConstanciasComponent } from "./menucliente/constancias/constancias.component";
 
 const pagesRoutes: Routes = [
   {
@@ -56,6 +62,36 @@ const pagesRoutes: Routes = [
             path: ":idevento/usuarios",
             component: UsuariosCliente,
             data: { titulo: "Usuario Cliente", breadcrumb: "usuarios" }
+          },
+          {
+            path: ":idevento/estadisticas",
+            component: EstadisticasComponent,
+            data: { titulo: "Estadísticas", breadcrumb: "estadisticas" }
+          },
+          {
+            path: ":idevento/conferencias",
+            component: ConferenciasComponent,
+            data: { titulo: "Conferencias", breadcrumb: "conferencias" }
+          },
+          {
+            path: ":idevento/mapas",
+            component: MapasComponent,
+            data: { titulo: "Mapas", breadcrumb: "mapas" }
+          },
+          {
+            path: ":idevento/marcas",
+            component: MarcasComponent,
+            data: { titulo: "Marcas", breadcrumb: "marcas" }
+          },
+          {
+            path: ":idevento/paseentrada",
+            component: PaseentradaComponent,
+            data: { titulo: "Pase de entrada", breadcrumb: "paseentrada" }
+          },
+          {
+            path: ":idevento/constancias",
+            component: ConstanciasComponent,
+            data: { titulo: "Constancias", breadcrumb: "constancias" }
           },
 
           {

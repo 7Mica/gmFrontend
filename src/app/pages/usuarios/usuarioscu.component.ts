@@ -20,13 +20,17 @@ export class UsuarioscuComponent implements OnInit {
 
   data: any;
   forma: FormGroup;
-  prefs = [{ name: 'Adminsitrador',value: "ADMIN_ROLE" }, { name:'Cliente',value: "CLIENT" }];
+  prefs = [
+    { name: "Adminsitrador", value: "ADMIN_ROLE" },
+    { name: "Cliente", value: "CLIENT" }
+  ];
 
   constructor(
     public modalRef: BsModalRef,
     public modalService: BsModalService,
-    public _usuarioService: UsuarioService,
+    public _usuarioService: UsuarioService
   ) {}
+
   ngOnInit() {
     this.forma = new FormGroup(
       {
@@ -45,9 +49,7 @@ export class UsuarioscuComponent implements OnInit {
           Validators.minLength(2),
           Validators.maxLength(50)
         ]),
-        fechanacimiento: new FormControl(null, [
-          Validators.required,
-        ]),
+        fechanacimiento: new FormControl(null, [Validators.required]),
         calle: new FormControl(null, [
           Validators.required,
           Validators.minLength(2),
@@ -81,11 +83,9 @@ export class UsuarioscuComponent implements OnInit {
         numeroexterior: new FormControl(null, [
           Validators.required,
           Validators.minLength(1),
-          Validators.maxLength(50),
+          Validators.maxLength(50)
         ]),
-        numerointerior: new FormControl(null, [
-          Validators.maxLength(50),
-        ]),
+        numerointerior: new FormControl(null, [Validators.maxLength(50)]),
         rol: new FormControl(null, [Validators.required]),
         email: new FormControl(null, [Validators.required, Validators.email]),
         emailconfirm: new FormControl(null, [
@@ -174,7 +174,7 @@ export class UsuarioscuComponent implements OnInit {
       this.forma.value.numerointerior,
       this.forma.value.rol,
       this.forma.value.email,
-      this.forma.value.password,
+      this.forma.value.password
     );
 
     console.log(usuario);

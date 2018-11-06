@@ -22,10 +22,17 @@ import { GraficaComponent } from "../components/grafica/grafica.component";
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-import { UsuariosComponent as UsuariosCliente } from './eventos/clientes/usuarios/usuarios.component';
+import { UsuariosComponent as UsuariosCliente } from './menucliente/usuarios/usuarios.component';
 import { UsuarioscuComponent } from "./usuarios/usuarioscu.component";
 import { EventocuComponent } from './eventos/eventocu.component';
 import { MenuclienteComponent } from './menucliente/menucliente.component';
+import { ConferenciasComponent } from './menucliente/conferencias/conferencias.component';
+import { EstadisticasComponent } from './menucliente/estadisticas/estadisticas.component';
+import { MapasComponent } from './menucliente/mapas/mapas.component';
+import { MarcasComponent } from './menucliente/marcas/marcas.component';
+import { PaseentradaComponent } from './menucliente/paseentrada/paseentrada.component';
+import { ConstanciasComponent } from './menucliente/constancias/constancias.component';
+import { UsuariocComponent } from './menucliente/usuarios/usuarioc/usuarioc.component';
 
 //temporal
 
@@ -43,7 +50,14 @@ import { MenuclienteComponent } from './menucliente/menucliente.component';
         UsuarioscuComponent,
         EventocuComponent,
         MenuclienteComponent,
-        UsuariosCliente
+        UsuariosCliente,
+        ConferenciasComponent,
+        EstadisticasComponent,
+        MapasComponent,
+        MarcasComponent,
+        PaseentradaComponent,
+        ConstanciasComponent,
+        UsuariocComponent
     ],
     exports: [
         DashboardComponent,
@@ -65,7 +79,8 @@ import { MenuclienteComponent } from './menucliente/menucliente.component';
 
     entryComponents: [
         UsuarioscuComponent,
-        EventocuComponent
+        EventocuComponent,
+        UsuariocComponent
     ],
 
     providers: [

@@ -19,10 +19,11 @@ export class MenuclienteComponent implements OnInit {
 
     console.log(this.activatedRoute.snapshot.params);
     this.eventoService.getEventoById(this.activatedRoute.snapshot.params.idevento).subscribe((res: any) => {
-      if(res.ok === false){
+      
+      if(res.data === null || res.ok === false ){
         this.router.navigate(['/eventos']);
       }else{
-
+        
         this.existe = true;
       }
       
