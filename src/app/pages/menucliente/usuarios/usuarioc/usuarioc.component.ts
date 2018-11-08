@@ -1,201 +1,198 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { UsuarioeventoService } from 'src/app/services/service.index';
-import { Usuario } from 'src/app/models/usuarioevento.model';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import {
+  FormGroup,
+  Validators,
+  FormControl,
+  AbstractControl
+} from "@angular/forms";
+import { BsModalRef, BsModalService } from "ngx-bootstrap";
+import { UsuarioeventoService } from "src/app/services/service.index";
+import { Usuario } from "src/app/models/usuarioevento.model";
+import { Router, ActivatedRoute } from "@angular/router";
+import swal from "sweetalert2";
 
 @Component({
-  selector: 'app-usuarioc',
-  templateUrl: './usuarioc.component.html',
-  styleUrls: ['./usuarioc.component.css']
+  selector: "app-usuarioc",
+  templateUrl: "./usuarioc.component.html",
+  styleUrls: ["./usuarioc.component.css"]
 })
 export class UsuariocComponent implements OnInit {
-
   @Output()
   action = new EventEmitter();
 
   data: any;
   forma: FormGroup;
   prefs = [
-    { name: 'Adminsitrador',value: "ADMIN_ROLE" }, 
-    { name:'Usuario',value: "USER_ROLE" }, 
-    { name:'Staff',value: "STAFF" }, 
-    { name:'Ponente',value: "PONENTE" },
-    { name:'Stand',value: "STAND" }];
-  
+    { name: "Adminsitrador", value: "ADMIN_ROLE" },
+    { name: "Usuario", value: "USER_ROLE" },
+    { name: "Staff", value: "STAFF" },
+    { name: "Ponente", value: "PONENTE" },
+    { name: "Stand", value: "STAND" }
+  ];
+
   constructor(
     public modalRef: BsModalRef,
     public modalService: BsModalService,
     public _usuarioService: UsuarioeventoService,
     private activatedRoute: ActivatedRoute
-    ) { 
-    }
+  ) {}
 
-    ngOnInit() {
-      this.forma = new FormGroup(
-        {
-          nombre: new FormControl(null, [
-            Validators.required,
-            Validators.minLength(2),
-            Validators.maxLength(50)
-          ]),
-          appaterno: new FormControl(null, [
-            Validators.required,
-            Validators.minLength(2),
-            Validators.maxLength(50)
-          ]),
-          apmaterno: new FormControl(null, [
-            Validators.required,
-            Validators.minLength(2),
-            Validators.maxLength(50)
-          ]),
-          fechanacimiento: new FormControl(null, [
-            Validators.required,
-          ]),
-          calle: new FormControl(null, [
-            Validators.required,
-            Validators.minLength(2),
-            Validators.maxLength(50)
-          ]),
-          estado: new FormControl(null, [
-            Validators.required,
-            Validators.minLength(2),
-            Validators.maxLength(50)
-          ]),
-          ciudad: new FormControl(null, [
-            Validators.required,
-            Validators.minLength(2),
-            Validators.maxLength(50)
-          ]),
-          referencias: new FormControl(null, [
-            Validators.required,
-            Validators.minLength(2),
-            Validators.maxLength(50)
-          ]),
-          codigopostal: new FormControl(null, [
-            Validators.required,
-            Validators.minLength(5),
-            Validators.maxLength(5)
-          ]),
-          colonia: new FormControl(null, [
-            Validators.required,
-            Validators.minLength(2),
-            Validators.maxLength(50)
-          ]),
-          numeroexterior: new FormControl(null, [
-            Validators.required,
-            Validators.minLength(1),
-            Validators.maxLength(50),
-          ]),
-          numerointerior: new FormControl(null, [
-            Validators.maxLength(50),
-          ]),
-          rol: new FormControl(null, [Validators.required]),
-          email: new FormControl(null, [Validators.required, Validators.email]),
-          emailconfirm: new FormControl(null, [
-            Validators.required,
-            Validators.email
-          ]),
-          password: new FormControl(null, [
-            Validators.required,
-            Validators.minLength(5)
-          ]),
-          passwordconfirm: new FormControl(null, [Validators.required])
-        },
-        { validators: [this.matchEmail, this.matchPassword] }
-      );
-  
-      if (this.data.edit) {
-        this._usuarioService.getUsuarioById(this.data._id).subscribe(
-          (res: any) => {
-            console.log(res);
-  
-            this.forma.get("nombre").setValue(res.data.nombre);
-            this.forma.get("appaterno").setValue(res.data.apellidoPaterno);
-            this.forma.get("apmaterno").setValue(res.data.apellidoMaterno);
-            this.forma.get("email").setValue(res.data.email);
-          },
-          error => {
-            console.log(error);
-          }
-        );
-      }
-    }
+  ngOnInit() {
+    this.forma = new FormGroup(
+      {
+        nombre: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50)
+        ]),
+        appaterno: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50)
+        ]),
+        apmaterno: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50)
+        ]),
+        fechanacimiento: new FormControl(null, [Validators.required]),
+        calle: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50)
+        ]),
+        estado: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50)
+        ]),
+        ciudad: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50)
+        ]),
+        referencias: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50)
+        ]),
+        codigopostal: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(5)
+        ]),
+        colonia: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50)
+        ]),
+        numeroexterior: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(50)
+        ]),
+        numerointerior: new FormControl(null, [Validators.maxLength(50)]),
+        rol: new FormControl(null, [Validators.required]),
+        email: new FormControl(null, [Validators.required, Validators.email]),
+        emailconfirm: new FormControl(null, [
+          Validators.required,
+          Validators.email
+        ]),
+        password: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(5)
+        ]),
+        passwordconfirm: new FormControl(null, [Validators.required])
+      },
+      { validators: [this.matchEmail, this.matchPassword] }
+    );
 
-    matchEmail(AC: AbstractControl) {
-      let email = AC.get("email").value; // to get value in input tag
-      let confirmEmail = AC.get("emailconfirm").value; // to get value in input tag
-      if (email != confirmEmail) {
-        AC.get("emailconfirm").setErrors({ matchemail: true });
-      } else {
-        return null;
-      }
-    }
-  
-    matchPassword(AC: AbstractControl) {
-      let password = AC.get("password").value; // to get value in input tag
-      let confirmPassword = AC.get("passwordconfirm").value; // to get value in input tag
-      if (password != confirmPassword) {
-        AC.get("passwordconfirm").setErrors({ matchpassword: true });
-      } else {
-        return null;
-      }
-    }
-
-    queEs() {
-      if (this.data.edit) {
-        this.actualizarUsuario(this.data._id);
-      } else {
-        this.registrarUsuario();
-      }
-    }
-
-    actualizarUsuario(id) {
-      if (this.forma.invalid) {
-        console.log("No es valido");
-      } else {
-        console.log("entro");
-      }
-    }
-
-    registrarUsuario() {
-      if (this.forma.invalid) {
-        return;
-      }
-
-  
-      let usuario = new Usuario(
-        this.forma.value.nombre,
-        this.forma.value.appaterno,
-        this.forma.value.apmaterno,
-        this.forma.value.fechanacimiento,
-        this.forma.value.calle,
-        this.forma.value.estado,
-        this.forma.value.ciudad,
-        this.forma.value.referencias,
-        this.forma.value.codigopostal,
-        this.forma.value.colonia,
-        this.forma.value.numeroexterior,
-        this.forma.value.numerointerior,
-        this.data.idevento.idevento,
-        this.forma.value.rol,
-        this.forma.value.email,
-        this.forma.value.password
-      );
-  
-      console.log(usuario);
-  
-      this._usuarioService.crearUsuario(usuario).subscribe(
-        res => {
-          console.log("Usuario guardado");
-          this.action.emit();
-          this.modalRef.hide();
+    if (this.data.edit) {
+      this._usuarioService.getUsuarioById(this.data._id).subscribe(
+        (res: any) => {
+          this.forma.get("nombre").setValue(res.data.nombre);
+          this.forma.get("appaterno").setValue(res.data.apellidoPaterno);
+          this.forma.get("apmaterno").setValue(res.data.apellidoMaterno);
+          this.forma.get("email").setValue(res.data.email);
         },
         error => {
           console.log(error);
         }
       );
     }
+  }
 
+  matchEmail(AC: AbstractControl) {
+    let email = AC.get("email").value; // to get value in input tag
+    let confirmEmail = AC.get("emailconfirm").value; // to get value in input tag
+    if (email != confirmEmail) {
+      AC.get("emailconfirm").setErrors({ matchemail: true });
+    } else {
+      return null;
+    }
+  }
+
+  matchPassword(AC: AbstractControl) {
+    let password = AC.get("password").value; // to get value in input tag
+    let confirmPassword = AC.get("passwordconfirm").value; // to get value in input tag
+    if (password != confirmPassword) {
+      AC.get("passwordconfirm").setErrors({ matchpassword: true });
+    } else {
+      return null;
+    }
+  }
+
+  queEs() {
+    if (this.data.edit) {
+      this.actualizarUsuario(this.data._id);
+    } else {
+      this.registrarUsuario();
+    }
+  }
+
+  actualizarUsuario(id) {
+    if (this.forma.invalid) {
+      console.log("No es valido");
+    } else {
+      console.log("entro");
+    }
+  }
+
+  registrarUsuario() {
+    if (this.forma.invalid) {
+      return;
+    }
+
+    let usuario = new Usuario(
+      this.forma.value.nombre,
+      this.forma.value.appaterno,
+      this.forma.value.apmaterno,
+      this.forma.value.fechanacimiento,
+      this.forma.value.calle,
+      this.forma.value.estado,
+      this.forma.value.ciudad,
+      this.forma.value.referencias,
+      this.forma.value.codigopostal,
+      this.forma.value.colonia,
+      this.forma.value.numeroexterior,
+      this.forma.value.numerointerior,
+      this.data.idevento.idevento,
+      this.forma.value.rol,
+      this.forma.value.email,
+      this.forma.value.password
+    );
+
+    console.log(usuario);
+
+    this._usuarioService.crearUsuario(usuario).subscribe(
+      res => {
+        console.log("Usuario guardado");
+        this.action.emit();
+        this.modalRef.hide();
+      },
+      error => {
+        swal("Error!", "Ocurrío un error: " + error, "error");
+      }
+    );
+  }
 }

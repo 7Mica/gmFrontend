@@ -1,0 +1,157 @@
+<div class="modal-header">
+
+  <h3 class="modal-title pull-left"> {{ title }} </h3>
+
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<form class="register-form" [formGroup]="forma" (ngSubmit)="registrarEvento()" #formDir="ngForm">
+  <div class="modal-body">
+
+    <div class="row">
+      <div class="col-md-12 div-title">
+        <h4>Información de la conferencia</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="titulo">Titulo</label>
+        <input minlength="2" maxlength="50" type="text" [ngClass]="{
+              'red-input': (forma.get('titulo').hasError('required') && forma.get('titulo').touched) || 
+              (formDir.submitted && forma.get('titulo').hasError('required') || forma.get('titulo').hasError('minlength') || forma.get('titulo').hasError(maxlength)) }"
+          formControlName="titulo" name="titulo" class="form-control" placeholder="Titulo del evento *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('titulo').hasError('required')) || (forma.get('titulo').hasError('required') && forma.get('titulo').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('titulo').hasError('minlength')">Este campo
+          tiene un minimo de 2 caracteres *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('titulo').hasError('maxlength')">Este campo
+          tiene un maximo de 50 caracteres *</p>
+
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="salon">Salon</label>
+        <input minlength="2" maxlength="50" type="text" [ngClass]="{
+              'red-input': (forma.get('salon').hasError('required') && forma.get('salon').touched) || 
+              (formDir.submitted && forma.get('salon').hasError('required') || forma.get('salon').hasError('minlength') || forma.get('salon').hasError(maxlength)) }"
+          formControlName="salon" name="salon" class="form-control" placeholder="Salon *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('salon').hasError('required')) || (forma.get('salon').hasError('required') && forma.get('salon').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('salon').hasError('minlength')">Este campo
+          tiene un minimo de 2 caracteres *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('salon').hasError('maxlength')">Este campo
+          tiene un maximo de 50 caracteres *</p>
+
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="hora">Hora</label>
+        <input  type="time" [ngClass]="{
+              'red-input': (forma.get('hora').hasError('required') && forma.get('hora').touched) || 
+              (formDir.submitted && forma.get('hora').hasError('required')) }"
+          formControlName="hora" name="hora" class="form-control" placeholder="Hora del evento *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('hora').hasError('required')) || (forma.get('hora').hasError('required') && forma.get('hora').touched)">Este
+          campo es
+          requerido *</p>
+
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="duracion">Duración</label>
+        <input type="number" min="0" max="99" [ngClass]="{
+              'red-input': (forma.get('duracion').hasError('required') && forma.get('duracion').touched) || 
+              (formDir.submitted && forma.get('duracion').hasError('required')) }"
+          formControlName="duracion" name="duracion" class="form-control" placeholder="Duración de la conferencia *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('duracion').hasError('required')) || (forma.get('duracion').hasError('required') && forma.get('duracion').touched)">Este
+          campo es
+          requerido *</p>
+
+      </div>
+
+      <div class="form-group col-md-6">
+        <select formControlName="ponente" id="ponente" name="ponente" class="form-control" [ngClass]="{
+          'red-input': (forma.get('ponente').hasError('required') && forma.get('ponente').touched )|| 
+          (formDir.submitted && forma.get('ponente').hasError('required')) }">
+          <option value=null disabled selected>Selecciona un rol</option>
+          <option *ngFor="let item of ponentes" [value]="item._id">{{item.nombre + ' ' + item.apellidoPaterno + ' ' +item.apellidoMaterno}}</option>
+        </select>
+  
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('ponente').hasError('required')) || (forma.get('ponente').hasError('required') && forma.get('ponente').touched)">Este
+          campo es
+          requerido *</p>
+  
+  
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="fecha">Fecha</label>
+        <input  type="date" [ngClass]="{
+                'red-input': (forma.get('fecha').hasError('required') && forma.get('fecha').touched) || 
+                (formDir.submitted && forma.get('fecha').hasError('required')) }"
+          formControlName="fecha" name="fecha" class="form-control" placeholder="Fecha de inicio *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('fecha').hasError('required')) || (forma.get('fecha').hasError('required') && forma.get('fecha').touched)">Este
+          campo es
+          requerido *</p>
+        
+
+      </div>
+
+      <div class="form-group col-md-12">
+        <label for="descripcion">Descripción</label>
+        <textarea minlength="2" maxlength="50" rows="4" type="text" [ngClass]="{
+              'red-input': (forma.get('descripcion').hasError('required') && forma.get('descripcion').touched) || 
+              (formDir.submitted && forma.get('descripcion').hasError('required') || forma.get('descripcion').hasError('minlength') || forma.get('descripcion').hasError(maxlength)) }"
+          formControlName="descripcion" name="descripcion" class="form-control" placeholder="Descripción del evento *"> </textarea>
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('descripcion').hasError('required')) || (forma.get('descripcion').hasError('required') && forma.get('descripcion').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('descripcion').hasError('minlength')) || (forma.get('descripcion').hasError('minlength') && forma.get('descripcion').touched)">Este
+          campo
+          tiene un minimo de 2 caracteres *</p>
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('descripcion').hasError('maxlength')) || (forma.get('descripcion').hasError('maxlength') && forma.get('descripcion').touched)">Este
+          campo
+          tiene un maximo de 100 caracteres *</p>
+
+      </div>
+
+ 
+      <div class="form-group col-md-6">
+          <label for="img">Imagen del evento</label>
+          <input type="file" class="form-control" [ngClass]="{
+                      'red-input': (forma.get('img').hasError('required') && forma.get('img').touched) || 
+                      (formDir.submitted && forma.get('img').hasError('required')) }"
+            formControlName="img" name="img" class="form-control" placeholder="Imagen del evento*" />
+  
+          <p class="text-danger" *ngIf="(formDir.submitted && forma.get('img').hasError('required')) || (forma.get('img').hasError('required') && forma.get('img').touched)">Este
+            campo es
+            requerido *</p>
+        
+  
+        </div>
+
+    </div>
+
+
+    <!-- Fin de modal-body -->
+  </div>
+
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <button type="submit" class="btn btn-default" *ngIf="!data.edit">Guardar</button>
+        <!-- <button type="submit" class="btn btn-default" *ngIf="data.edit">Actualizar</button> -->
+      </div>
+    </div>
+  </div>
+</form>
