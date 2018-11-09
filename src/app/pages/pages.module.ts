@@ -35,6 +35,7 @@ import { ConstanciasComponent } from './menucliente/constancias/constancias.comp
 import { UsuariocComponent } from './menucliente/usuarios/usuarioc/usuarioc.component';
 import { ConferenciacuComponent } from './menucliente/conferencias/conferenciacu/conferenciacu.component';
 import { DetalleconferenciaComponent } from './menucliente/modales/detalleconferencia/detalleconferencia.component';
+import { MarcascuComponent } from './menucliente/marcas/marcascu/marcascu.component';
 
 //temporal
 
@@ -61,7 +62,8 @@ import { DetalleconferenciaComponent } from './menucliente/modales/detalleconfer
         ConstanciasComponent,
         UsuariocComponent,
         ConferenciacuComponent,
-        DetalleconferenciaComponent
+        DetalleconferenciaComponent,
+        MarcascuComponent
     ],
     exports: [
         DashboardComponent,
@@ -86,7 +88,8 @@ import { DetalleconferenciaComponent } from './menucliente/modales/detalleconfer
         EventocuComponent,
         UsuariocComponent,
         ConferenciacuComponent,
-        DetalleconferenciaComponent
+        DetalleconferenciaComponent,
+        MarcascuComponent
     ],
 
     providers: [
