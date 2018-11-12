@@ -7,6 +7,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import {DataTableModule} from "angular2-datatable";
 import { ChartsModule } from 'ng2-charts';
 import { ModalModule } from 'ngx-bootstrap';
+import { AgmCoreModule } from '@agm/core';
 
 
 
@@ -80,6 +81,9 @@ import { MarcascuComponent } from './menucliente/marcas/marcascu/marcascu.compon
         BrowserModule,
         HttpModule,
         ReactiveFormsModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyC-78ipSk2R-phjUHRzEdXvnF0Gh7TD4CE'
+          }),
         ModalModule.forRoot(),
     ],
 
