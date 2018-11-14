@@ -1,50 +1,55 @@
-<br>
-<br>
+<br />
+<br />
+<div class="row"><h2>Eventos</h2></div>
 <div class="row">
-  <h2>Eventos</h2>
-</div>
-<div class="row">
-
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-
-      <li *ngFor="let item of url; let i = index" class="breadcrumb-item pointer" routerLink="{{(i === 1)? '/eventos':item}}"
-        aria-current="page">
+      <li
+        *ngFor="let item of url; let i = index"
+        class="breadcrumb-item pointer"
+        routerLink="{{(i === 1)? '/eventos':item}}"
+        aria-current="page"
+      >
         <a>{{ item }}</a>
       </li>
     </ol>
   </nav>
 </div>
 <div>
-  <div class="row" *ngIf="menuActivado">
+  <div class="row" *ngIf="activo()">
     <div class="col-md-2 ml-auto text-right">
-
       <button class="circulo amarillo pointer" (click)="openModal()">
         <span class="add"><i class="fa fa-plus"></i></span>
       </button>
       <h5>Agregar nuevo evento</h5>
     </div>
-
   </div>
-  <hr>
+  <hr />
   <div class="row" *ngIf="menuActivado">
-
-    <div *ngFor="let item of eventos" class="card pointer" style="width: 18rem; margin-left: 1%;" [routerLink]="['/eventos', item._id]"
-      (click)="evento = true; menuActivado = false;">
-      <img class="card-img-top" src="https://picsum.photos/400/200" alt="Card image cap">
+    <div
+      *ngFor="let item of eventos"
+      class="card pointer"
+      style="width: 18rem; margin-left: 1%;"
+      [routerLink]="['/eventos', item._id]"
+      (click)="evento = true; menuActivado = false"
+    >
+      <img
+        class="card-img-top"
+        src="https://picsum.photos/400/200"
+        alt="Card image cap"
+      />
       <div class="card-body">
-        <h4 class="card-title">{{item.titulo}}</h4>
-        <p class="card-text">{{item.descripcion}}</p>
-        <p class="card-text">{{item.fechainicio}}</p>
-        <p class="card-text">{{item.fechadefinalizacion}}</p>
-        <p class="card-text">{{item.cliente}}</p>
+        <h4 class="card-title">{{ item.titulo }}</h4>
+        <p class="card-text">{{ item.descripcion }}</p>
+        <p class="card-text">{{ item.fechainicio }}</p>
+        <p class="card-text">{{ item.fechadefinalizacion }}</p>
+        <p class="card-text">{{ item.cliente }}</p>
       </div>
     </div>
-
   </div>
-
-
-
 </div>
 
-<router-outlet (activate)='displayCounter($event)' (deactivate)="displayDesactivate($event)"></router-outlet>
+<router-outlet
+  (activate)="displayCounter($event)"
+  (deactivate)="displayDesactivate($event)"
+></router-outlet>

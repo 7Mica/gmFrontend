@@ -15,9 +15,11 @@ import { Conferencia } from "src/app/models/conferencia.model";
 export class ConferenciacuComponent implements OnInit {
   @Output()
   action = new EventEmitter();
+  titulo: string = '';
 
   forma: FormGroup;
   ponentes: any[] = [];
+  
   constructor(
     public modalRef: BsModalRef,
     public modalService: BsModalService,
@@ -25,6 +27,8 @@ export class ConferenciacuComponent implements OnInit {
     private usuarioeventoService: UsuarioeventoService
   ) {
     this.getPonentesEvento();
+    let titulo: any = modalService.config.initialState;
+    this.titulo = titulo.title;
   }
 
   ngOnInit() {

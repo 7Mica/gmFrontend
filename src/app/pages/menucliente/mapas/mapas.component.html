@@ -1,17 +1,85 @@
+<div class="row text-center titulo">
+  <div class="col-md-12"><h3>Localización del evento</h3></div>
+</div>
 <div class="row">
-
-  <div class="col-md-6">
-    <!-- this creates a google map on the page with the given lat/lng from -->
-    <!-- the component as the initial center of the map: -->
-    <agm-map [latitude]="lat" [longitude]="lng">
+  <div class="col-md-9">
+    <agm-map
+      [latitude]="lat"
+      [longitude]="lng"
+      (mapClick)="mapClicked($event)"
+      [zoom]="zoom"
+      [zoomControl]="false"
+      [usePanning]="true"
+    >
       <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
     </agm-map>
-
-
   </div>
 
+  <div class="col-md-3">
+    <div class="col-md-12 mx-auto">
+      <div class="form-group">
+        <label for="latitud">Latitud</label>
+        <input
+          disabled
+          type="text"
+          [(ngModel)]="lat"
+          class="form-control"
+          name="latitud"
+          id="latitud"
+          placeholder="Latitud"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-12 mx-auto">
+      <div class="form-group">
+        <label for="longitud">Longitud</label>
+        <input
+          disabled
+          type="text"
+          [(ngModel)]="lng"
+          class="form-control"
+          name="longitud"
+          id="longitud"
+          placeholder="Longitud"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <button
+        type="button"
+        name="savemap"
+        id="savemap"
+        class="btn btn-primary btn-lg btn-block"
+        (click)="guardarMapa()"
+      >
+        Guardar Localización
+      </button>
+    </div>
+  </div>
 </div>
+<br />
 
+<div class="row text-center titulo">
+  <div class="col-md-12"><h3>Croquís del evento</h3></div>
+</div>
 <div class="row">
-
+  <div class="col-md-8 mx-auto">
+    <img src="https://picsum.photos/900/400/?random" />
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4 mx-auto">
+    <div class="form-group">
+      <br />
+      <input
+        type="file"
+        class="form-control"
+        name="croquis"
+        id="croquis"
+        placeholder="Selecciona el croquís de tu evento"
+      />
+    </div>
+  </div>
 </div>

@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Evento } from 'src/app/models/evento.model';
-import { EventoService } from 'src/app/services/service.index';
+import { EventoService, UsuarioService } from 'src/app/services/service.index';
 
 @Component({
   selector: 'app-eventocu',
@@ -13,10 +13,19 @@ export class EventocuComponent implements OnInit {
   @Output()
   action = new EventEmitter();
   forma: FormGroup;
+  titulo: string = '';
+  clientes: any[] = [];
 
   constructor(public modalRef: BsModalRef,
     public modalService: BsModalService,
-    private _eventoService: EventoService) { }
+    private _eventoService: EventoService,
+    private _usuarioService: UsuarioService) { 
+      this.listaClientes();
+      let titulo: any = this.modalService.config.initialState;
+      this.titulo = titulo.title;
+      console.log(this.clientes);
+      
+    }
 
   ngOnInit() {
 
@@ -43,8 +52,7 @@ export class EventocuComponent implements OnInit {
           Validators.maxLength(10)]),
 
         cliente: new FormControl(null, [
-          Validators.required, 
-          Validators.email]),
+          Validators.required]),
 
         fechainicio: new FormControl(null, [Validators.required]),
         fechadefinalizacion: new FormControl(null, [Validators.required,]),
@@ -96,6 +104,8 @@ export class EventocuComponent implements OnInit {
 
   registrarEvento() {
     if (this.forma.invalid) {
+      console.log('Form no valido');
+      
       return;
     }
 
@@ -131,5 +141,16 @@ export class EventocuComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  listaClientes(){
+    this._usuarioService.listaUsuariosClientes().subscribe((res: any) => {
+      res.data.forEach(element => {
+            
+        this.clientes.push(element);
+      });
+    }, error => {
+
+    })
   }
 }

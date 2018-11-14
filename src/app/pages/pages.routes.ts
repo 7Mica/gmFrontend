@@ -16,6 +16,7 @@ import { MapasComponent } from "./menucliente/mapas/mapas.component";
 import { MarcasComponent } from "./menucliente/marcas/marcas.component";
 import { PaseentradaComponent } from "./menucliente/paseentrada/paseentrada.component";
 import { ConstanciasComponent } from "./menucliente/constancias/constancias.component";
+import { ClienteGuardGuard } from "../services/guards/cliente-guard.guard";
 
 const pagesRoutes: Routes = [
   {
@@ -26,26 +27,31 @@ const pagesRoutes: Routes = [
       {
         path: "dashboard",
         component: DashboardComponent,
+        canActivate: [ClienteGuardGuard],
         data: { titulo: "Dashboard" }
       },
       {
         path: "progress",
         component: ProgressComponent,
+        canActivate: [ClienteGuardGuard],
         data: { titulo: "Progress bar" }
       },
       {
         path: "graficas1",
         component: Graficas1Component,
+        canActivate: [ClienteGuardGuard],
         data: { titulo: "Graficas" }
       },
       {
         path: "usuarios",
         component: UsuariosComponent,
+        canActivate: [ClienteGuardGuard],
         data: { titulo: "Usuarios" }
       },
       {
         path: "account-settings",
         component: AccountSettingsComponent,
+        canActivate: [ClienteGuardGuard],
         data: { titulo: "Ajustes de cuenta" }
       },
       {

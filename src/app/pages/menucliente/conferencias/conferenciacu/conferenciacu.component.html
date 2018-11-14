@@ -1,6 +1,6 @@
 <div class="modal-header">
 
-  <h3 class="modal-title pull-left"> {{ title }} </h3>
+  <h3 class="modal-title pull-left"> {{ titulo }} </h3>
 
   <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
     <span aria-hidden="true">&times;</span>
@@ -81,7 +81,7 @@
         <select formControlName="ponente" id="ponente" name="ponente" class="form-control" [ngClass]="{
           'red-input': (forma.get('ponente').hasError('required') && forma.get('ponente').touched )|| 
           (formDir.submitted && forma.get('ponente').hasError('required')) }">
-          <option value=null disabled selected>Selecciona un rol</option>
+          <option value=null disabled selected>Selecciona un ponente</option>
           <option *ngFor="let item of ponentes" [value]="item._id">{{item.nombre + ' ' + item.apellidoPaterno + ' ' +item.apellidoMaterno}}</option>
         </select>
   

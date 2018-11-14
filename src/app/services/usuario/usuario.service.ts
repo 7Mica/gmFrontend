@@ -16,6 +16,11 @@ export class UsuarioService {
     console.log('Hola sevicio');
   }
 
+  infoUsuarioActual(){
+
+    return JSON.parse(localStorage.getItem('usuario'));
+  }
+
   estaLogueado(){
     if(localStorage.getItem('token')){
       return true
@@ -31,6 +36,15 @@ export class UsuarioService {
     localStorage.removeItem('id');
 
     this.router.navigate(['/login']);
+  }
+
+  tipoLogin(){
+    let tipo = JSON.parse(localStorage.getItem('usuario'));
+    if(tipo.rol === 'CLIENT'){
+      return false;
+    }else{
+      return true;
+    }
   }
 
   login(usuario: Login, recordar: boolean = false){
@@ -73,6 +87,12 @@ export class UsuarioService {
 
   listaUsuarios(){
     let url = URL_SERVICIOS + '/usuario';
+
+    return this.http.get(url);
+  }
+
+  listaUsuariosClientes(){
+    let url = URL_SERVICIOS + '/usuario/clientes/lista';
 
     return this.http.get(url);
   }

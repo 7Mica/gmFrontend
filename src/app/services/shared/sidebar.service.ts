@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class SidebarService {
 
-  menu: any = [
+  menuAdmin: any = [
     {
       titulo: 'Dashboard',
       icono: 'material-icons',
@@ -33,6 +33,14 @@ export class SidebarService {
       titulo: 'Papelera',
       icono: 'material-icons',
       url: '/papelera'
+    }
+  ];
+
+  menuCliente: any =[
+    {
+      titulo: 'Eventos',
+      icono: 'material-icons',
+      url: '/eventos'
     }
   ];
 

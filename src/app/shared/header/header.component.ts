@@ -4,11 +4,14 @@ import { UsuarioService } from 'src/app/services/service.index';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styles: []
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private _usuarioService: UsuarioService) { }
+  usuario: string = '';
+  constructor(private _usuarioService: UsuarioService) {
+    this.usuario = _usuarioService.infoUsuarioActual().nombre;
+   }
 
   ngOnInit() {
   }

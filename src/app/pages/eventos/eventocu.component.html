@@ -1,6 +1,6 @@
 <div class="modal-header">
 
-  <h3 class="modal-title pull-left"> {{ title }} </h3>
+  <h3 class="modal-title pull-left"> {{ titulo }} </h3>
 
   <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
     <span aria-hidden="true">&times;</span>
@@ -88,19 +88,19 @@
       </div>
 
       <div class="form-group col-md-6">
-          <label for="cliente">Número de telefono alternativo</label>
-          <input type="cliente" [ngClass]="{
-            'red-input': (forma.get('cliente').hasError('required') && forma.get('cliente').touched || forma.get('cliente').hasError('email') && forma.get('cliente').touched) || 
-            (formDir.submitted && forma.get('cliente').hasError('required') || forma.get('cliente').hasError('email')) }"
-            formControlName="cliente" name="cliente" class="form-control" placeholder="Cliente *" />
+        <select formControlName="cliente" id="cliente" name="cliente" class="form-control" [ngClass]="{
+          'red-input': (forma.get('cliente').hasError('required') && forma.get('cliente').touched )|| 
+          (formDir.submitted && forma.get('cliente').hasError('required')) }">
+          <option value=null disabled selected>Selecciona un cliente</option>
+          <option *ngFor="let item of clientes" [value]="item._id">{{item.nombre + ' ' + item.apellidoPaterno + ' ' +item.apellidoMaterno}}</option>
+        </select>
   
-          <p class="text-danger" *ngIf="(formDir.submitted && forma.get('cliente').hasError('required')) || (forma.get('cliente').hasError('required') && forma.get('cliente').touched)">Este
-            campo es
-            requerido *</p>
-          <p class="text-danger" *ngIf="(formDir.submitted && forma.get('cliente').hasError('email')) || (forma.get('cliente').hasError('email') && forma.get('cliente').touched)">El
-            formato del email no es valido *</p>
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('cliente').hasError('required')) || (forma.get('cliente').hasError('required') && forma.get('cliente').touched)">Este
+          campo es
+          requerido *</p>
   
-        </div>
+  
+      </div>
 
       <div class="form-group col-md-6">
           <label for="img">Imagen del evento</label>

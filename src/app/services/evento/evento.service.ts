@@ -18,6 +18,17 @@ export class EventoService {
     return this.http.get(url);
   }
 
+  removeEvento(id){
+    let url = URL_SERVICIOS + "/evento/"+id;
+    return this.http.delete(url);
+  }
+
+  getEventosByOwner(idcliente) {
+    let url = URL_SERVICIOS + "/evento/byowner/"+idcliente;
+
+    return this.http.get(url);
+  }
+
   crearEvento(evento: Evento) {
     let url = URL_SERVICIOS + "/evento";
 
@@ -52,6 +63,28 @@ export class EventoService {
 
  getMarcasByEvento(id){
    let url = URL_SERVICIOS + "/evento/marcas/lista/"+id;
+
+   return this.http.get(url);
+ }
+
+/******************
+ * TODO REFERENTE *
+ *    A MAPAS     *
+ ******************/
+
+/**
+ * Nueva locación
+ * @param idevento id del evento donde se guardará el mapa
+ * @param coords Coordenas {lat: , lng: }
+ */
+ newLocation(idevento, coords){
+  let url = URL_SERVICIOS + "/evento/mapas/"+idevento;
+
+  return this.http.post(url, coords);
+ }
+
+ getLocation(idevento){
+   let url = URL_SERVICIOS + "/evento/mapas/"+idevento;
 
    return this.http.get(url);
  }
