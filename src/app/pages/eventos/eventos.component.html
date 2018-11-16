@@ -1,43 +1,41 @@
-<br />
-<br />
-<div class="row"><h2>Eventos</h2></div>
-<div class="row">
+  <h2>Eventos</h2>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li
-        *ngFor="let item of url; let i = index"
-        class="breadcrumb-item pointer"
-        routerLink="{{(i === 1)? '/eventos':item}}"
-        aria-current="page"
-      >
+      <li *ngFor="let item of url; let i = index" class="breadcrumb-item pointer" routerLink="{{(i === 1)? '/eventos':item}}"
+        aria-current="page">
         <a>{{ item }}</a>
       </li>
     </ol>
   </nav>
-</div>
 <div>
   <div class="row" *ngIf="activo()">
-    <div class="col-md-2 ml-auto text-right">
-      <button class="circulo amarillo pointer" (click)="openModal()">
-        <span class="add"><i class="fa fa-plus"></i></span>
+    <div class="col-md-2">
+      <button (click)="openModal()" type="button" class="btn btn-facebook waves-effect btn-rounded waves-light">Crear
+        nuevo evento</button>
+    </div>
+    <div class="btn-group">
+      <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        <span class="btn-label"><i class="fa fa-reorder"></i></span>
+        Ordenar
       </button>
-      <h5>Agregar nuevo evento</h5>
+      <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 36px, 0px); top: 0px; left: 0px; will-change: transform;">
+        <a class="dropdown-item" href="#">Nombre</a>
+        <a class="dropdown-item" href="#">Fecha de creación</a>
+        <a class="dropdown-item" href="#">Cliente</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Finalizados</a>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <input type="text" id="demo-input-search2" placeholder="Buscar evento" class="form-control">
     </div>
   </div>
-  <hr />
+  <hr>
   <div class="row" *ngIf="menuActivado">
-    <div
-      *ngFor="let item of eventos"
-      class="card pointer"
-      style="width: 18rem; margin-left: 1%;"
-      [routerLink]="['/eventos', item._id]"
-      (click)="evento = true; menuActivado = false"
-    >
-      <img
-        class="card-img-top"
-        src="https://picsum.photos/400/200"
-        alt="Card image cap"
-      />
+    <div *ngFor="let item of eventos" class="card pointer" style="width: 18rem; margin-left: 1%;" [routerLink]="['/eventos', item._id]"
+      (click)="evento = true; menuActivado = false">
+      <img class="card-img-top" src="https://picsum.photos/400/200" alt="Card image cap" />
       <div class="card-body">
         <h4 class="card-title">{{ item.titulo }}</h4>
         <p class="card-text">{{ item.descripcion }}</p>
@@ -49,7 +47,4 @@
   </div>
 </div>
 
-<router-outlet
-  (activate)="displayCounter($event)"
-  (deactivate)="displayDesactivate($event)"
-></router-outlet>
+<router-outlet (activate)="displayCounter($event)" (deactivate)="displayDesactivate($event)"></router-outlet>

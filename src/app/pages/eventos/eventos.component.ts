@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { EventoService, SharedService, UsuarioService } from "src/app/services/service.index";
 import { BsModalRef, BsModalService } from "ngx-bootstrap";
-import { EventocuComponent } from "./eventocu.component";
+import { EventocuComponent } from "./eventocu/eventocu.component";
 import { Router } from "@angular/router";
 
 @Component({

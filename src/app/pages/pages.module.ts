@@ -8,6 +8,7 @@ import {DataTableModule} from "angular2-datatable";
 import { ChartsModule } from 'ng2-charts';
 import { ModalModule } from 'ngx-bootstrap';
 import { AgmCoreModule } from '@agm/core';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 
 
@@ -24,8 +25,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { EventosComponent } from './eventos/eventos.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { UsuariosComponent as UsuariosCliente } from './menucliente/usuarios/usuarios.component';
-import { UsuarioscuComponent } from "./usuarios/usuarioscu.component";
-import { EventocuComponent } from './eventos/eventocu.component';
+import { UsuarioscuComponent } from "./usuarios/usuarioscu/usuarioscu.component";
+import { EventocuComponent } from './eventos/eventocu/eventocu.component';
 import { MenuclienteComponent } from './menucliente/menucliente.component';
 import { ConferenciasComponent } from './menucliente/conferencias/conferencias.component';
 import { EstadisticasComponent } from './menucliente/estadisticas/estadisticas.component';
@@ -64,7 +65,7 @@ import { MarcascuComponent } from './menucliente/marcas/marcascu/marcascu.compon
         UsuariocComponent,
         ConferenciacuComponent,
         DetalleconferenciaComponent,
-        MarcascuComponent
+        MarcascuComponent,
     ],
     exports: [
         DashboardComponent,
@@ -85,6 +86,7 @@ import { MarcascuComponent } from './menucliente/marcas/marcascu/marcascu.compon
             apiKey: 'AIzaSyC-78ipSk2R-phjUHRzEdXvnF0Gh7TD4CE'
           }),
         ModalModule.forRoot(),
+        Ng2SmartTableModule
     ],
 
     entryComponents: [
@@ -93,7 +95,7 @@ import { MarcascuComponent } from './menucliente/marcas/marcascu/marcascu.compon
         UsuariocComponent,
         ConferenciacuComponent,
         DetalleconferenciaComponent,
-        MarcascuComponent
+        MarcascuComponent,
     ],
 
     providers: [

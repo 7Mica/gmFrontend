@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { BsModalService, BsModalRef, ModalDirective } from "ngx-bootstrap";
-import { UsuarioscuComponent } from "./usuarioscu.component";
+import { UsuarioscuComponent } from "./usuarioscu/usuarioscu.component";
 import { UsuarioService } from "src/app/services/service.index";
 import swal from "sweetalert2";
+import { LocalDataSource } from "ng2-smart-table";
 
 @Component({
   selector: "app-usuarios",
@@ -10,32 +11,78 @@ import swal from "sweetalert2";
   styleUrls: ["./usuarios.component.css"]
 })
 export class UsuariosComponent implements OnInit {
-  public data: any[] = [];
-  public filterQuery = "";
-  public rowsOnPage = 5;
-  public sortBy = "email";
-  public sortOrder = "asc";
+  source: LocalDataSource;
+
+  settings = {
+    actions:{
+      columnTitle: 'Acciones',
+      add: false,
+      delete: false,
+      edit: false,
+      position: 'right',
+      custom: [
+        {
+          name: 'edit',
+          title: '<i title="Editar" class="btn btn-success btn-circle fa fa-link"></i> ',
+          
+        },
+        {
+          name: 'delete',
+          title: '<i title="Eliminar" class="btn btn-danger btn-circle fa fa-times"></i> ',
+        },
+      ],
+    },
+    columns: {
+      
+      nombre: {
+        title: 'Nombre'
+      },
+      apellidoPaterno: {
+        title: 'Apellido Paterno'
+      },
+      apellidoMaterno: {
+        title: 'Apellido Materno'
+      },
+      email: {
+        title: 'Email'
+      },
+      rol: {
+        title: 'Rol de usuario'
+      },
+     
+    }
+  };
 
   usuario: any;
   modalRef: BsModalRef;
 
   constructor(
     private modalService: BsModalService,
-    public _usuarioService: UsuarioService
+    public _usuarioService: UsuarioService,
   ) {
+    this.source = new LocalDataSource();
     this.getUsuarios();
+
+
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
+  onCustom(event) {
+    console.log(event);
+    
+    if(event.action === 'edit'){
+      this.editarUsuario(event.data._id);
+    }else{
+      this.eliminarUsuario(event.data._id);
+      this.getUsuarios();
+    }
+    
+  }
   getUsuarios() {
-    this.data = [];
-
     this._usuarioService.listaUsuarios().subscribe(
       (res: any) => {
-        res.data.forEach(element => {
-          this.data.push(element);
-        });
+        this.source.load(res.data);
       },
       err => {
         console.log(err);
@@ -84,8 +131,8 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
-  
-  editarUsuario(id) {    
+
+  editarUsuario(id) {
     let modalRef = this.modalService.show(UsuarioscuComponent, {
       class: "modal-lg",
       initialState: {

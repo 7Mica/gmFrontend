@@ -1,104 +1,88 @@
+<h2>Marcas</h2>
 <div class="row">
-  <div class="col-md-10">
-     <div class="row">
-         <div class="col-xs-12 col-sm-6 col-md-4 pointer" *ngFor="let item of marcas">
-      <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-        <div class="mainflip">
-          <div class="frontside">
-            <div class="card">
-              <div class="card-body text-center">
-                <p>
-                  <img
-                    class=" img-fluid"
-                    src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png"
-                    alt="card image"
-                  />
-                </p>
-                <h4 class="card-title">{{item.titulo}}</h4>
-                <p class="card-text">
-                  This is basic card with image on top, title, description and
-                  button.
-                </p>
-                <a href="#" class="btn btn-primary btn-sm"
-                  ><i class="fa fa-plus"></i
-                ></a>
-              </div>
+  <div class="col-md-2">
+    <button (click)="openModal()" type="button" class="btn btn-facebook waves-effect btn-rounded waves-light">Crear
+      nueva marca</button>
+  </div>
+  <div class="btn-group">
+    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false">
+      <span class="btn-label"><i class="fa fa-reorder"></i></span>
+      Ordenar
+    </button>
+    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 36px, 0px); top: 0px; left: 0px; will-change: transform;">
+      <a class="dropdown-item" href="#">Nombre</a>
+      <a class="dropdown-item" href="#">Fecha de creación</a>
+      <a class="dropdown-item" href="#">Cliente</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Ambito</a>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <input type="text" id="demo-input-search2" placeholder="Buscar evento" class="form-control">
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-md-4 pointer" *ngFor="let item of marcas">
+    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+      <div class="mainflip">
+        <div class="frontside">
+          <div class="card">
+            <div class="card-body text-center">
+              <p>
+                <img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png"
+                  alt="card image" />
+              </p>
+              <h4 class="card-title">{{item.titulo}}</h4>
+              <p class="card-text">
+                This is basic card with image on top, title, description and
+                button.
+              </p>
+              <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
             </div>
           </div>
-          <div class="backside">
-            <div class="card">
-              <div class="card-body text-center mt-4">
-                <h4 class="card-title">Sunlimetech</h4>
-                <p class="card-text">
-                  This is basic card with image on top, title, description and
-                  button.This is basic card with image on top, title,
-                  description and button.This is basic card with image on top,
-                  title, description and button.
-                </p>
-                <ul class="list-inline">
-                  <li class="list-inline-item">
-                    <a
-                      class="social-icon text-xs-center"
-                      target="_blank"
-                      href="#"
-                    >
-                      <i class="fa fa-facebook"></i>
-                    </a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a
-                      class="social-icon text-xs-center"
-                      target="_blank"
-                      href="#"
-                    >
-                      <i class="fa fa-twitter"></i>
-                    </a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a
-                      class="social-icon text-xs-center"
-                      target="_blank"
-                      href="#"
-                    >
-                      <i class="fa fa-skype"></i>
-                    </a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a
-                      class="social-icon text-xs-center"
-                      target="_blank"
-                      href="#"
-                    >
-                      <i class="fa fa-google"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
+        </div>
+        <div class="backside">
+          <div class="card">
+            <div class="card-body text-center mt-4">
+              <h4 class="card-title">Sunlimetech</h4>
+              <p class="card-text">
+                This is basic card with image on top, title, description and
+                button.This is basic card with image on top, title,
+                description and button.This is basic card with image on top,
+                title, description and button.
+              </p>
+              <ul class="list-inline">
+                <li class="list-inline-item">
+                  <a class="social-icon text-xs-center" target="_blank" href="#">
+                    <i class="fa fa-facebook"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a class="social-icon text-xs-center" target="_blank" href="#">
+                    <i class="fa fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a class="social-icon text-xs-center" target="_blank" href="#">
+                    <i class="fa fa-skype"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a class="social-icon text-xs-center" target="_blank" href="#">
+                    <i class="fa fa-google"></i>
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
-     </div> 
-    
-
-
-  </div>
-
-  <div class="col-md-1 fa-pull-right"><hr class="vertical-hr mr-1" /></div>
-
-  <div class="col-md-1">
-    <div class="row fa-pull-left">
-      <div class="col-md-12 text-center ">
-        <button class="circulo amarillo pointer" (click)="openModal()">
-          <span class="add"><i class="fa fa-plus"></i></span>
-        </button>
-        <h4>Agregar nueva</h4>
-        <hr>
-      </div>
-    </div>
-    <br>
-    <br>
   </div>
 </div>
+
+
+
 <!-- Team -->

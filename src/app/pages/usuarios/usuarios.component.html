@@ -1,67 +1,13 @@
-<br>
 <h2>Usuarios</h2>
-<br>
 <div class="row">
-  <div class="col-md-12 text-right">
-    <button class="btn add-btn" (click)="openModal()">Agregar nuevo usuario</button>
+  <div class="col-md-12">
+    <button class="btn btn-facebook waves-effect btn-rounded waves-light" (click)="openModal()">Agregar nuevo usuario</button>
   </div>
 </div>
+<hr>
 
-<br>
 <div class="row">
   <div class="col-md-12 mx-auto">
-    <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage">
-      <thead>
-        <tr>
-          <th style="width: 20%">
-            <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
-          </th>
-          <th style="width: 20%">
-            <mfDefaultSorter by="appaterno">Apellido Paterno</mfDefaultSorter>
-          </th>
-          <th style="width: 20%">
-            <mfDefaultSorter by="apmaterno">Apellido Materno</mfDefaultSorter>
-          </th>
-          <th style="width: 20%">
-            <mfDefaultSorter by="email">Email</mfDefaultSorter>
-          </th>
-          <th style="width: 10%">
-            <mfDefaultSorter by="rol">Rol</mfDefaultSorter>
-          </th>
-          <th style="width: 10%">
-            Acciones
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of mf.data">
-          <td>{{item.nombre}}</td>
-          <td>{{item.apellidoPaterno}}</td>
-          <td>{{item.apellidoMaterno}}</td>
-          <td>{{item.email}}</td>
-          <td>{{item.rol}}</td>
-          <td>
-            <button class="btn table-action-btn" style="color:red" (click)="eliminarUsuario(item._id)">
-              <i class="fa fa-trash-o"></i> 
-            </button>
-            <button class="btn table-action-btn" style="color:green" (click)="editarUsuario(item._id)">
-                <i class="fa fa-pencil-square-o"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="4">
-            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
-
+    <ng2-smart-table #tabla [settings]="settings" [source]="source" (custom)="onCustom($event)"></ng2-smart-table>
   </div>
-
-
-
-
 </div>
