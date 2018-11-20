@@ -3,7 +3,6 @@ import { Routes, RouterModule } from "@angular/router";
 import { PagesComponent } from "./pages.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ProgressComponent } from "./progress/progress.component";
-import { Graficas1Component } from "./graficas1/graficas1.component";
 import { AccountSettingsComponent } from "./account-settings/account-settings.component";
 import { LoginGuardGuard } from "../services/service.index";
 import { EventosComponent } from "./eventos/eventos.component";
@@ -27,7 +26,7 @@ const pagesRoutes: Routes = [
       {
         path: "dashboard",
         component: DashboardComponent,
-        canActivate: [ClienteGuardGuard],
+        //canActivate: [ClienteGuardGuard],
         data: { titulo: "Dashboard" }
       },
       {
@@ -35,12 +34,6 @@ const pagesRoutes: Routes = [
         component: ProgressComponent,
         canActivate: [ClienteGuardGuard],
         data: { titulo: "Progress bar" }
-      },
-      {
-        path: "graficas1",
-        component: Graficas1Component,
-        canActivate: [ClienteGuardGuard],
-        data: { titulo: "Graficas" }
       },
       {
         path: "usuarios",

@@ -28,7 +28,6 @@ export class ConferenciasComponent implements OnInit {
 
   openModal() {
     let evento = this.activatedRoute.snapshot.params.idevento;
-    console.log(evento);
     let modalRef = this.modalService.show(ConferenciacuComponent, {
       class: "modal-xl",
       initialState: {
@@ -38,7 +37,7 @@ export class ConferenciasComponent implements OnInit {
       }
     });
 
-    modalRef.content.action.take(1).subscribe(() => {
+    modalRef.content.action.subscribe(() => {
       this.conferencias = [];
       this.listaConferencias();
     });
@@ -47,9 +46,9 @@ export class ConferenciasComponent implements OnInit {
   listaConferencias() {
     let conferenciaid = this.activatedRoute.snapshot.params.idevento;
     this.conferenciaService.getConferencias(conferenciaid).subscribe(
-      (res: any) => {
+      (res: any) => {    
         console.log(res);
-        
+                    
         res.conferencias.forEach(element => {
           this.conferencias.push(element);
         });
@@ -62,7 +61,6 @@ export class ConferenciasComponent implements OnInit {
 
 
   openDetalleConferencia(idconferencia){
-    console.log(idconferencia);
     
     let modalRef = this.modalService.show(DetalleconferenciaComponent, {
       class: "modal-lg",

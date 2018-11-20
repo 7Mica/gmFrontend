@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { map } from "rxjs/operators";
-import { Usuario } from "src/app/models/usuarioevento.model";
+import { UsuarioEvento } from "src/app/models/usuarioevento.model";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { URL_SERVICIOS } from "src/app/config/config";
@@ -12,7 +12,7 @@ import swal from "sweetalert2";
 export class UsuarioeventoService {
   constructor(public http: HttpClient, public router: Router) {}
 
-  crearUsuario(usuario: Usuario) {
+  crearUsuario(usuario: UsuarioEvento) {
     let url = URL_SERVICIOS + "/usuarioevento";
 
     return this.http.post(url, usuario).pipe(

@@ -4,6 +4,7 @@ import { UsuarioscuComponent } from "./usuarioscu/usuarioscu.component";
 import { UsuarioService } from "src/app/services/service.index";
 import swal from "sweetalert2";
 import { LocalDataSource } from "ng2-smart-table";
+import { DTCONFIG_DELETE_EDIT_BTNS, SWALCONFIG_CONFIRMDELETE, SWALCONFIG_TOAST } from "src/app/config/config";
 
 @Component({
   selector: "app-usuarios",
@@ -12,28 +13,17 @@ import { LocalDataSource } from "ng2-smart-table";
 })
 export class UsuariosComponent implements OnInit {
   source: LocalDataSource;
+  settings = DTCONFIG_DELETE_EDIT_BTNS;
 
-  settings = {
-    actions:{
-      columnTitle: 'Acciones',
-      add: false,
-      delete: false,
-      edit: false,
-      position: 'right',
-      custom: [
-        {
-          name: 'edit',
-          title: '<i title="Editar" class="btn btn-success btn-circle fa fa-link"></i> ',
-          
-        },
-        {
-          name: 'delete',
-          title: '<i title="Eliminar" class="btn btn-danger btn-circle fa fa-times"></i> ',
-        },
-      ],
-    },
-    columns: {
-      
+  usuario: any;
+  modalRef: BsModalRef;
+
+  constructor(
+    private modalService: BsModalService,
+    public _usuarioService: UsuarioService,
+  ) {
+    this.settings.columns = {
+
       nombre: {
         title: 'Nombre'
       },
@@ -49,17 +39,8 @@ export class UsuariosComponent implements OnInit {
       rol: {
         title: 'Rol de usuario'
       },
-     
+
     }
-  };
-
-  usuario: any;
-  modalRef: BsModalRef;
-
-  constructor(
-    private modalService: BsModalService,
-    public _usuarioService: UsuarioService,
-  ) {
     this.source = new LocalDataSource();
     this.getUsuarios();
 
@@ -68,16 +49,12 @@ export class UsuariosComponent implements OnInit {
 
   ngOnInit() { }
 
-  onCustom(event) {
-    console.log(event);
-    
-    if(event.action === 'edit'){
-      this.editarUsuario(event.data._id);
-    }else{
-      this.eliminarUsuario(event.data._id);
-      this.getUsuarios();
-    }
-    
+  onDelete(event) {
+    this.eliminarUsuario(event.data._id);
+  }
+
+  onEdit(event) {
+    this.editarUsuario(event.data._id);
   }
   getUsuarios() {
     this._usuarioService.listaUsuarios().subscribe(
@@ -91,24 +68,22 @@ export class UsuariosComponent implements OnInit {
   }
 
   eliminarUsuario(id) {
-    swal({
-      title: "¿Estás seguro?",
-      text: "Se eliminará permamentemente el usuario",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Sí, eliminar",
-      cancelButtonText: "No, Cancelar"
-    }).then(result => {
+    let config = SWALCONFIG_CONFIRMDELETE;
+    config.text = config.text + 'evento';
+
+    swal(config).then(result => {
       if (result.value) {
         this._usuarioService.eliminarUsuario(id).subscribe(
           res => {
-            console.log(res);
             this.getUsuarios();
-
-            swal("Usuario eliminado", "Petición correcta", "success");
+            let config = SWALCONFIG_TOAST;
+            config.title = 'Se eliminó el registro'
+            swal(config);
           },
           error => {
-            swal("Error", "Ocurrío algo en la petición", "error");
+            let config = SWALCONFIG_TOAST;
+            config.title = 'Error al eliminar el usuario';
+            swal(config);
           }
         );
       } else if (result.dismiss === swal.DismissReason.cancel) {
@@ -126,7 +101,7 @@ export class UsuariosComponent implements OnInit {
       }
     });
 
-    modalRef.content.action.take(1).subscribe(() => {
+    modalRef.content.action.subscribe(() => {
       this.getUsuarios();
     });
   }

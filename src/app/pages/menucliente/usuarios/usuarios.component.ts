@@ -4,6 +4,8 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { UsuarioService, UsuarioeventoService } from 'src/app/services/service.index';
 import swal from 'sweetalert2';
 import { UsuariocComponent } from './usuarioc/usuarioc.component';
+import { LocalDataSource } from 'ng2-smart-table';
+import { DTCONFIG_DELETE_EDIT_BTNS, SWALCONFIG_TOAST, SWALCONFIG_CONFIRMDELETE } from 'src/app/config/config';
 
 @Component({
   selector: 'app-usuarios',
@@ -12,60 +14,60 @@ import { UsuariocComponent } from './usuarioc/usuarioc.component';
 })
 export class UsuariosComponent implements OnInit {
 
-  public data: any[] = [];
-  public filterQuery = "";
-  public rowsOnPage = 5;
-  public sortBy = "email";
-  public sortOrder = "asc";
+  source: LocalDataSource;
+  settings = DTCONFIG_DELETE_EDIT_BTNS;
 
   usuario: any;
   modalRef: BsModalRef;
 
-  constructor(private router: Router, private modalService: BsModalService,
-    public _usuarioService: UsuarioeventoService, private activatedRoute: ActivatedRoute) { 
-      this.getUsuarios();
+  constructor(private router: Router, public modalService: BsModalService,
+    public _usuarioService: UsuarioeventoService, private activatedRoute: ActivatedRoute) {
+      this.source = new LocalDataSource();
+      this.settings.columns = {
+
+        nombre: {
+          title: 'Nombre'
+        },
+        apellidoPaterno: {
+          title: 'Apellido Paterno'
+        },
+        apellidoMaterno: {
+          title: 'Apellido Materno'
+        },
+        email: {
+          title: 'Email'
+        },
+        rol: {
+          title: 'Rol de usuario'
+        },
+  
+      }
+    this.getUsuarios();
   }
 
   ngOnInit() {
   }
 
-  getUsuarios() {
-    
-    let eventoid = this.activatedRoute.snapshot.params.idevento;
+  onDelete(event) {
+    let toast = SWALCONFIG_TOAST;
+    let alert = SWALCONFIG_CONFIRMDELETE;
+    alert.title = '¿Estás seguro?';
+    alert.text = 'Se eliminará permamentemente el usuario';
 
-    this.data = [];
-    this._usuarioService.listaUsuarios(eventoid).subscribe(
-      (res: any) => {
-        console.log(res);
-        res.data.forEach(element => {
-          this.data.push(element);
-        });
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  }
-
-  eliminarUsuario(id) {
-    swal({
-      title: "¿Estás seguro?",
-      text: "Se eliminará permamentemente el usuario",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Sí, eliminar",
-      cancelButtonText: "No, Cancelar"
-    }).then(result => {
+    swal(alert).then(result => {
       if (result.value) {
-        this._usuarioService.eliminarUsuario(id).subscribe(
+        this._usuarioService.eliminarUsuario(event.data._id).subscribe(
           res => {
-            console.log(res);
-            this.getUsuarios();
 
-            swal("Usuario eliminado", "Petición correcta", "success");
+            this.getUsuarios();
+            toast.title = 'El usuario se eliminó correctamente';
+            toast.type = 'success'
+            swal(toast);
           },
           error => {
-            swal("Error", "Ocurrío algo en la petición", "error");
+            toast.title = 'Ocurrió un error en la petición';
+            toast.type = 'error';
+            swal(toast);
           }
         );
       } else if (result.dismiss === swal.DismissReason.cancel) {
@@ -74,34 +76,52 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
-  openModal() {
+  onEdit(event) {
     
+    let modalRef = this.modalService.show(UsuariocComponent, {
+      class: "modal-lg",
+      initialState: {
+        titulo: "Editar usuario",
+          edit: true,
+          _id: event.data._id,
+          idevento: this.activatedRoute.snapshot.params.idevento
+      }
+    });
+  }
+  
+  getUsuarios() {
+
+    let eventoid = this.activatedRoute.snapshot.params.idevento;
+
+    this._usuarioService.listaUsuarios(eventoid).subscribe(
+      (res: any) => {
+        this.source.load(res.data);
+      },
+      err => {
+        let toast = SWALCONFIG_TOAST;
+        toast.title = 'Ocurrió un error al cargar usuarios';
+        toast.type = 'error';
+        swal(toast);
+      }
+    );
+  }
+
+  openModal() {
 
     let modalRef = this.modalService.show(UsuariocComponent, {
       class: "modal-lg",
       initialState: {
-        title: "Registrar nuevo usuario",
-        data: {idevento: this.activatedRoute.snapshot.params}
+        titulo: "Registrar nuevo usuario",
+        idevento: this.activatedRoute.snapshot.params.idevento,
+        edit: false
       }
     });
 
-    modalRef.content.action.take(1).subscribe(() => {
+    modalRef.content.action.subscribe(() => {
       this.getUsuarios();
     });
   }
 
-  
-  editarUsuario(id) {    
-    let modalRef = this.modalService.show(UsuariocComponent, {
-      class: "modal-lg",
-      initialState: {
-        title: "Registrar nuevo usuario",
-        data: {
-          edit: true,
-          _id: id,
-        }
-      }
-    });
-  }
+
 
 }

@@ -6,10 +6,11 @@ import {
   AbstractControl
 } from "@angular/forms";
 import { BsModalRef, BsModalService } from "ngx-bootstrap";
-import { UsuarioeventoService } from "src/app/services/service.index";
-import { Usuario } from "src/app/models/usuarioevento.model";
+import { UsuarioeventoService, EventoService } from "src/app/services/service.index";
+import { UsuarioEvento } from "src/app/models/usuarioevento.model";
 import { Router, ActivatedRoute } from "@angular/router";
 import swal from "sweetalert2";
+import { SWALCONFIG_TOAST } from "src/app/config/config";
 
 @Component({
   selector: "app-usuarioc",
@@ -22,6 +23,7 @@ export class UsuariocComponent implements OnInit {
 
   data: any;
   forma: FormGroup;
+  ponente: boolean = false;
   prefs = [
     { name: "Adminsitrador", value: "ADMIN_ROLE" },
     { name: "Usuario", value: "USER_ROLE" },
@@ -30,14 +32,24 @@ export class UsuariocComponent implements OnInit {
     { name: "Stand", value: "STAND" }
   ];
 
+  marcas: any[] = [];
+
   constructor(
     public modalRef: BsModalRef,
     public modalService: BsModalService,
     public _usuarioService: UsuarioeventoService,
-    private activatedRoute: ActivatedRoute
-  ) {}
+    private activatedRoute: ActivatedRoute,
+    private eventoService: EventoService
+  ) {
+    
+    
+  }
 
   ngOnInit() {
+    let data: any = this.modalService.config.initialState;
+    this.data = data;
+    this.getMarcas();
+
     this.forma = new FormGroup(
       {
         nombre: new FormControl(null, [
@@ -93,6 +105,7 @@ export class UsuariocComponent implements OnInit {
         ]),
         numerointerior: new FormControl(null, [Validators.maxLength(50)]),
         rol: new FormControl(null, [Validators.required]),
+        marca: new FormControl(null, [Validators.required]),
         email: new FormControl(null, [Validators.required, Validators.email]),
         emailconfirm: new FormControl(null, [
           Validators.required,
@@ -106,20 +119,56 @@ export class UsuariocComponent implements OnInit {
       },
       { validators: [this.matchEmail, this.matchPassword] }
     );
-
+      
     if (this.data.edit) {
+      
       this._usuarioService.getUsuarioById(this.data._id).subscribe(
         (res: any) => {
+          console.log(res);
+          
           this.forma.get("nombre").setValue(res.data.nombre);
           this.forma.get("appaterno").setValue(res.data.apellidoPaterno);
           this.forma.get("apmaterno").setValue(res.data.apellidoMaterno);
           this.forma.get("email").setValue(res.data.email);
         },
         error => {
-          console.log(error);
+          let toast = SWALCONFIG_TOAST;
+          toast.title = 'Error en la petición';
+          toast.type = 'error';
+
+          swal(toast);
         }
       );
     }
+  }
+
+  onChange(event){
+    console.log(event.target.value);
+    if(event.target.value === 'PONENTE'){
+      this.forma.get('marca').enable();
+      this.ponente = true;
+    }else{
+      this.forma.get('marca').setValue(null);
+      this.forma.get('marca').disable();
+      this.ponente = false;
+      
+    }
+    
+  }
+
+  getMarcas(){
+    console.log(this.data.idevento);
+    
+    this.eventoService.getMarcasByEvento(this.data.idevento).subscribe((res: any)=>{
+      console.log(res);
+      
+      res.data.marcas.forEach(element => {
+        this.marcas.push(element);
+      });
+      
+    }, error => {
+
+    });
   }
 
   matchEmail(AC: AbstractControl) {
@@ -143,6 +192,8 @@ export class UsuariocComponent implements OnInit {
   }
 
   queEs() {
+    console.log(this.data);
+    
     if (this.data.edit) {
       this.actualizarUsuario(this.data._id);
     } else {
@@ -163,7 +214,7 @@ export class UsuariocComponent implements OnInit {
       return;
     }
 
-    let usuario = new Usuario(
+    let usuario = new UsuarioEvento(
       this.forma.value.nombre,
       this.forma.value.appaterno,
       this.forma.value.apmaterno,
@@ -176,16 +227,19 @@ export class UsuariocComponent implements OnInit {
       this.forma.value.colonia,
       this.forma.value.numeroexterior,
       this.forma.value.numerointerior,
-      this.data.idevento.idevento,
+      this.data.idevento,
       this.forma.value.rol,
       this.forma.value.email,
-      this.forma.value.password
+      this.forma.value.password,
+      this.forma.value.marca
     );
 
     console.log(usuario);
 
     this._usuarioService.crearUsuario(usuario).subscribe(
       res => {
+        console.log(res);
+        
         console.log("Usuario guardado");
         this.action.emit();
         this.modalRef.hide();

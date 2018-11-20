@@ -61,6 +61,10 @@ export class EventoService {
   );
  }
 
+ getMarcaById(id){
+   let url = URL_SERVICIOS + '/marcas/'+ id;
+   return this.http.get(url);
+ }
  getMarcasByEvento(id){
    let url = URL_SERVICIOS + "/evento/marcas/lista/"+id;
 

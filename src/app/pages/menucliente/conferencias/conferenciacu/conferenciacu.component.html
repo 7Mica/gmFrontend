@@ -97,7 +97,7 @@
         <input  type="date" [ngClass]="{
                 'red-input': (forma.get('fecha').hasError('required') && forma.get('fecha').touched) || 
                 (formDir.submitted && forma.get('fecha').hasError('required')) }"
-          formControlName="fecha" name="fecha" class="form-control" placeholder="Fecha de inicio *" />
+          formControlName="fecha" name="fecha" class="form-control" />
 
         <p class="text-danger" *ngIf="(formDir.submitted && forma.get('fecha').hasError('required')) || (forma.get('fecha').hasError('required') && forma.get('fecha').touched)">Este
           campo es
@@ -108,7 +108,7 @@
 
       <div class="form-group col-md-12">
         <label for="descripcion">Descripción</label>
-        <textarea minlength="2" maxlength="50" rows="4" type="text" [ngClass]="{
+        <textarea minlength="2" maxlength="255" rows="6" type="text" [ngClass]="{
               'red-input': (forma.get('descripcion').hasError('required') && forma.get('descripcion').touched) || 
               (formDir.submitted && forma.get('descripcion').hasError('required') || forma.get('descripcion').hasError('minlength') || forma.get('descripcion').hasError(maxlength)) }"
           formControlName="descripcion" name="descripcion" class="form-control" placeholder="Descripción del evento *"> </textarea>
@@ -121,7 +121,7 @@
           tiene un minimo de 2 caracteres *</p>
         <p class="text-danger" *ngIf="(formDir.submitted && forma.get('descripcion').hasError('maxlength')) || (forma.get('descripcion').hasError('maxlength') && forma.get('descripcion').touched)">Este
           campo
-          tiene un maximo de 100 caracteres *</p>
+          tiene un maximo de 255 caracteres *</p>
 
       </div>
 

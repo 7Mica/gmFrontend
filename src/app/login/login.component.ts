@@ -12,7 +12,11 @@ export class LoginComponent implements OnInit {
 
   email: string;
   recuerdame: boolean = false;
-  constructor(public router: Router, public _usuarioService: UsuarioService) { }
+  constructor(public router: Router, public _usuarioService: UsuarioService) {
+    if(this._usuarioService.estaLogueado()){
+      this.router.navigate(['/dashboard']);
+    }
+   }
 
   ngOnInit() {
 

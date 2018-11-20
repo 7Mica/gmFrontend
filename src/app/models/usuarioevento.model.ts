@@ -1,4 +1,4 @@
-export class Usuario {
+export class UsuarioEvento {
     constructor(
         public nombre: string,
         public apellidoPaterno: string,
@@ -16,6 +16,7 @@ export class Usuario {
         public rol='USER_ROLE',
         public email: string,
         public password: string,
+        public marca?: string,
         public img?: string,
         ){
         

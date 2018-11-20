@@ -8,11 +8,10 @@ import { Component, OnInit, Input } from '@angular/core';
 export class GraficaComponent implements OnInit {
 @Input('data') data: number[];
 @Input('labels') labels: string[];
-@Input('leyenda') leyenda: string = 'Algo';
+@Input('leyenda') leyenda: string = '';
 @Input('charType') type: string[];
 
   constructor() { 
-    console.log(this.leyenda);
   }
 
   ngOnInit() {

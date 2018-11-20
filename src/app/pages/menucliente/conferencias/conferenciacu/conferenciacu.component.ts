@@ -6,6 +6,8 @@ import {
   UsuarioeventoService
 } from "src/app/services/service.index";
 import { Conferencia } from "src/app/models/conferencia.model";
+import swal from "sweetalert2";
+import { SWALCONFIG_TOAST } from "src/app/config/config";
 
 @Component({
   selector: "app-conferenciacu",
@@ -41,7 +43,7 @@ export class ConferenciacuComponent implements OnInit {
       descripcion: new FormControl(null, [
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(100)
+        Validators.maxLength(255)
       ]),
       ponente: new FormControl(null, [
         Validators.required
@@ -81,6 +83,10 @@ export class ConferenciacuComponent implements OnInit {
 
     this.conferenciaService.crearConferencia(conferencia).subscribe(
       res => {
+        let toast = SWALCONFIG_TOAST;
+        toast.title = 'Registro creado correctamente'
+        toast.type = 'success';
+        swal(toast);
         this.action.emit();
         this.modalRef.hide();
       },

@@ -122,8 +122,11 @@ section .section-title {
     color: #007b5e !important;
 }
 
-.frontside .card .card-body img {
-    width: 120px;
+/* .frontside .card .body img*/
+.frontside .card img {
+    /* width: 120px;
     height: 120px;
-    border-radius: 50%;
+    border-radius: 50%; */
+    padding-left: 0% !important;
+    padding-right: 0% !important;
 }
