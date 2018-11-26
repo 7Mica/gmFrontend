@@ -1,12 +1,12 @@
-  <h2>Eventos</h2>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li *ngFor="let item of url; let i = index" class="breadcrumb-item pointer" routerLink="{{(i === 1)? '/eventos':item}}"
-        aria-current="page">
-        <a>{{ item }}</a>
-      </li>
-    </ol>
-  </nav>
+<h2>Eventos</h2>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li *ngFor="let item of url; let i = index" class="breadcrumb-item pointer" routerLink="{{(i === 1)? '/eventos':item}}"
+      aria-current="page">
+      <a>{{ item }}</a>
+    </li>
+  </ol>
+</nav>
 <div>
   <div class="row" *ngIf="activo()">
     <div class="col-md-2">
@@ -31,8 +31,11 @@
       <input type="text" id="demo-input-search2" placeholder="Buscar evento" class="form-control">
     </div>
   </div>
+
   <hr>
+
   <div class="row" *ngIf="menuActivado">
+
     <div *ngFor="let item of eventos" class="card pointer" style="width: 18rem; margin-left: 1%;" [routerLink]="['/eventos', item._id]"
       (click)="evento = true; menuActivado = false">
       <img class="card-img-top" src="https://picsum.photos/400/200" alt="Card image cap" />
@@ -44,7 +47,9 @@
         <p class="card-text">{{ item.cliente }}</p>
       </div>
     </div>
+
   </div>
+
 </div>
 
 <router-outlet (activate)="displayCounter($event)" (deactivate)="displayDesactivate($event)"></router-outlet>

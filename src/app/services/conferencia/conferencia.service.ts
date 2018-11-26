@@ -30,7 +30,8 @@ export class ConferenciaService {
   }
 
   getConferenciaById(id){
-
+    console.log(id);
+    
     let url = URL_SERVICIOS + '/conferencia/'+id;
     return this.http.get(url);
   }

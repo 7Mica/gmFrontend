@@ -26,7 +26,7 @@
 
 <div class="row">
 
-    <div class="col-xs-10 col-sm-4 col-md-3" *ngFor="let item of conferencias" (click)="openDetalleConferencia(item._id)">
+    <div class="col-xs-10 col-sm-4 col-md-3" *ngFor="let item of conferencias" (click)="openDetalleConferencia(item._id, item.ponente.marcas)">
         <div class="image-flip pointer" ontouchstart="this.classList.toggle('hover');">
             <div class="mainflip">
                 <div class="frontside">

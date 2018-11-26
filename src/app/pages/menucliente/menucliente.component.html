@@ -1,173 +1,177 @@
-<div class="row" *ngIf="existe">
+<div class="card">
+  <div class="card-body">
+        <div class="row" *ngIf="existe">
 
-    <div class="col-md-3">
-
-        <div class="col-md-12">
-            <div class="card bg-primary pointer" routerLink="conferencias">
-                <div class="card-body">
-                    <div class="d-flex no-block">
-                        <div class="m-r-20 align-self-center"><img src="../assets/images/icon/assets-w.png" alt="Income"></div>
-                        <div class="align-self-center">
-                            <h6 class="text-white m-t-10 m-b-0">Conferencias</h6>
-                            <h2 class="m-t-0 text-white">987,563</h2>
+                <div class="col-md-3">
+            
+                    <div class="col-md-12">
+                        <div class="card bg-primary pointer" routerLink="conferencias">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="m-r-20 align-self-center"><img src="../assets/images/icon/assets-w.png" alt="Income"></div>
+                                    <div class="align-self-center">
+                                        <h6 class="text-white m-t-10 m-b-0">Conferencias</h6>
+                                        <h2 class="m-t-0 text-white">987,563</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-md-12">
+                        <div class="card bg-danger pointer" routerLink="usuarios">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="m-r-20 align-self-center"><img src="../assets/images/icon/staff-w.png" alt="Income"></div>
+                                    <div class="align-self-center">
+                                        <h6 class="text-white m-t-10 m-b-0">Usuarios</h6>
+                                        <h2 class="m-t-0 text-white">987,563</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+            
+                    <div class="col-md-12">
+                        <div class="card bg-success pointer" routerLink="estadisticas">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="m-r-20 align-self-center"><img src="../assets/images/icon/expense-w.png" alt="Income"></div>
+                                    <div class="align-self-center">
+                                        <h6 class="text-white m-t-10 m-b-0">Estadisticas</h6>
+                                        <h2 class="m-t-0 text-white">236,000</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-md-12">
+                        <div class="card bg-info pointer" routerLink="constancias">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="m-r-20 align-self-center"><img src="../assets/images/icon/income-w.png" alt="Income"></div>
+                                    <div class="align-self-center">
+                                        <h6 class="text-white m-t-10 m-b-0">Constancias</h6>
+                                        <h2 class="m-t-0 text-white">953,000</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-md-12">
+                        <div class="card bg-danger pointer" (click)="eliminarEvento()" *ngIf="queEs()">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="m-r-20 align-self-center"><img src="../assets/images/icon/trash.png" alt="Income"></div>
+                                    <div class="align-self-center">
+                                        <h6 class="text-white m-t-10 m-b-0">Eliminar evento</h6>
+                                        <h2 class="m-t-0 text-white">953,000</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+            
+                    <div class="col-md-12">
+                        <div class="card bg-info pointer" routerLink="mapas">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="m-r-20 align-self-center"><img src="../assets/images/icon/location.png" alt="Income"></div>
+                                    <div class="align-self-center">
+                                        <h6 class="text-white m-t-10 m-b-0">Mapas</h6>
+                                        <h2 class="m-t-0 text-white">953,000</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-md-12">
+                        <div class="card bg-info pointer" routerLink="marcas">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="m-r-20 align-self-center"><img src="../assets/images/icon/company.png" alt="Income"></div>
+                                    <div class="align-self-center">
+                                        <h6 class="text-white m-t-10 m-b-0">Marcas</h6>
+                                        <h2 class="m-t-0 text-white">953,000</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-md-12">
+                        <div class="card bg-info pointer" routerLink="paseentrada">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="m-r-20 align-self-center"><img src="../assets/images/icon/pass.png" alt="Income"></div>
+                                    <div class="align-self-center">
+                                        <h6 class="text-white m-t-10 m-b-0">Pase de entrada</h6>
+                                        <h2 class="m-t-0 text-white">953,000</h2>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="col-md-12">
-            <div class="card bg-danger pointer" routerLink="usuarios">
-                <div class="card-body">
-                    <div class="d-flex no-block">
-                        <div class="m-r-20 align-self-center"><img src="../assets/images/icon/staff-w.png" alt="Income"></div>
-                        <div class="align-self-center">
-                            <h6 class="text-white m-t-10 m-b-0">Usuarios</h6>
-                            <h2 class="m-t-0 text-white">987,563</h2>
+            
+            
+                <div class="col-md-9">
+                    <div class="row text-center">
+                        <img src="https://picsum.photos/g/1000/200" alt="" class="col-md-12">
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Titulo del evento</h3>
+                            <hr>
+                            <h4>Fechas</h4>
+                            <p>Inicio: 12/04/01 </p>
+                            <p>Fin: 13/05/02</p>
+                            <p>Fecha de creación: 13/05/02</p>
+            
+                            <h4>Descripción</h4>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Odio saepe amet inventore molestiae maxime, aliquam atque odit at
+                                provident fuga magnam aspernatur harum, reiciendis quas, corporis eveniet?
+                                Non, soluta maxime? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias
+                                itaque veritatis perspiciatis. Repellendus, doloribus vitae. Perferendis distinctio error,
+                                provident beatae quis nulla voluptas debitis, quisquam et, porro unde nesciunt sapiente?</p>
+            
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-md-12">
-            <div class="card bg-success pointer" routerLink="estadisticas">
-                <div class="card-body">
-                    <div class="d-flex no-block">
-                        <div class="m-r-20 align-self-center"><img src="../assets/images/icon/expense-w.png" alt="Income"></div>
-                        <div class="align-self-center">
-                            <h6 class="text-white m-t-10 m-b-0">Estadisticas</h6>
-                            <h2 class="m-t-0 text-white">236,000</h2>
+                    <br>
+            
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Contratación</h4>
+                            <p>Michel Casillas</p>
+                        </div>
+                        <br>
+                        <div class="col-md-6">
+                            <h4>Estado de evento</h4>
+                            <p>Activo</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-12">
-            <div class="card bg-info pointer" routerLink="constancias">
-                <div class="card-body">
-                    <div class="d-flex no-block">
-                        <div class="m-r-20 align-self-center"><img src="../assets/images/icon/income-w.png" alt="Income"></div>
-                        <div class="align-self-center">
-                            <h6 class="text-white m-t-10 m-b-0">Constancias</h6>
-                            <h2 class="m-t-0 text-white">953,000</h2>
+            
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Dirección</h4>
+                            <p>Bulevard Tepic-Xalisco #26</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Contacto</h4>
+                            <p>Tel: 993-493-3940</p>
                         </div>
                     </div>
+            
+            
                 </div>
+            
             </div>
-        </div>
-
-        <div class="col-md-12">
-            <div class="card bg-danger pointer" (click)="eliminarEvento()" *ngIf="queEs()">
-                <div class="card-body">
-                    <div class="d-flex no-block">
-                        <div class="m-r-20 align-self-center"><img src="../assets/images/icon/trash.png" alt="Income"></div>
-                        <div class="align-self-center">
-                            <h6 class="text-white m-t-10 m-b-0">Eliminar evento</h6>
-                            <h2 class="m-t-0 text-white">953,000</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-md-12">
-            <div class="card bg-info pointer" routerLink="mapas">
-                <div class="card-body">
-                    <div class="d-flex no-block">
-                        <div class="m-r-20 align-self-center"><img src="../assets/images/icon/location.png" alt="Income"></div>
-                        <div class="align-self-center">
-                            <h6 class="text-white m-t-10 m-b-0">Mapas</h6>
-                            <h2 class="m-t-0 text-white">953,000</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-12">
-            <div class="card bg-info pointer" routerLink="marcas">
-                <div class="card-body">
-                    <div class="d-flex no-block">
-                        <div class="m-r-20 align-self-center"><img src="../assets/images/icon/company.png" alt="Income"></div>
-                        <div class="align-self-center">
-                            <h6 class="text-white m-t-10 m-b-0">Marcas</h6>
-                            <h2 class="m-t-0 text-white">953,000</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-12">
-            <div class="card bg-info pointer" routerLink="paseentrada">
-                <div class="card-body">
-                    <div class="d-flex no-block">
-                        <div class="m-r-20 align-self-center"><img src="../assets/images/icon/pass.png" alt="Income"></div>
-                        <div class="align-self-center">
-                            <h6 class="text-white m-t-10 m-b-0">Pase de entrada</h6>
-                            <h2 class="m-t-0 text-white">953,000</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="col-md-9">
-        <div class="row text-center">
-            <img src="https://picsum.photos/g/1000/200" alt="" class="col-md-12">
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-12">
-                <h3>Titulo del evento</h3>
-                <hr>
-                <h4>Fechas</h4>
-                <p>Inicio: 12/04/01 </p>
-                <p>Fin: 13/05/02</p>
-                <p>Fecha de creación: 13/05/02</p>
-
-                <h4>Descripción</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Odio saepe amet inventore molestiae maxime, aliquam atque odit at
-                    provident fuga magnam aspernatur harum, reiciendis quas, corporis eveniet?
-                    Non, soluta maxime? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias
-                    itaque veritatis perspiciatis. Repellendus, doloribus vitae. Perferendis distinctio error,
-                    provident beatae quis nulla voluptas debitis, quisquam et, porro unde nesciunt sapiente?</p>
-
-            </div>
-        </div>
-        <br>
-
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Contratación</h4>
-                <p>Michel Casillas</p>
-            </div>
-            <br>
-            <div class="col-md-6">
-                <h4>Estado de evento</h4>
-                <p>Activo</p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Dirección</h4>
-                <p>Bulevard Tepic-Xalisco #26</p>
-            </div>
-            <div class="col-md-6">
-                <h4>Contacto</h4>
-                <p>Tel: 993-493-3940</p>
-            </div>
-        </div>
-
-
-    </div>
-
+  </div>
 </div>

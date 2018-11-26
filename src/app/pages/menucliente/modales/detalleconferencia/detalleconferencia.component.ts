@@ -9,15 +9,15 @@ import { ConferenciaService, EventoService } from 'src/app/services/service.inde
 })
 export class DetalleconferenciaComponent implements OnInit {
 
-  conferencia: any = {};
-  ponente: any = {};
-  marca: string = '';
+  conferencia: any;
+  ponente: any;
+  marca: any;
 
   barChartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: true
   };
-  
+
   barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
   barChartType: string = 'bar';
   barChartLegend: boolean = true;
@@ -27,42 +27,41 @@ export class DetalleconferenciaComponent implements OnInit {
     private conferenciaService: ConferenciaService,
     private eventoService: EventoService) {
 
-    let conferencia: any = this.modalService.config.initialState;
-    this.getConferencia(conferencia.idconferencia);
+      this.conferencia = {};
+      this.ponente = {};
+      this.marca = {};
+    let eas: any = this.modalService.config.initialState;
+
     
-  }
+
+      this.conferenciaService.getConferenciaById(eas.idconferencia).subscribe((res:any)=> {
+        this.conferencia = res.conferencias[0];
+        this.ponente = this.conferencia.ponente;
+        
+      },
+      error=>{
   
+      });  
+      
+      this.getMarca(eas.marca);
+      
+  }
+
   ngOnInit() {
-    
   }
 
-  getConferencia(id) {
-
-    this.conferenciaService.getConferenciaById(id).subscribe((res: any) => {
-
-      
-      this.conferencia = res.conferencias[0];
-      this.ponente = res.conferencias[0].ponente;
-      
-      this.getMarca(this.ponente.marcas);
+  getMarca(idmarca) {
+    this.eventoService.getMarcaById(idmarca).subscribe((res: any) => {
       
       
-    }, error => {
-
-    });
-
-  }
-
-  getMarca(id) {
-    
-    this.eventoService.getMarcaById(id).subscribe((res: any) => {
-      
+      this.marca = res.data.marcas[0];
       console.log(res);
       
     }, error => {
-      console.log(error);
-
+      
     });
+        
+    
   }
 
   /************

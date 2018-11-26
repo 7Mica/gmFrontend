@@ -60,13 +60,14 @@ export class ConferenciasComponent implements OnInit {
   }
 
 
-  openDetalleConferencia(idconferencia){
-    
+  openDetalleConferencia(idconferencia, idmarca){
+
     let modalRef = this.modalService.show(DetalleconferenciaComponent, {
       class: "modal-lg",
       initialState: {
         title: "Detalle conferencia",
-        idconferencia: idconferencia
+        idconferencia: idconferencia,
+        marca: idmarca
       }
     });
 

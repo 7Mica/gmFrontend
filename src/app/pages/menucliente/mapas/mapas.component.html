@@ -1,85 +1,67 @@
-<div class="row text-center titulo">
-  <div class="col-md-12"><h3>Localización del evento</h3></div>
-</div>
-<div class="row">
-  <div class="col-md-9">
-    <agm-map
-      [latitude]="lat"
-      [longitude]="lng"
-      (mapClick)="mapClicked($event)"
-      [zoom]="zoom"
-      [zoomControl]="false"
-      [usePanning]="true"
-    >
-      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-    </agm-map>
-  </div>
 
-  <div class="col-md-3">
-    <div class="col-md-12 mx-auto">
-      <div class="form-group">
-        <label for="latitud">Latitud</label>
-        <input
-          disabled
-          type="text"
-          [(ngModel)]="lat"
-          class="form-control"
-          name="latitud"
-          id="latitud"
-          placeholder="Latitud"
-        />
+
+<div class="row">
+
+  <div class="col-md-12">
+    
+
+      <div class="card">
+          <div class="card-body">
+              <h2 class="card-title">Localización del evento</h2>
+              <!-- <h6 class="card-subtitle">Use default tab with class <code>nav-tabs &amp; tabcontent-border </code></h6> -->
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs" role="tablist">
+                  <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Localización del evento</span></a> </li>
+                  <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Croquís</span></a> </li>
+              </ul>
+              <!-- Tab panes -->
+              <div class="tab-content tabcontent-border">
+                  <div class="tab-pane active" id="home" role="tabpanel">
+                      <div class="p-20">
+                        <div class="row">
+                            <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="mapClicked($event)" [zoom]="zoom" [zoomControl]="false"
+                          [usePanning]="true">
+                          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                        </agm-map>
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="latitud">Latitud</label>
+                                  <input disabled type="text" [(ngModel)]="lat" class="form-control" name="latitud" id="latitud" placeholder="Latitud" />
+                                </div>
+                              </div>
+                          
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="longitud">Longitud</label>
+                                  <input disabled type="text" [(ngModel)]="lng" class="form-control" name="longitud" id="longitud" placeholder="Longitud" />
+                                </div>
+                              </div>
+                          
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button type="button" name="savemap" id="savemap" class="btn btn-primary btn-block" (click)="guardarMapa()">
+                                  Guardar Localización
+                                </button>
+                              </div>
+                        </div>
+                        
+                      </div>
+                  </div>
+                  <div class="tab-pane  p-20" id="profile" role="tabpanel">2</div>
+              </div>
+          </div>
       </div>
-    </div>
-
-    <div class="col-md-12 mx-auto">
-      <div class="form-group">
-        <label for="longitud">Longitud</label>
-        <input
-          disabled
-          type="text"
-          [(ngModel)]="lng"
-          class="form-control"
-          name="longitud"
-          id="longitud"
-          placeholder="Longitud"
-        />
-      </div>
-    </div>
-
-    <div class="col-md-12">
-      <button
-        type="button"
-        name="savemap"
-        id="savemap"
-        class="btn btn-primary btn-lg btn-block"
-        (click)="guardarMapa()"
-      >
-        Guardar Localización
-      </button>
-    </div>
   </div>
-</div>
-<br />
 
-<div class="row text-center titulo">
-  <div class="col-md-12"><h3>Croquís del evento</h3></div>
-</div>
-<div class="row">
-  <div class="col-md-8 mx-auto">
-    <img src="https://picsum.photos/900/400/?random" />
+  <div class="col-md-6 pull-right">
+
+    
   </div>
-</div>
-<div class="row">
-  <div class="col-md-4 mx-auto">
-    <div class="form-group">
-      <br />
-      <input
-        type="file"
-        class="form-control"
-        name="croquis"
-        id="croquis"
-        placeholder="Selecciona el croquís de tu evento"
-      />
-    </div>
-  </div>
+
 </div>
