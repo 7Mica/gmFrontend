@@ -1,21 +1,21 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {
   FormGroup,
   Validators,
   FormControl,
   AbstractControl
-} from "@angular/forms";
-import { BsModalRef, BsModalService } from "ngx-bootstrap";
-import { UsuarioeventoService, EventoService } from "src/app/services/service.index";
-import { UsuarioEvento } from "src/app/models/usuarioevento.model";
-import { Router, ActivatedRoute } from "@angular/router";
-import swal from "sweetalert2";
-import { SWALCONFIG_TOAST } from "src/app/config/config";
+} from '@angular/forms';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { UsuarioeventoService, EventoService } from 'src/app/services/service.index';
+import { UsuarioEvento } from 'src/app/models/usuarioevento.model';
+import { Router, ActivatedRoute } from '@angular/router';
+import swal from 'sweetalert2';
+import { SWALCONFIG_TOAST } from 'src/app/config/config';
 
 @Component({
-  selector: "app-usuarioc",
-  templateUrl: "./usuarioc.component.html",
-  styleUrls: ["./usuarioc.component.css"]
+  selector: 'app-usuarioc',
+  templateUrl: './usuarioc.component.html',
+  styleUrls: ['./usuarioc.component.css']
 })
 export class UsuariocComponent implements OnInit {
   @Output()
@@ -23,15 +23,15 @@ export class UsuariocComponent implements OnInit {
 
   data: any;
   forma: FormGroup;
-  ponente: boolean = false;
+  ponente = false;
   prefs = [
-    { name: "Adminsitrador", value: "ADMIN_ROLE" },
-    { name: "Usuario", value: "USER_ROLE" },
-    { name: "Staff", value: "STAFF" },
-    { name: "Ponente", value: "PONENTE" },
-    { name: "Stand", value: "STAND" }
+    { name: 'Adminsitrador', value: 'ADMIN_ROLE' },
+    { name: 'Usuario', value: 'USER_ROLE' },
+    { name: 'Staff', value: 'STAFF' },
+    { name: 'Ponente', value: 'PONENTE' },
   ];
 
+  isEdit = false;
   marcas: any[] = [];
 
   constructor(
@@ -41,11 +41,11 @@ export class UsuariocComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private eventoService: EventoService
   ) {
-    
-    
+
   }
 
   ngOnInit() {
+    // tslint:disable-next-line:prefer-const
     let data: any = this.modalService.config.initialState;
     this.data = data;
     this.getMarcas();
@@ -67,7 +67,6 @@ export class UsuariocComponent implements OnInit {
           Validators.minLength(2),
           Validators.maxLength(50)
         ]),
-        fechanacimiento: new FormControl(null, [Validators.required]),
         calle: new FormControl(null, [
           Validators.required,
           Validators.minLength(2),
@@ -79,11 +78,6 @@ export class UsuariocComponent implements OnInit {
           Validators.maxLength(50)
         ]),
         ciudad: new FormControl(null, [
-          Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(50)
-        ]),
-        referencias: new FormControl(null, [
           Validators.required,
           Validators.minLength(2),
           Validators.maxLength(50)
@@ -119,19 +113,40 @@ export class UsuariocComponent implements OnInit {
       },
       { validators: [this.matchEmail, this.matchPassword] }
     );
-      
+
     if (this.data.edit) {
-      
+
       this._usuarioService.getUsuarioById(this.data._id).subscribe(
         (res: any) => {
-          console.log(res);
-          
-          this.forma.get("nombre").setValue(res.data.nombre);
-          this.forma.get("appaterno").setValue(res.data.apellidoPaterno);
-          this.forma.get("apmaterno").setValue(res.data.apellidoMaterno);
-          this.forma.get("email").setValue(res.data.email);
+          this.isEdit = true;
+          this.forma.get('email').disable();
+          this.forma.get('emailconfirm').disable();
+          this.forma.get('password').disable();
+          this.forma.get('passwordconfirm').disable();
+
+          this.forma.get('nombre').setValue(res.data.nombre);
+          this.forma.get('appaterno').setValue(res.data.apellidoPaterno);
+          this.forma.get('apmaterno').setValue(res.data.apellidoMaterno);
+          this.forma.get('calle').setValue(res.data.direccion.calle);
+          this.forma.get('estado').setValue(res.data.direccion.estado);
+          this.forma.get('ciudad').setValue(res.data.direccion.ciudad);
+          this.forma.get('codigopostal').setValue(res.data.direccion.cp);
+          this.forma.get('colonia').setValue(res.data.direccion.colonia);
+          this.forma.get('numeroexterior').setValue(res.data.direccion.numeroExterior);
+          this.forma.get('numerointerior').setValue(res.data.direccion.numeroInterior);
+          this.forma.get('rol').setValue(res.data.rol);
+          if (res.data.rol === 'PONENTE') {
+            this.ponente = true;
+            this.forma.get('marca').setValue(res.data.marcas);
+            this.forma.get('marca').enable();
+          } else {
+            this.ponente = false;
+            this.forma.get('marca').disable();
+          }
+
         },
         error => {
+          // tslint:disable-next-line:prefer-const
           let toast = SWALCONFIG_TOAST;
           toast.title = 'Error en la petición';
           toast.type = 'error';
@@ -142,58 +157,52 @@ export class UsuariocComponent implements OnInit {
     }
   }
 
-  onChange(event){
+  onChange(event) {
     console.log(event.target.value);
-    if(event.target.value === 'PONENTE'){
+    if (event.target.value === 'PONENTE') {
       this.forma.get('marca').enable();
       this.ponente = true;
-    }else{
+    } else {
       this.forma.get('marca').setValue(null);
       this.forma.get('marca').disable();
       this.ponente = false;
-      
+
     }
-    
+
   }
 
-  getMarcas(){
-    console.log(this.data.idevento);
-    
-    this.eventoService.getMarcasByEvento(this.data.idevento).subscribe((res: any)=>{
-      console.log(res);
-      
+  getMarcas() {
+    this.eventoService.getMarcasByEvento(this.data.idevento).subscribe((res: any) => {
       res.data.marcas.forEach(element => {
         this.marcas.push(element);
       });
-      
+
     }, error => {
 
     });
   }
 
   matchEmail(AC: AbstractControl) {
-    let email = AC.get("email").value; // to get value in input tag
-    let confirmEmail = AC.get("emailconfirm").value; // to get value in input tag
-    if (email != confirmEmail) {
-      AC.get("emailconfirm").setErrors({ matchemail: true });
+    const email = AC.get('email').value; // to get value in input tag
+    const confirmEmail = AC.get('emailconfirm').value; // to get value in input tag
+    if (email !== confirmEmail) {
+      AC.get('emailconfirm').setErrors({ matchemail: true });
     } else {
       return null;
     }
   }
 
   matchPassword(AC: AbstractControl) {
-    let password = AC.get("password").value; // to get value in input tag
-    let confirmPassword = AC.get("passwordconfirm").value; // to get value in input tag
-    if (password != confirmPassword) {
-      AC.get("passwordconfirm").setErrors({ matchpassword: true });
+    const password = AC.get('password').value; // to get value in input tag
+    const confirmPassword = AC.get('passwordconfirm').value; // to get value in input tag
+    if (password !== confirmPassword) {
+      AC.get('passwordconfirm').setErrors({ matchpassword: true });
     } else {
       return null;
     }
   }
 
   queEs() {
-    console.log(this.data);
-    
     if (this.data.edit) {
       this.actualizarUsuario(this.data._id);
     } else {
@@ -203,10 +212,29 @@ export class UsuariocComponent implements OnInit {
 
   actualizarUsuario(id) {
     if (this.forma.invalid) {
-      console.log("No es valido");
-    } else {
-      console.log("entro");
+
+      return;
     }
+    // tslint:disable-next-line:prefer-const
+    let toast: any = SWALCONFIG_TOAST;
+    // tslint:disable-next-line:prefer-const
+    let usuarioevento = this.forma.value;
+    usuarioevento.idevento = this.data.idevento;
+    this._usuarioService.actualizarUsuario(id, usuarioevento).subscribe(
+      res => {
+
+        toast.title = 'Se actualizó el registro';
+        swal(toast);
+        this.action.emit();
+        this.modalRef.hide();
+      },
+      error => {
+        toast.title = 'Ocurrió un error en la petición';
+        toast.type = 'error';
+        swal(toast);
+
+      }
+    );
   }
 
   registrarUsuario() {
@@ -214,38 +242,23 @@ export class UsuariocComponent implements OnInit {
       return;
     }
 
-    let usuario = new UsuarioEvento(
-      this.forma.value.nombre,
-      this.forma.value.appaterno,
-      this.forma.value.apmaterno,
-      this.forma.value.fechanacimiento,
-      this.forma.value.calle,
-      this.forma.value.estado,
-      this.forma.value.ciudad,
-      this.forma.value.referencias,
-      this.forma.value.codigopostal,
-      this.forma.value.colonia,
-      this.forma.value.numeroexterior,
-      this.forma.value.numerointerior,
-      this.data.idevento,
-      this.forma.value.rol,
-      this.forma.value.email,
-      this.forma.value.password,
-      this.forma.value.marca
-    );
+    // tslint:disable-next-line:prefer-const
+    let usuario = this.forma.value;
+    usuario.evento = this.data.idevento;
 
-    console.log(usuario);
-
-    this._usuarioService.crearUsuario(usuario).subscribe(
+    // tslint:disable-next-line:prefer-const
+    let toast = SWALCONFIG_TOAST;
+    this._usuarioService.crearUsuario(this.forma.value).subscribe(
       res => {
-        console.log(res);
-        
-        console.log("Usuario guardado");
+        toast.title = 'Usuario creado correctamente';
+        swal(toast);
         this.action.emit();
         this.modalRef.hide();
       },
       error => {
-        swal("Error!", "Ocurrío un error: " + error, "error");
+        toast.title = 'Ocurrió algo con la petición';
+        toast.type = 'error';
+        swal(toast);
       }
     );
   }

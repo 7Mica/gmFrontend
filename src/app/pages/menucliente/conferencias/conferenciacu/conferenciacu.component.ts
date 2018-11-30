@@ -1,27 +1,27 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { FormGroup, Validators, FormControl } from "@angular/forms";
-import { BsModalRef, BsModalService } from "ngx-bootstrap";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import {
   ConferenciaService,
   UsuarioeventoService
-} from "src/app/services/service.index";
-import { Conferencia } from "src/app/models/conferencia.model";
-import swal from "sweetalert2";
-import { SWALCONFIG_TOAST } from "src/app/config/config";
+} from 'src/app/services/service.index';
+import { Conferencia } from 'src/app/models/conferencia.model';
+import swal from 'sweetalert2';
+import { SWALCONFIG_TOAST } from 'src/app/config/config';
 
 @Component({
-  selector: "app-conferenciacu",
-  templateUrl: "./conferenciacu.component.html",
-  styleUrls: ["./conferenciacu.component.css"]
+  selector: 'app-conferenciacu',
+  templateUrl: './conferenciacu.component.html',
+  styleUrls: ['./conferenciacu.component.css']
 })
 export class ConferenciacuComponent implements OnInit {
   @Output()
   action = new EventEmitter();
-  titulo: string = '';
+  titulo = '';
 
   forma: FormGroup;
   ponentes: any[] = [];
-  
+
   constructor(
     public modalRef: BsModalRef,
     public modalService: BsModalService,
@@ -29,7 +29,7 @@ export class ConferenciacuComponent implements OnInit {
     private usuarioeventoService: UsuarioeventoService
   ) {
     this.getPonentesEvento();
-    let titulo: any = modalService.config.initialState;
+    const titulo: any = modalService.config.initialState;
     this.titulo = titulo.title;
   }
 
@@ -65,8 +65,9 @@ export class ConferenciacuComponent implements OnInit {
       return;
     }
 
-    let idevento: any = this.modalService.config.initialState;
+    const idevento: any = this.modalService.config.initialState;
 
+    // tslint:disable-next-line:prefer-const
     let conferencia = new Conferencia(
       this.forma.value.titulo,
       this.forma.value.hora,
@@ -76,15 +77,16 @@ export class ConferenciacuComponent implements OnInit {
       this.forma.value.ponente,
       this.forma.value.fecha,
       idevento.data
-      
+
     );
 
     console.log(conferencia);
 
     this.conferenciaService.crearConferencia(conferencia).subscribe(
       res => {
+        // tslint:disable-next-line:prefer-const
         let toast = SWALCONFIG_TOAST;
-        toast.title = 'Registro creado correctamente'
+        toast.title = 'Registro creado correctamente';
         toast.type = 'success';
         swal(toast);
         this.action.emit();
@@ -97,16 +99,17 @@ export class ConferenciacuComponent implements OnInit {
   }
 
   getPonentesEvento() {
-    let data:any = this.modalService.config.initialState;
+    // tslint:disable-next-line:prefer-const
+    let data: any = this.modalService.config.initialState;
     this.usuarioeventoService
       .getPonentesPorEvento(data.data)
       .subscribe(
         (res: any) => {
           res.data.forEach(element => {
-            
+
             this.ponentes.push(element);
           });
-          
+
 
         },
         error => {}

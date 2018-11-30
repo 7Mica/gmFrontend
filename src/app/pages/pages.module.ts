@@ -34,6 +34,7 @@ import { PAGES_ROUTES } from "./pages.routes";
  *******************/
 
 import * as PagesIndex from "../config/pages.index";
+import { ChangePasswordComponent } from './menucliente/modales/change-password/change-password.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import * as PagesIndex from "../config/pages.index";
         PagesIndex.ConferenciacuComponent,
         PagesIndex.DetalleconferenciaComponent,
         PagesIndex.MarcascuComponent,
+        ChangePasswordComponent,
     ],
     exports: [
         PagesIndex.DashboardComponent,

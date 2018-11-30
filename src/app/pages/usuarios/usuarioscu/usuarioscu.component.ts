@@ -1,18 +1,19 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {
   FormGroup,
   FormControl,
   Validators,
   AbstractControl
-} from "@angular/forms";
-import { BsModalRef, BsModalService } from "ngx-bootstrap";
-import { Usuario } from "src/app/models/usuario.model";
-import { UsuarioService } from "src/app/services/service.index";
+} from '@angular/forms';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { UsuarioService } from 'src/app/services/service.index';
+import { SWALCONFIG_TOAST } from 'src/app/config/config';
+import swal from 'sweetalert2';
 
 @Component({
-  selector: "app-usuarioscu",
-  templateUrl: "./usuarioscu.component.html",
-  styleUrls: ["./usuarioscu.component.css"]
+  selector: 'app-usuarioscu',
+  templateUrl: './usuarioscu.component.html',
+  styleUrls: ['./usuarioscu.component.css']
 })
 export class UsuarioscuComponent implements OnInit {
   @Output()
@@ -21,15 +22,16 @@ export class UsuarioscuComponent implements OnInit {
   data: any;
   forma: FormGroup;
   prefs = [
-    { name: "Adminsitrador", value: "ADMIN_ROLE" },
-    { name: "Cliente", value: "CLIENT" }
+    { name: 'Adminsitrador', value: 'ADMIN_ROLE' },
+    { name: 'Cliente', value: 'CLIENT' }
   ];
+  isEdit = false;
 
   constructor(
     public modalRef: BsModalRef,
     public modalService: BsModalService,
     public _usuarioService: UsuarioService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.forma = new FormGroup(
@@ -49,7 +51,6 @@ export class UsuarioscuComponent implements OnInit {
           Validators.minLength(2),
           Validators.maxLength(50)
         ]),
-        fechanacimiento: new FormControl(null, [Validators.required]),
         calle: new FormControl(null, [
           Validators.required,
           Validators.minLength(2),
@@ -61,11 +62,6 @@ export class UsuarioscuComponent implements OnInit {
           Validators.maxLength(50)
         ]),
         ciudad: new FormControl(null, [
-          Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(50)
-        ]),
-        referencias: new FormControl(null, [
           Validators.required,
           Validators.minLength(2),
           Validators.maxLength(50)
@@ -104,12 +100,24 @@ export class UsuarioscuComponent implements OnInit {
     if (this.data.edit) {
       this._usuarioService.getUsuarioById(this.data._id).subscribe(
         (res: any) => {
-          console.log(res);
 
-          this.forma.get("nombre").setValue(res.data.nombre);
-          this.forma.get("appaterno").setValue(res.data.apellidoPaterno);
-          this.forma.get("apmaterno").setValue(res.data.apellidoMaterno);
-          this.forma.get("email").setValue(res.data.email);
+          this.isEdit = true;
+          this.forma.get('email').disable();
+          this.forma.get('emailconfirm').disable();
+          this.forma.get('password').disable();
+          this.forma.get('passwordconfirm').disable();
+
+          this.forma.get('nombre').setValue(res.data.nombre);
+          this.forma.get('appaterno').setValue(res.data.apellidoPaterno);
+          this.forma.get('apmaterno').setValue(res.data.apellidoMaterno);
+          this.forma.get('calle').setValue(res.data.direccion.calle);
+          this.forma.get('estado').setValue(res.data.direccion.estado);
+          this.forma.get('ciudad').setValue(res.data.direccion.ciudad);
+          this.forma.get('codigopostal').setValue(res.data.direccion.cp);
+          this.forma.get('colonia').setValue(res.data.direccion.colonia);
+          this.forma.get('numeroexterior').setValue(res.data.direccion.numeroExterior);
+          this.forma.get('numerointerior').setValue(res.data.direccion.numeroInterior);
+          this.forma.get('rol').setValue(res.data.rol);
         },
         error => {
           console.log(error);
@@ -119,20 +127,20 @@ export class UsuarioscuComponent implements OnInit {
   }
 
   matchEmail(AC: AbstractControl) {
-    let email = AC.get("email").value; // to get value in input tag
-    let confirmEmail = AC.get("emailconfirm").value; // to get value in input tag
-    if (email != confirmEmail) {
-      AC.get("emailconfirm").setErrors({ matchemail: true });
+    const email = AC.get('email').value; // to get value in input tag
+    const confirmEmail = AC.get('emailconfirm').value; // to get value in input tag
+    if (email !== confirmEmail) {
+      AC.get('emailconfirm').setErrors({ matchemail: true });
     } else {
       return null;
     }
   }
 
   matchPassword(AC: AbstractControl) {
-    let password = AC.get("password").value; // to get value in input tag
-    let confirmPassword = AC.get("passwordconfirm").value; // to get value in input tag
-    if (password != confirmPassword) {
-      AC.get("passwordconfirm").setErrors({ matchpassword: true });
+    const password = AC.get('password').value; // to get value in input tag
+    const confirmPassword = AC.get('passwordconfirm').value; // to get value in input tag
+    if (password !== confirmPassword) {
+      AC.get('passwordconfirm').setErrors({ matchpassword: true });
     } else {
       return null;
     }
@@ -148,10 +156,25 @@ export class UsuarioscuComponent implements OnInit {
 
   actualizarUsuario(id) {
     if (this.forma.invalid) {
-      console.log("No es valido");
-    } else {
-      console.log("entro");
+      return;
     }
+    // tslint:disable-next-line:prefer-const
+    let toast: any = SWALCONFIG_TOAST;
+    this._usuarioService.actualizarUsuario(id, this.forma.value).subscribe(
+      res => {
+        toast.title = 'Se actualizó el registro';
+        swal(toast);
+        this.action.emit();
+        this.modalRef.hide();
+      },
+      error => {
+        toast.title = 'Ocurrió un error en la petición';
+        toast.type = 'error';
+        swal(toast);
+
+      }
+    );
+
   }
 
   registrarUsuario() {
@@ -159,29 +182,9 @@ export class UsuarioscuComponent implements OnInit {
       return;
     }
 
-    let usuario = new Usuario(
-      this.forma.value.nombre,
-      this.forma.value.appaterno,
-      this.forma.value.apmaterno,
-      this.forma.value.fechanacimiento,
-      this.forma.value.calle,
-      this.forma.value.estado,
-      this.forma.value.ciudad,
-      this.forma.value.referencias,
-      this.forma.value.codigopostal,
-      this.forma.value.colonia,
-      this.forma.value.numeroexterior,
-      this.forma.value.numerointerior,
-      this.forma.value.rol,
-      this.forma.value.email,
-      this.forma.value.password
-    );
-
-    console.log(usuario);
-
-    this._usuarioService.crearUsuario(usuario).subscribe(
+    this._usuarioService.crearUsuario(this.forma.value).subscribe(
       res => {
-        console.log("Usuario guardado");
+        console.log('Usuario guardado');
         this.action.emit();
         this.modalRef.hide();
       },

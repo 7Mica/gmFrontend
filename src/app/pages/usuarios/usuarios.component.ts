@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { BsModalService, BsModalRef, ModalDirective } from "ngx-bootstrap";
-import { UsuarioscuComponent } from "./usuarioscu/usuarioscu.component";
-import { UsuarioService } from "src/app/services/service.index";
-import swal from "sweetalert2";
-import { LocalDataSource } from "ng2-smart-table";
-import { DTCONFIG_DELETE_EDIT_BTNS, SWALCONFIG_CONFIRMDELETE, SWALCONFIG_TOAST } from "src/app/config/config";
+import { Component, OnInit } from '@angular/core';
+import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap';
+import { UsuarioscuComponent } from './usuarioscu/usuarioscu.component';
+import { UsuarioService } from 'src/app/services/service.index';
+import swal from 'sweetalert2';
+import { LocalDataSource } from 'ng2-smart-table';
+import { DTCONFIG_DELETE_EDIT_BTNS, SWALCONFIG_CONFIRMDELETE, SWALCONFIG_TOAST } from 'src/app/config/config';
 
 @Component({
-  selector: "app-usuarios",
-  templateUrl: "./usuarios.component.html",
-  styleUrls: ["./usuarios.component.css"]
+  selector: 'app-usuarios',
+  templateUrl: './usuarios.component.html',
+  styleUrls: ['./usuarios.component.css']
 })
 export class UsuariosComponent implements OnInit {
   source: LocalDataSource;
@@ -40,11 +40,10 @@ export class UsuariosComponent implements OnInit {
         title: 'Rol de usuario'
       },
 
-    }
+    };
+
     this.source = new LocalDataSource();
     this.getUsuarios();
-
-
   }
 
   ngOnInit() { }
@@ -68,7 +67,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   eliminarUsuario(id) {
-    let config = SWALCONFIG_CONFIRMDELETE;
+    const config = SWALCONFIG_CONFIRMDELETE;
     config.text = config.text + 'evento';
 
     swal(config).then(result => {
@@ -76,27 +75,29 @@ export class UsuariosComponent implements OnInit {
         this._usuarioService.eliminarUsuario(id).subscribe(
           res => {
             this.getUsuarios();
-            let config = SWALCONFIG_TOAST;
-            config.title = 'Se eliminó el registro'
-            swal(config);
+            // tslint:disable-next-line:prefer-const
+            let configtoast = SWALCONFIG_TOAST;
+            configtoast.title = 'Se eliminó el registro';
+            swal(configtoast);
           },
           error => {
-            let config = SWALCONFIG_TOAST;
-            config.title = 'Error al eliminar el usuario';
-            swal(config);
+            // tslint:disable-next-line:prefer-const
+            let configtoastdel = SWALCONFIG_TOAST;
+            configtoastdel.title = 'Error al eliminar el usuario';
+            swal(configtoastdel);
           }
         );
       } else if (result.dismiss === swal.DismissReason.cancel) {
-        //boton cancelar presionado
+        // boton cancelar presionado
       }
     });
   }
 
   openModal() {
-    let modalRef = this.modalService.show(UsuarioscuComponent, {
-      class: "modal-lg",
+    const modalRef = this.modalService.show(UsuarioscuComponent, {
+      class: 'modal-lg',
       initialState: {
-        title: "Registrar nuevo usuario",
+        title: 'Registrar nuevo usuario',
         data: {}
       }
     });
@@ -108,15 +109,20 @@ export class UsuariosComponent implements OnInit {
 
 
   editarUsuario(id) {
-    let modalRef = this.modalService.show(UsuarioscuComponent, {
-      class: "modal-lg",
+    const modalRef = this.modalService.show(UsuarioscuComponent, {
+      class: 'modal-lg',
       initialState: {
-        title: "Registrar nuevo usuario",
+        title: 'Registrar nuevo usuario',
         data: {
           edit: true,
           _id: id,
         }
       }
     });
+
+    modalRef.content.action.subscribe(() => {
+      this.getUsuarios();
+    });
+
   }
 }

@@ -19,32 +19,32 @@ export class DetalleconferenciaComponent implements OnInit {
   };
 
   barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  barChartType: string = 'bar';
-  barChartLegend: boolean = true;
+  barChartType = 'bar';
+  barChartLegend = true;
 
   constructor(public modalRef: BsModalRef,
     public modalService: BsModalService,
     private conferenciaService: ConferenciaService,
     private eventoService: EventoService) {
 
-      this.conferencia = {};
-      this.ponente = {};
-      this.marca = {};
-    let eas: any = this.modalService.config.initialState;
+    this.conferencia = {};
+    this.ponente = {};
+    this.marca = {};
+    const eas: any = this.modalService.config.initialState;
 
-    
 
-      this.conferenciaService.getConferenciaById(eas.idconferencia).subscribe((res:any)=> {
-        this.conferencia = res.conferencias[0];
-        this.ponente = this.conferencia.ponente;
-        
-      },
-      error=>{
-  
-      });  
-      
-      this.getMarca(eas.marca);
-      
+
+    this.conferenciaService.getConferenciaById(eas.idconferencia).subscribe((res: any) => {
+      this.conferencia = res.conferencias[0];
+      this.ponente = this.conferencia.ponente;
+
+    },
+      error => {
+
+      });
+
+    this.getMarca(eas.marca);
+
   }
 
   ngOnInit() {
@@ -52,22 +52,23 @@ export class DetalleconferenciaComponent implements OnInit {
 
   getMarca(idmarca) {
     this.eventoService.getMarcaById(idmarca).subscribe((res: any) => {
-      
-      
+
+
       this.marca = res.data.marcas[0];
       console.log(res);
-      
+
     }, error => {
-      
+
     });
-        
-    
+
+
   }
 
   /************
    * GRAFICOS *
    ************/
 
+  // tslint:disable-next-line:member-ordering
   public barChartData: any[] = [
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
@@ -84,7 +85,7 @@ export class DetalleconferenciaComponent implements OnInit {
 
   public randomize(): void {
     // Only Change 3 values
-    let data = [
+    const data = [
       Math.round(Math.random() * 100),
       59,
       80,
@@ -92,7 +93,7 @@ export class DetalleconferenciaComponent implements OnInit {
       56,
       (Math.random() * 100),
       40];
-    let clone = JSON.parse(JSON.stringify(this.barChartData));
+    const clone = JSON.parse(JSON.stringify(this.barChartData));
     clone[0].data = data;
     this.barChartData = clone;
     /**

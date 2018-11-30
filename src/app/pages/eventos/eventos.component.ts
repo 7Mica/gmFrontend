@@ -1,21 +1,21 @@
-import { Component, OnInit } from "@angular/core";
-import { EventoService, SharedService, UsuarioService } from "src/app/services/service.index";
-import { BsModalRef, BsModalService } from "ngx-bootstrap";
-import { EventocuComponent } from "./eventocu/eventocu.component";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { EventoService, SharedService, UsuarioService } from 'src/app/services/service.index';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { EventocuComponent } from './eventocu/eventocu.component';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-eventos",
-  templateUrl: "./eventos.component.html",
-  styleUrls: ["./eventos.component.css"]
+  selector: 'app-eventos',
+  templateUrl: './eventos.component.html',
+  styleUrls: ['./eventos.component.css']
 })
 export class EventosComponent implements OnInit {
   eventos: any[] = [];
   modalRef: BsModalRef;
   menuActivado = false;
   evento = false;
-  url = ["/eventos"];
-  cliente: boolean = false;
+  url = ['/eventos'];
+  cliente = false;
 
   constructor(
     private _eventoService: EventoService,
@@ -24,46 +24,46 @@ export class EventosComponent implements OnInit {
     private usuarioService: UsuarioService
   ) {
     this.listaEventos();
-    if (this.router.url === "/eventos") {
+    if (this.router.url === '/eventos') {
       this.menuActivado = true;
     }
-    if(usuarioService.tipoLogin() === false){
+    if (usuarioService.tipoLogin() === false) {
       this.cliente = true;
-      
+
     }
 
   }
 
-  activo(){
-    if(!this.cliente && this.menuActivado){
+  activo() {
+    if (!this.cliente && this.menuActivado) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
 
   displayCounter(count) {
-    this.url = count.router.url.split("/");
+    this.url = count.router.url.split('/');
   }
 
   displayDesactivate(some) {
     console.log(some);
-    if (some.router.url === "/eventos") {
+    if (some.router.url === '/eventos') {
       this.listaEventos();
       this.menuActivado = true;
     }
-    this.url = some.router.url.split("/");
+    this.url = some.router.url.split('/');
   }
 
   ngOnInit() {
-    
+
   }
 
   openModal() {
-    let modalRef = this.modalService.show(EventocuComponent, {
-      class: "modal-lg",
+    const modalRef = this.modalService.show(EventocuComponent, {
+      class: 'modal-lg',
       initialState: {
-        title: "Crear nuevo evento",
+        title: 'Crear nuevo evento',
         data: {}
       }
     });
@@ -75,16 +75,16 @@ export class EventosComponent implements OnInit {
   }
 
   listaEventos() {
-    let tipo = JSON.parse(localStorage.getItem("usuario"));
-    if (tipo.rol === "CLIENT") {
+    const tipo = JSON.parse(localStorage.getItem('usuario'));
+    if (tipo.rol === 'CLIENT') {
       this.eventos = [];
-      this._eventoService.getEventosByOwner(tipo._id).subscribe((res: any)=>{
+      this._eventoService.getEventosByOwner(tipo._id).subscribe((res: any) => {
         res.data.forEach(element => {
           this.eventos.push(element);
         });
-      }, error =>{
+      }, error => {
         console.log(error);
-        
+
       });
     } else {
       this._eventoService.getEventos().subscribe(

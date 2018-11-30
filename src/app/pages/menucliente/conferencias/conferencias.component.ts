@@ -1,20 +1,20 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { BsModalService, BsModalRef } from "ngx-bootstrap";
-import { ConferenciaService } from "src/app/services/service.index";
-import { ConferenciacuComponent } from "./conferenciacu/conferenciacu.component";
-import { DetalleconferenciaComponent } from "../modales/detalleconferencia/detalleconferencia.component";
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { ConferenciaService } from 'src/app/services/service.index';
+import { ConferenciacuComponent } from './conferenciacu/conferenciacu.component';
+import { DetalleconferenciaComponent } from '../modales/detalleconferencia/detalleconferencia.component';
 
 @Component({
-  selector: "app-conferencias",
-  templateUrl: "./conferencias.component.html",
-  styleUrls: ["./conferencias.component.css"]
+  selector: 'app-conferencias',
+  templateUrl: './conferencias.component.html',
+  styleUrls: ['./conferencias.component.css']
 })
 export class ConferenciasComponent implements OnInit {
   conferencias: any[] = [];
   modalRef: BsModalRef;
   menuActivado = false;
-  
+
   constructor(
     private conferenciaService: ConferenciaService,
     private modalService: BsModalService,
@@ -27,11 +27,11 @@ export class ConferenciasComponent implements OnInit {
   ngOnInit() {}
 
   openModal() {
-    let evento = this.activatedRoute.snapshot.params.idevento;
-    let modalRef = this.modalService.show(ConferenciacuComponent, {
-      class: "modal-xl",
+    const evento = this.activatedRoute.snapshot.params.idevento;
+    const modalRef = this.modalService.show(ConferenciacuComponent, {
+      class: 'modal-xl',
       initialState: {
-        title: "Crear nueva conferencia",
+        title: 'Crear nueva conferencia',
         data: evento
 
       }
@@ -44,11 +44,11 @@ export class ConferenciasComponent implements OnInit {
   }
 
   listaConferencias() {
-    let conferenciaid = this.activatedRoute.snapshot.params.idevento;
+    const conferenciaid = this.activatedRoute.snapshot.params.idevento;
     this.conferenciaService.getConferencias(conferenciaid).subscribe(
-      (res: any) => {    
+      (res: any) => {
         console.log(res);
-                    
+
         res.conferencias.forEach(element => {
           this.conferencias.push(element);
         });
@@ -60,17 +60,16 @@ export class ConferenciasComponent implements OnInit {
   }
 
 
-  openDetalleConferencia(idconferencia, idmarca){
+  openDetalleConferencia(idconferencia, idmarca) {
 
-    let modalRef = this.modalService.show(DetalleconferenciaComponent, {
-      class: "modal-lg",
+    const modalRef = this.modalService.show(DetalleconferenciaComponent, {
+      class: 'modal-lg',
       initialState: {
-        title: "Detalle conferencia",
+        title: 'Detalle conferencia',
         idconferencia: idconferencia,
         marca: idmarca
       }
     });
 
-    
   }
 }

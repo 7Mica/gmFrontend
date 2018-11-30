@@ -2,8 +2,10 @@
  *    CLASES PERSONALISADAS    *
  * FUERA DEL TEMA DE BOOTSTRAP *
  *******************************/
-
- .vertical-hr{ 
+.tbl-button {
+  margin-right: 10px !important;
+}
+ .vertical-hr { 
   
   border:         none;
   border-left:    1px solid hsla(200, 10%, 50%,100);

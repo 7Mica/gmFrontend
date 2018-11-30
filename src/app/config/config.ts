@@ -18,13 +18,13 @@ export const DTCONFIG_DELETE_EDIT_BTNS = {
         custom: [],
     },
     edit: {
-        editButtonContent: '<i title="Editar" class="btn btn-success fa fa-pencil"></i> &nbsp;'
+        editButtonContent: '<span class="btn btn-success tbl-button"><i title="Editar" class="fa fa-pencil"></i></span>'
     },
 
     delete: {
-        deleteButtonContent: '<i title="Eliminar" class="btn btn-danger fa fa-times"></i>'
+        deleteButtonContent: '<span class="btn btn-danger"><i title="Eliminar" class="fa fa-times"></i></span>'
     }
-}
+};
 
 /**********************
  * CONFIGURACION SWAL *
@@ -36,19 +36,19 @@ export const DTCONFIG_DELETE_EDIT_BTNS = {
  */
 export const SWALCONFIG_CONFIRMDELETE: any = {
 
-    title: "¿Estás seguro?",
-    text: "Se eliminará permamentemente el",
-    type: "warning",
+    title: '¿Estás seguro?',
+    text: 'Se eliminará permamentemente el',
+    type: 'warning',
     showCancelButton: true,
-    confirmButtonText: "Sí, eliminar",
-    cancelButtonText: "No, Cancelar"
-}
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'No, Cancelar'
+};
 
 export const SWALCONFIG_TOAST: any = {
     toast: true,
-    type: "success",
+    type: 'success',
     showConfirmButton: false,
     position: 'top-end',
     title: 'Se eliminó el registro',
     timer: 4000
-}
+};
