@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ConferenciaService, EventoService } from 'src/app/services/service.index';
+import { Observable, Observer } from 'rxjs';
+import { SWALCONFIG_CONFIRMDELETE, SWALCONFIG_TOAST } from 'src/app/config/config';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-detalleconferencia',
@@ -8,15 +11,19 @@ import { ConferenciaService, EventoService } from 'src/app/services/service.inde
   styleUrls: ['./detalleconferencia.component.css']
 })
 export class DetalleconferenciaComponent implements OnInit {
+  @Output()
+  action = new EventEmitter();
 
-  conferencia: any;
-  ponente: any;
+  conferencia: any = {};
+  ponente: any = {};
   marca: any;
-
+  data: any;
   barChartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: true
   };
+
+  watcher: Observable<String>;
 
   barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
   barChartType = 'bar';
@@ -27,40 +34,68 @@ export class DetalleconferenciaComponent implements OnInit {
     private conferenciaService: ConferenciaService,
     private eventoService: EventoService) {
 
-    this.conferencia = {};
-    this.ponente = {};
-    this.marca = {};
-    const eas: any = this.modalService.config.initialState;
+    this.data = this.modalService.config.initialState;
 
 
+    this.conferenciaService.getConferenciaById(this.data.idconferencia).subscribe((res: any) => {
 
-    this.conferenciaService.getConferenciaById(eas.idconferencia).subscribe((res: any) => {
       this.conferencia = res.conferencias[0];
       this.ponente = this.conferencia.ponente;
 
     },
-      error => {
+      _error => {
 
       });
 
-    this.getMarca(eas.marca);
+      this.getMarca(this.data.marca);
 
   }
 
   ngOnInit() {
+
   }
+
 
   getMarca(idmarca) {
     this.eventoService.getMarcaById(idmarca).subscribe((res: any) => {
-
-
       this.marca = res.data.marcas[0];
-      console.log(res);
 
-    }, error => {
+    }, _error => {
 
     });
+  }
 
+  borrarConferencia(conferencia) {
+    swal(SWALCONFIG_CONFIRMDELETE)
+    .then(res => {
+      if (res.value) {
+        console.log('Conferencia borrada');
+        this.conferenciaService.eliminarConferencia(conferencia).subscribe(
+          _res => {
+            // tslint:disable-next-line:prefer-const
+            let toast: any = SWALCONFIG_TOAST;
+            swal(toast);
+            this.modalRef.hide();
+            this.action.emit();
+          },
+
+          _error => {
+            // tslint:disable-next-line:prefer-const
+            let toast: any = SWALCONFIG_TOAST;
+            toast.titulo = 'Algo salió mal en la petición';
+            toast.type = 'error';
+            swal(toast);
+          }
+        );
+
+      } else {
+
+      }
+    })
+    .catch(error => {
+      console.log(error);
+
+    });
 
   }
 

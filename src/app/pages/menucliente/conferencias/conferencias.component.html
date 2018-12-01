@@ -11,15 +11,15 @@
             Ordenar
         </button>
         <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 36px, 0px); top: 0px; left: 0px; will-change: transform;">
-            <a class="dropdown-item" href="#">Nombre</a>
-            <a class="dropdown-item" href="#">Fecha de creación</a>
-            <a class="dropdown-item" href="#">Ponente</a>
+            <a class="dropdown-item pointer" (click)="sortBy('nombre')">Nombre</a>
+            <a class="dropdown-item pointer" (click)="sortBy('fecha')">Hora</a>
+            <a class="dropdown-item pointer" (click)="sortBy('ponente')">Ponente</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Finalizadas</a>
+            <a class="dropdown-item pointer" (click)="sortBy('finalizadas')">Finalizadas</a>
         </div>
     </div>
     <div class="col-md-3 col-xs-4">
-        <input type="text" id="demo-input-search2" placeholder="Buscar conferencia" class="form-control">
+        <input type="text" id="demo-input-search2" (blur)="conferencias = tempConferencias;" (keyup)="findConference($event)" [(ngModel)]="busqueda" placeholder="Buscar conferencia" class="form-control">
     </div>
 </div>
 <br>
@@ -29,7 +29,7 @@
     <div class="col-xs-10 col-sm-4 col-md-3" *ngFor="let item of conferencias" (click)="openDetalleConferencia(item._id, item.ponente.marcas)">
         <div class="image-flip pointer" ontouchstart="this.classList.toggle('hover');">
             <div class="mainflip">
-                <div class="frontside">
+                <div class="frontside" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
                     <div class="card">
                         <img class="img-fluid col-md-12" src="{{item.img}}" alt="card image">
                         <div class="card-body">

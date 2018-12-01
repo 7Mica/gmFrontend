@@ -3,7 +3,7 @@
     <div class="col-md-8">
 
       <h2>{{conferencia.titulo}}</h2>
-      
+
       <p><b>Hora:</b> {{conferencia.hora}}</p>
       <p><b>Salón:</b> {{conferencia.salon}}</p>
       <p><b>Duración:</b> {{conferencia.duracion}} </p>
@@ -47,22 +47,33 @@
 
     </div>
 
-    <div class="col-md-4">
-      <div class="card">
-        <img src="{{ponente.img}}" alt="{{ponente.name}}" style="width:100%">
-        <h1>{{ponente.nombre}}</h1>
-        <p>{{ponente.apellidoPaterno + ' ' + ponente.apellidoMaterno}} </p>
-        <p class="title">{{marca.titulo}}</p>
-        <p>Ambito: {{marca.ambito}}</p>
-        <p>Origen: {{marca.ciudad}}</p>
-        <div style="margin: 24px 0;">
-          <a href="#"><i class="fa fa-dribbble"></i></a>
-          <a href="#"><i class="fa fa-twitter"></i></a>
-          <a href="#"><i class="fa fa-linkedin"></i></a>
-          <a href="#"><i class="fa fa-facebook"></i></a>
+    <div class="col-md-4" *ngIf="marca !== undefined">
+
+      <div class="col-md-12">
+        <div class="card">
+          <img src="{{ponente.img}}" alt="{{ponente.name}}" style="width:100%">
+          <h1>{{ponente.nombre}}</h1>
+          <p>{{ponente.apellidoPaterno + ' ' + ponente.apellidoMaterno}} </p>
+          <p class="title">{{marca.titulo}}</p>
+          <p>Ambito: {{marca.ambito}}</p>
+          <p>Origen: {{marca.ciudad}}</p>
+          <div style="margin: 24px 0;">
+            <a href="#"><i class="fa fa-dribbble"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+          </div>
+          <p><button>Contact</button></p>
         </div>
-        <p><button>Contact</button></p>
+      </div>
+      <div class="col-md-12">
+        <div class="card">
+
+          <button (click)="borrarConferencia(conferencia._id)" style="background-color: red !important;"> <i title="Editar" class="fa fa-trash"></i> Eliminar conferencia</button>
+
+        </div>
       </div>
     </div>
   </div>
+
 </div>

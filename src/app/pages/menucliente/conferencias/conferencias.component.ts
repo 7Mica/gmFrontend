@@ -12,8 +12,10 @@ import { DetalleconferenciaComponent } from '../modales/detalleconferencia/detal
 })
 export class ConferenciasComponent implements OnInit {
   conferencias: any[] = [];
+  tempConferencias: any[] = [];
   modalRef: BsModalRef;
   menuActivado = false;
+  busqueda: string;
 
   constructor(
     private conferenciaService: ConferenciaService,
@@ -24,7 +26,7 @@ export class ConferenciasComponent implements OnInit {
     this.listaConferencias();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   openModal() {
     const evento = this.activatedRoute.snapshot.params.idevento;
@@ -47,11 +49,9 @@ export class ConferenciasComponent implements OnInit {
     const conferenciaid = this.activatedRoute.snapshot.params.idevento;
     this.conferenciaService.getConferencias(conferenciaid).subscribe(
       (res: any) => {
-        console.log(res);
-
-        res.conferencias.forEach(element => {
-          this.conferencias.push(element);
-        });
+        // this.conferencias = res.conferencias.filter(item => item.ponente.marcas);
+        this.conferencias = res.conferencias;
+        this.tempConferencias = res.conferencias;
       },
       error => {
         console.log(error);
@@ -59,9 +59,35 @@ export class ConferenciasComponent implements OnInit {
     );
   }
 
+  sortBy(metodo) {
+    switch (metodo) {
+      case 'nombre':
+        this.conferencias.sort((a, b) => a.titulo < b.titulo ? -1 : 1);
+        break;
+
+      case 'fecha':
+        this.conferencias.sort((a, b) => new Date(a.fecha).getHours() < new Date(b.fecha).getHours() ? -1 : 1);
+        break;
+
+      case 'ponente':
+        this.conferencias.sort((a, b) => a.ponente.nombre < b.ponente.nombre ? -1 : 1);
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  findConference(e) {
+    if (e.key === 'Escape') {
+      this.busqueda = '';
+      this.conferencias = this.tempConferencias;
+    } else {
+      this.conferencias = this.conferencias.filter((item: any) => (item.titulo.indexOf(this.busqueda) > -1));
+    }
+  }
 
   openDetalleConferencia(idconferencia, idmarca) {
-
     const modalRef = this.modalService.show(DetalleconferenciaComponent, {
       class: 'modal-lg',
       initialState: {
@@ -70,6 +96,8 @@ export class ConferenciasComponent implements OnInit {
         marca: idmarca
       }
     });
-
+    modalRef.content.action.subscribe(() => {
+      this.listaConferencias();
+    });
   }
 }

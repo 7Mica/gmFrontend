@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 })
 export class EventosComponent implements OnInit {
   eventos: any[] = [];
+  tempEventos: any[] = [];
+
+  busqueda: any;
   modalRef: BsModalRef;
   menuActivado = false;
   evento = false;
@@ -32,6 +35,29 @@ export class EventosComponent implements OnInit {
 
     }
 
+  }
+
+  sortBy(metodo) {
+    switch (metodo) {
+      case 'nombre':
+        this.eventos.sort((a, b) => a.titulo < b.titulo ? -1 : 1);
+        break;
+
+      case 'fecha':
+        this.eventos.sort((a, b) => new Date(a.fechainicio).getDate() < new Date(b.fechafechainicio).getDate() ? -1 : 1);
+        break;
+      default:
+        break;
+    }
+  }
+
+  findEvento(e) {
+    if (e.key === 'Escape') {
+      this.busqueda = '';
+      this.eventos = this.tempEventos;
+    } else {
+      this.eventos = this.eventos.filter((item: any) => (item.titulo.indexOf(this.busqueda) > -1));
+    }
   }
 
   activo() {
@@ -68,8 +94,7 @@ export class EventosComponent implements OnInit {
       }
     });
 
-    modalRef.content.action.take(1).subscribe(() => {
-      this.eventos = [];
+    modalRef.content.action.subscribe(() => {
       this.listaEventos();
     });
   }
@@ -77,11 +102,10 @@ export class EventosComponent implements OnInit {
   listaEventos() {
     const tipo = JSON.parse(localStorage.getItem('usuario'));
     if (tipo.rol === 'CLIENT') {
-      this.eventos = [];
+
       this._eventoService.getEventosByOwner(tipo._id).subscribe((res: any) => {
-        res.data.forEach(element => {
-          this.eventos.push(element);
-        });
+        this.eventos = res.data;
+        this.tempEventos = res.data;
       }, error => {
         console.log(error);
 
@@ -89,10 +113,10 @@ export class EventosComponent implements OnInit {
     } else {
       this._eventoService.getEventos().subscribe(
         (res: any) => {
-          this.eventos = [];
-          res.data.forEach(element => {
-            this.eventos.push(element);
-          });
+          console.log(res);
+
+          this.tempEventos = res.data;
+          this.eventos = res.data;
         },
         error => {
           console.log(error);
