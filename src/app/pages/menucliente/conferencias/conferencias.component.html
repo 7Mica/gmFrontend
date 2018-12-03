@@ -19,14 +19,15 @@
         </div>
     </div>
     <div class="col-md-3 col-xs-4">
-        <input type="text" id="demo-input-search2" (blur)="conferencias = tempConferencias;" (keyup)="findConference($event)" [(ngModel)]="busqueda" placeholder="Buscar conferencia" class="form-control">
+        <input type="text" id="demo-input-search2" (blur)="conferencias = tempConferencias;" (keyup)="findConference($event)"
+            [(ngModel)]="busqueda" placeholder="Buscar conferencia" class="form-control">
     </div>
 </div>
 <br>
 
 <div class="row">
 
-    <div class="col-xs-10 col-sm-4 col-md-3" *ngFor="let item of conferencias" (click)="openDetalleConferencia(item._id, item.ponente.marcas)">
+    <div class="col-xs-10 col-sm-4 col-md-3" *ngFor="let item of conferencias">
         <div class="image-flip pointer" ontouchstart="this.classList.toggle('hover');">
             <div class="mainflip">
                 <div class="frontside" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
@@ -34,43 +35,32 @@
                         <img class="img-fluid col-md-12" src="{{item.img}}" alt="card image">
                         <div class="card-body">
                             <h4 class="card-title">{{item.titulo}}</h4>
-                            <p class="card-text">Ponente: {{item.ponente.fullName}}</p>
+                            
+                            <p class="card-text" *ngIf="item.ponente;">Ponente: {{item.ponente.fullName}}</p>
+                            <p class="card-text" *ngIf="!item.ponente" >Ponente: Sin ponente asignado</p>
                             <p class="card-text">Hora: {{item.hora}}</p>
                             <p class="card-text">Fecha: {{item.fecha}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="backside">
-                    <div class="card">
+                    <div class="card" (click)="openDetalleConferencia(item)">
                         <div class="card-body mt-4">
-                            <h4 class="card-title">Descripción</h4>
+                            <h4 class="card-title"><b>Descripción</b></h4>
                             <p class="card-text">{{item.descripcion}}</p>
-                            <p class="card-text">Salon: {{item.salon}}</p>
-                            <p class="card-text">Duración: {{item.duracion}}</p>
+                            <p class="card-text"><b>Salon:</b> {{item.salon}}</p>
+                            <p class="card-text"><b>Duración:</b> {{item.duracion}}</p>
+                            
                             <!-- <ul class="list-inline">
-                                    <li class="list-inline-item">
-                                        <a class="social-icon text-xs-center" target="_blank" href="#">
-                                            <i class="fa fa-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a class="social-icon text-xs-center" target="_blank" href="#">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a class="social-icon text-xs-center" target="_blank" href="#">
-                                            <i class="fa fa-skype"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a class="social-icon text-xs-center" target="_blank" href="#">
-                                            <i class="fa fa-google"></i>
-                                        </a>
-                                    </li>
-                                </ul> -->
+                                <li class="list-inline-item">
+                                    <a class="social-icon text-xs-center" >
+                                        <i class="fa fa-pencil"></i> Editar
+                                    </a>
+                                </li>
+                            </ul> -->
                         </div>
                     </div>
+                    <button type="button" class="btn waves-effect waves-light btn-block btn-secondary" (click)="modificarConferencia(item._id)"><i class="fa fa-pencil"></i> Editar</button>
                 </div>
             </div>
         </div>

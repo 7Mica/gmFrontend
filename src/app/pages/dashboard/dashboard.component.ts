@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
   // Title agregar titulo a la pagina
   constructor(private router: Router, private title: Title) {
     this.getDataRoute().subscribe(event => {
-      console.log(event);
+      // console.log(event);
       this.titulo = event.titulo;
       // Agregar titulo de la pagina
       this.title.setTitle(this.titulo);

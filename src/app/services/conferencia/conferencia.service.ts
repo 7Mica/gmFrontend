@@ -4,8 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from 'src/app/config/config';
 import swal from 'sweetalert2';
 import { map, filter } from 'rxjs/operators';
-import { Conferencia } from 'src/app/models/conferencia.model';
-import { isNgTemplate } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -16,16 +14,29 @@ export class ConferenciaService {
   getConferencias(id) {
     const url = URL_SERVICIOS + '/conferencia/lista/' + id;
 
-    return this.http.get(url).pipe(map((item: any) => {
-      // tslint:disable-next-line:prefer-const
-      let temp = item;
-      temp.conferencias = item.conferencias.filter(conferencia => conferencia.ponente.marcas);
-      return temp;
-    }));
+    // return this.http.get(url).pipe(map((item: any) => {
+    //   // tslint:disable-next-line:prefer-const
+    //   let temp = item;
+    //   temp.conferencias = item.conferencias.filter(conferencia => conferencia.ponente.marcas);
+    //   return temp;
+    // }));
+
+    return this.http.get(url);
 
   }
 
-  crearConferencia(conferencia: Conferencia) {
+  getConferenciaCount(idevento) {
+    const url = URL_SERVICIOS + '/conferencia/count/' + idevento;
+    return this.http.get(url);
+
+  }
+
+  updateConferencia(idconferencia, data) {
+    const url = URL_SERVICIOS + '/conferencia/' + idconferencia;
+    return this.http.put(url, data);
+  }
+
+  crearConferencia(conferencia) {
     const url = URL_SERVICIOS + '/conferencia';
 
     return this.http.post(url, conferencia).pipe(map((resp: any) => {

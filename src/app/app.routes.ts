@@ -8,7 +8,7 @@ import { PortalComponent } from './portal/portal.component';
 
 
 const appRoutes: Routes = [
-    
+
     { path: 'portal', component: PortalComponent },
     { path: 'login', component: LoginComponent },
     // { path: 'register', component: RegisterComponent },

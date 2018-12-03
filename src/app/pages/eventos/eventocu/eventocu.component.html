@@ -7,7 +7,7 @@
   </button>
 </div>
 
-<form class="register-form" [formGroup]="forma" (ngSubmit)="registrarEvento()" #formDir="ngForm">
+<form class="register-form" [formGroup]="forma" (ngSubmit)="elegirAccion()" #formDir="ngForm">
   <div class="modal-body">
 
     <div class="row">
@@ -34,9 +34,22 @@
 
       </div>
 
+      <div class="form-group col-md-6" *ngIf="queEs()">
+        <label for="cliente">Cliente</label>
+
+        <ng-select  formControlName="cliente" [dropdownPosition]="'bottom'"
+          [items]="clientes" bindLabel="fullName" bindValue="_id" placeholder="Selecciona un cliente">
+        </ng-select>
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('cliente').hasError('required')) || (forma.get('cliente').hasError('required') && forma.get('cliente').touched)">Este
+          campo es
+          requerido *</p>
+
+      </div>
+
       <div class="form-group col-md-12">
         <label for="descripcion">Descripción</label>
-        <textarea minlength="2" maxlength="50" rows="4" type="text" [ngClass]="{
+        <textarea minlength="2" maxlength="300" rows="4" type="text" [ngClass]="{
               'red-input': (forma.get('descripcion').hasError('required') && forma.get('descripcion').touched) || 
               (formDir.submitted && forma.get('descripcion').hasError('required') || forma.get('descripcion').hasError('minlength') || forma.get('descripcion').hasError(maxlength)) }"
           formControlName="descripcion" name="descripcion" class="form-control" placeholder="Descripción del evento *"> </textarea>
@@ -49,11 +62,11 @@
           tiene un minimo de 2 caracteres *</p>
         <p class="text-danger" *ngIf="(formDir.submitted && forma.get('descripcion').hasError('maxlength')) || (forma.get('descripcion').hasError('maxlength') && forma.get('descripcion').touched)">Este
           campo
-          tiene un maximo de 100 caracteres *</p>
+          tiene un maximo de 300 caracteres *</p>
 
       </div>
 
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-3">
         <label for="telefono">Número de telefono</label>
         <input minlength="10" maxlength="10" type="text" [ngClass]="{
                 'red-input': (forma.get('telefono').hasError('required') && forma.get('telefono').touched) || 
@@ -70,7 +83,7 @@
 
       </div>
 
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-3">
         <label for="telefonodos">Número de telefono alternativo</label>
         <input minlength="10" maxlength="10" type="text" [ngClass]="{
                   'red-input': (forma.get('telefonodos').hasError('required') && forma.get('telefonodos').touched) || 
@@ -87,34 +100,20 @@
 
       </div>
 
-      <div class="form-group col-md-6">
-        <select formControlName="cliente" id="cliente" name="cliente" class="form-control" [ngClass]="{
-          'red-input': (forma.get('cliente').hasError('required') && forma.get('cliente').touched )|| 
-          (formDir.submitted && forma.get('cliente').hasError('required')) }">
-          <option value=null disabled selected>Selecciona un cliente</option>
-          <option *ngFor="let item of clientes" [value]="item._id">{{item.nombre + ' ' + item.apellidoPaterno + ' ' +item.apellidoMaterno}}</option>
-        </select>
-  
-        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('cliente').hasError('required')) || (forma.get('cliente').hasError('required') && forma.get('cliente').touched)">Este
-          campo es
-          requerido *</p>
-  
-  
-      </div>
 
       <div class="form-group col-md-6">
-          <label for="img">Imagen del evento</label>
-          <input type="file" class="form-control" [ngClass]="{
+        <label for="img">Imagen del evento</label>
+        <input type="file" class="form-control" [ngClass]="{
                       'red-input': (forma.get('img').hasError('required') && forma.get('img').touched) || 
                       (formDir.submitted && forma.get('img').hasError('required')) }"
-            formControlName="img" name="img" class="form-control" placeholder="Imagen del evento*" />
-  
-          <p class="text-danger" *ngIf="(formDir.submitted && forma.get('img').hasError('required')) || (forma.get('img').hasError('required') && forma.get('img').touched)">Este
-            campo es
-            requerido *</p>
-        
-  
-        </div>
+          formControlName="img" name="img" class="form-control" placeholder="Imagen del evento*" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('img').hasError('required')) || (forma.get('img').hasError('required') && forma.get('img').touched)">Este
+          campo es
+          requerido *</p>
+
+
+      </div>
 
     </div>
 
@@ -248,23 +247,6 @@
 
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="referencias">Referencias</label>
-        <input maxlength="50" minlength="2" type="text" [ngClass]="{
-                      'red-input': (forma.get('referencias').hasError('required') && forma.get('referencias').touched) || 
-                      (formDir.submitted && forma.get('referencias').hasError('required') || forma.get('referencias').hasError('minlength') || forma.get('referencias').hasError(maxlength)) }"
-          formControlName="referencias" name="referencias" class="form-control" placeholder="Referencias *" />
-
-        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('referencias').hasError('required')) || (forma.get('referencias').hasError('required') && forma.get('referencias').touched)">Este
-          campo es
-          requerido *</p>
-        <p class="text-danger" *ngIf="formDir.submitted && forma.get('referencias').hasError('minlength')">Este campo
-          tiene un minimo de 2 caracteres *</p>
-        <p class="text-danger" *ngIf="formDir.submitted && forma.get('referencias').hasError('maxlength')">Este campo
-          tiene un maximo de 50 caracteres *</p>
-
-      </div>
-
     </div>
 
     <div class="row">
@@ -276,7 +258,7 @@
     <div class="row">
       <div class="form-group col-md-6">
         <label for="fechainicio">Fecha de inicio</label>
-        <input  type="date" [ngClass]="{
+        <input type="date" [ngClass]="{
                 'red-input': (forma.get('fechainicio').hasError('required') && forma.get('fechainicio').touched) || 
                 (formDir.submitted && forma.get('fechainicio').hasError('required') || forma.get('fechainicio').hasError('minlength') || forma.get('fechainicio').hasError(maxlength)) }"
           formControlName="fechainicio" name="fechainicio" class="form-control" placeholder="Fecha de inicio *" />
@@ -292,21 +274,23 @@
       </div>
 
       <div class="form-group col-md-6">
-          <label for="fechadefinalizacion">Fecha de clausura</label>
-          <input  type="date" [ngClass]="{
+        <label for="fechadefinalizacion">Fecha de clausura</label>
+        <input type="date" [ngClass]="{
                   'red-input': (forma.get('fechadefinalizacion').hasError('required') && forma.get('fechadefinalizacion').touched) || 
                   (formDir.submitted && forma.get('fechadefinalizacion').hasError('required') || forma.get('fechadefinalizacion').hasError('minlength') || forma.get('fechadefinalizacion').hasError(maxlength)) }"
-            formControlName="fechadefinalizacion" name="fechadefinalizacion" class="form-control" placeholder="Fecha de clausura *" />
-  
-          <p class="text-danger" *ngIf="(formDir.submitted && forma.get('fechadefinalizacion').hasError('required')) || (forma.get('fechadefinalizacion').hasError('required') && forma.get('fechadefinalizacion').touched)">Este
-            campo es
-            requerido *</p>
-          <p class="text-danger" *ngIf="formDir.submitted && forma.get('fechadefinalizacion').hasError('minlength')">Este campo
-            tiene un minimo de 2 caracteres *</p>
-          <p class="text-danger" *ngIf="formDir.submitted && forma.get('fechadefinalizacion').hasError('maxlength')">Este campo
-            tiene un maximo de 50 caracteres *</p>
-  
-        </div>
+          formControlName="fechadefinalizacion" name="fechadefinalizacion" class="form-control" placeholder="Fecha de clausura *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('fechadefinalizacion').hasError('required')) || (forma.get('fechadefinalizacion').hasError('required') && forma.get('fechadefinalizacion').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('fechadefinalizacion').hasError('minlength')">Este
+          campo
+          tiene un minimo de 2 caracteres *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('fechadefinalizacion').hasError('maxlength')">Este
+          campo
+          tiene un maximo de 50 caracteres *</p>
+
+      </div>
 
 
 
@@ -317,11 +301,8 @@
   </div>
 
   <div class="modal-footer">
-    <div class="row">
-      <div class="col-md-12 text-right">
-        <button type="submit" class="btn btn-default" *ngIf="!data.edit">Guardar</button>
-        <!-- <button type="submit" class="btn btn-default" *ngIf="data.edit">Actualizar</button> -->
-      </div>
-    </div>
+        <button type="submit" class="btn btn-facebook btn-block" *ngIf="!data.idevento">Guardar</button>
+        <button type="submit" class="btn btn-facebook btn-block" *ngIf="data.idevento">Actualizar</button>
+   
   </div>
 </form>

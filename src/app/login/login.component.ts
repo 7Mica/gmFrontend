@@ -11,41 +11,41 @@ import { Login } from '../models/login.model';
 export class LoginComponent implements OnInit {
 
   email: string;
-  recuerdame: boolean = false;
+  recuerdame = false;
   constructor(public router: Router, public _usuarioService: UsuarioService) {
-    if(this._usuarioService.estaLogueado()){
+    if (this._usuarioService.estaLogueado()) {
       this.router.navigate(['/dashboard']);
     }
-   }
+  }
 
   ngOnInit() {
 
     this.email = localStorage.getItem('email') || '';
-    if(this.email.length > 1){
+    if (this.email.length > 1) {
       this.recuerdame = true;
     }
-   
+
   }
 
-  ingresar(form: NgForm){
-    if(form.invalid){
+  ingresar(form: NgForm) {
+    if (form.invalid) {
       return;
     }
 
-    let usuario = new Login(form.value.email, form.value.password);
+    const usuario = new Login(form.value.email, form.value.password);
 
-    this._usuarioService.login(usuario, form.value.recuerdame).subscribe(resp =>{
+    this._usuarioService.login(usuario, form.value.recuerdame).subscribe(resp => {
 
       this.router.navigate(['dashboard']);
-      
+
 
     }, error => {
 
     });
 
 
-    
-    
+
+
   }
 
 }

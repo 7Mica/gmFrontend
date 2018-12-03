@@ -17,5 +17,3 @@ export { UsuariocComponent } from '../pages/menucliente/usuarios/usuarioc/usuari
 export { ConferenciacuComponent } from '../pages/menucliente/conferencias/conferenciacu/conferenciacu.component';
 export { DetalleconferenciaComponent } from '../pages/menucliente/modales/detalleconferencia/detalleconferencia.component';
 export { MarcascuComponent } from '../pages/menucliente/marcas/marcascu/marcascu.component';
-
- 

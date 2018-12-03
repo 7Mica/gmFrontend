@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Usuario } from 'src/app/models/usuario.model';
 import { URL_SERVICIOS } from 'src/app/config/config';
 import { map } from 'rxjs/operators';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/models/login.model';
-import { idLocale } from 'ngx-bootstrap';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +12,7 @@ import { idLocale } from 'ngx-bootstrap';
 export class UsuarioService {
 
   constructor(public http: HttpClient, public router: Router) {
-    console.log('Hola sevicio');
+
   }
 
   infoUsuarioActual() {
@@ -61,13 +59,13 @@ export class UsuarioService {
       localStorage.setItem('id', res.id);
       localStorage.setItem('token', res.token);
       localStorage.setItem('usuario', JSON.stringify(res.usuario));
-      console.log(res);
+      // console.log(res);
 
       return true;
     }));
   }
 
-  crearUsuario(usuario: Usuario) {
+  crearUsuario(usuario) {
     const url = URL_SERVICIOS + '/usuario';
 
     return this.http.post(url, usuario).pipe(map((resp: any) => {

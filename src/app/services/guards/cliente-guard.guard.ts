@@ -8,18 +8,18 @@ import { UsuarioService } from '../service.index';
 })
 export class ClienteGuardGuard implements CanActivate {
 
-  constructor(private router: Router, public _usuarioService: UsuarioService){}
+  constructor(private router: Router, public _usuarioService: UsuarioService) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
 
-      if(this._usuarioService.tipoLogin()){
-        return true;
-      }else{
-        console.log('Bloqueado por el guard');
+    if (this._usuarioService.tipoLogin()) {
+      return true;
+    } else {
+      // console.log('Bloqueado por el guard');
       this.router.navigate(['/eventos']);
       return false;
-      }
+    }
   }
 }

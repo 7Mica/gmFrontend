@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { UsuarioEvento } from 'src/app/models/usuarioevento.model';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from 'src/app/config/config';
@@ -33,6 +32,14 @@ export class UsuarioeventoService {
     const url = URL_SERVICIOS + '/usuarioevento/ponente/' + id;
 
     return this.http.get(url);
+  }
+
+  getCountById(idevento) {
+
+    const url = URL_SERVICIOS + '/usuarioevento/count/' + idevento;
+
+    return this.http.get(url);
+
   }
 
   actualizarUsuario(id, usuarioevento: any) {

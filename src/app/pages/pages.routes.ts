@@ -1,92 +1,92 @@
-import { Routes, RouterModule } from "@angular/router";
+import { Routes, RouterModule } from '@angular/router';
 
-import * as PagesIndex from '../config/pages.index'
-import { ClienteGuardGuard } from "../services/guards/cliente-guard.guard";
-import { LoginGuardGuard } from "../services/guards/login-guard.guard";
+import * as PagesIndex from '../config/pages.index';
+import { ClienteGuardGuard } from '../services/guards/cliente-guard.guard';
+import { LoginGuardGuard } from '../services/guards/login-guard.guard';
 
 const pagesRoutes: Routes = [
   {
-    path: "",
+    path: '',
     component: PagesIndex.PagesComponent,
     canActivate: [LoginGuardGuard],
     children: [
       {
-        path: "dashboard",
+        path: 'dashboard',
         component: PagesIndex.DashboardComponent,
-        //canActivate: [ClienteGuardGuard],
-        data: { titulo: "Dashboard" }
+        // canActivate: [ClienteGuardGuard],
+        data: { titulo: 'Dashboard' }
       },
       {
-        path: "usuarios",
+        path: 'usuarios',
         component: PagesIndex.UsuariosComponent,
         canActivate: [ClienteGuardGuard],
-        data: { titulo: "Usuarios" }
+        data: { titulo: 'Usuarios' }
       },
       {
-        path: "account-settings",
+        path: 'account-settings',
         component: PagesIndex.AccountSettingsComponent,
         canActivate: [ClienteGuardGuard],
-        data: { titulo: "Ajustes de cuenta" }
+        data: { titulo: 'Ajustes de cuenta' }
       },
       {
-        path: "eventos",
+        path: 'eventos',
         component: PagesIndex.EventosComponent,
-        data: { titulo: "Eventos" },
+        data: { titulo: 'Eventos' },
         children: [
           {
-            path: ":idevento",
+            path: ':idevento',
             component: PagesIndex.MenuclienteComponent,
-            data: { titulo: "Menu Cliente", breadcrumb: "menucliente" }
+            data: { titulo: 'Menu Cliente', breadcrumb: 'menucliente' }
           },
           {
-            path: ":idevento/usuarios",
+            path: ':idevento/usuarios',
             component: PagesIndex.UsuariosCliente,
-            data: { titulo: "Usuario Cliente", breadcrumb: "usuarios" }
+            data: { titulo: 'Usuario Cliente', breadcrumb: 'usuarios' }
           },
           {
-            path: ":idevento/estadisticas",
+            path: ':idevento/estadisticas',
             component: PagesIndex.EstadisticasComponent,
-            data: { titulo: "Estadísticas", breadcrumb: "estadisticas" }
+            data: { titulo: 'Estadísticas', breadcrumb: 'estadisticas' }
           },
           {
-            path: ":idevento/conferencias",
+            path: ':idevento/conferencias',
             component: PagesIndex.ConferenciasComponent,
-            data: { titulo: "Conferencias", breadcrumb: "conferencias" }
+            data: { titulo: 'Conferencias', breadcrumb: 'conferencias' }
           },
           {
-            path: ":idevento/mapas",
+            path: ':idevento/mapas',
             component: PagesIndex.MapasComponent,
-            data: { titulo: "Mapas", breadcrumb: "mapas" }
+            data: { titulo: 'Mapas', breadcrumb: 'mapas' }
           },
           {
-            path: ":idevento/marcas",
+            path: ':idevento/marcas',
             component: PagesIndex.MarcasComponent,
-            data: { titulo: "Marcas", breadcrumb: "marcas" }
+            data: { titulo: 'Marcas', breadcrumb: 'marcas' }
           },
           {
-            path: ":idevento/paseentrada",
+            path: ':idevento/paseentrada',
             component: PagesIndex.PaseentradaComponent,
-            data: { titulo: "Pase de entrada", breadcrumb: "paseentrada" }
+            data: { titulo: 'Pase de entrada', breadcrumb: 'paseentrada' }
           },
           {
-            path: ":idevento/constancias",
+            path: ':idevento/constancias',
             component: PagesIndex.ConstanciasComponent,
-            data: { titulo: "Constancias", breadcrumb: "constancias" }
+            data: { titulo: 'Constancias', breadcrumb: 'constancias' }
           },
 
           {
-            path: "",
-            pathMatch: "full",
-            redirectTo: "/eventos"
+            path: '',
+            pathMatch: 'full',
+            redirectTo: '/eventos'
           },
           {
-            path: "**",
-            pathMatch: "full",
-            redirectTo: "/eventos"
+            path: '**',
+            pathMatch: 'full',
+            redirectTo: '/eventos'
           }
         ]
       },
-      { path: "", redirectTo: "/dashboard", pathMatch: "full" }
+      { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
     ]
   }
 ];

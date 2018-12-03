@@ -11,15 +11,11 @@
       Ordenar
     </button>
     <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 36px, 0px); top: 0px; left: 0px; will-change: transform;">
-      <a class="dropdown-item" href="#">Nombre</a>
-      <a class="dropdown-item" href="#">Fecha de creación</a>
-      <a class="dropdown-item" href="#">Cliente</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Ambito</a>
+        <a class="dropdown-item pointer" (click)="sortBy('nombre')">Nombre</a>
     </div>
   </div>
   <div class="col-md-2">
-    <input type="text" id="demo-input-search2" placeholder="Buscar marca" class="form-control">
+    <input type="text" (blur)="marcas = tempMarcas;" (keyup)="findMarca($event)" [(ngModel)]="busqueda" id="demo-input-search2" placeholder="Buscar marca" class="form-control">
   </div>
 </div>
 <br>
@@ -28,52 +24,47 @@
     <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
       <div class="mainflip">
         <div class="frontside">
-          <div class="card">
+          <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
             <div class="card-body text-center">
               <p>
-                <img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png"
+                <img class=" img-fluid" src="{{item.img}}"
                   alt="card image" />
               </p>
               <h4 class="card-title">{{item.titulo}}</h4>
-              <p class="card-text">
-                This is basic card with image on top, title, description and
-                button.
+              <b>Representante: </b> <p class="card-text">
+                 {{item.representante}}
               </p>
-              <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
             </div>
           </div>
         </div>
         <div class="backside">
           <div class="card">
             <div class="card-body text-center mt-4">
-              <h4 class="card-title">Sunlimetech</h4>
+              <b>Ciudad: </b>
               <p class="card-text">
-                This is basic card with image on top, title, description and
-                button.This is basic card with image on top, title,
-                description and button.This is basic card with image on top,
-                title, description and button.
+               {{item.ciudad}}
+              </p>
+              <b>Estado: </b>
+              <p class="card-text">
+               {{item.estado}}
+              </p>
+              <b>Telefono: </b>
+              <p class="card-text">
+               {{item.telefono}} <br>
+               {{item.telefonodos}}
               </p>
               <ul class="list-inline">
                 <li class="list-inline-item">
-                  <a class="social-icon text-xs-center" target="_blank" href="#">
-                    <i class="fa fa-facebook"></i>
+                  <a class="social-icon text-xs-center" (click)="modificarMarca(item._id)">
+                    <i class="fa fa-pencil"></i> Editar
                   </a>
                 </li>
                 <li class="list-inline-item">
-                  <a class="social-icon text-xs-center" target="_blank" href="#">
-                    <i class="fa fa-twitter"></i>
+                  <a class="social-icon text-xs-center" (click)="eliminarMarca(item._id)">
+                    <i class="fa fa-trash"></i> Eliminar
                   </a>
                 </li>
-                <li class="list-inline-item">
-                  <a class="social-icon text-xs-center" target="_blank" href="#">
-                    <i class="fa fa-skype"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a class="social-icon text-xs-center" target="_blank" href="#">
-                    <i class="fa fa-google"></i>
-                  </a>
-                </li>
+                
               </ul>
             </div>
           </div>

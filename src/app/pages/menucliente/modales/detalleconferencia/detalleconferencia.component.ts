@@ -47,7 +47,7 @@ export class DetalleconferenciaComponent implements OnInit {
 
       });
 
-      this.getMarca(this.data.marca);
+    this.getMarca(this.data.marca);
 
   }
 
@@ -55,47 +55,50 @@ export class DetalleconferenciaComponent implements OnInit {
 
   }
 
-
   getMarca(idmarca) {
     this.eventoService.getMarcaById(idmarca).subscribe((res: any) => {
-      this.marca = res.data.marcas[0];
 
-    }, _error => {
+      this.marca = (res.data) ? res.data.marcas[0] : null;
 
+    }, error => {
+      const toast = SWALCONFIG_TOAST;
+      toast.type = 'error';
+      toast.title = 'Ocurrió un error en la petición';
+      swal(toast);
     });
   }
 
   borrarConferencia(conferencia) {
     swal(SWALCONFIG_CONFIRMDELETE)
-    .then(res => {
-      if (res.value) {
-        console.log('Conferencia borrada');
-        this.conferenciaService.eliminarConferencia(conferencia).subscribe(
-          _res => {
-            // tslint:disable-next-line:prefer-const
-            let toast: any = SWALCONFIG_TOAST;
-            swal(toast);
-            this.modalRef.hide();
-            this.action.emit();
-          },
+      .then(res => {
+        if (res.value) {
+          console.log('Conferencia borrada');
+          this.conferenciaService.eliminarConferencia(conferencia).subscribe(
+            _res => {
+              // tslint:disable-next-line:prefer-const
+              let toast: any = SWALCONFIG_TOAST;
+              swal(toast);
+              this.modalRef.hide();
+              this.action.emit();
+            },
 
-          _error => {
-            // tslint:disable-next-line:prefer-const
-            let toast: any = SWALCONFIG_TOAST;
-            toast.titulo = 'Algo salió mal en la petición';
-            toast.type = 'error';
-            swal(toast);
-          }
-        );
+            _error => {
+              // tslint:disable-next-line:prefer-const
+              let toast: any = SWALCONFIG_TOAST;
+              toast.titulo = 'Algo salió mal en la petición';
+              toast.type = 'error';
+              swal(toast);
+            }
+          );
 
-      } else {
+        } else {
 
-      }
-    })
-    .catch(error => {
-      console.log(error);
+        }
+      })
+      .catch(error => {
+        console.log(error);
 
-    });
+      });
 
   }
 

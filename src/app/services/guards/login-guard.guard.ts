@@ -7,22 +7,22 @@ import { UsuarioService } from '../usuario/usuario.service';
 })
 export class LoginGuardGuard implements CanActivate {
 
-  constructor( public _usuarioService: UsuarioService, public router: Router){
+  constructor(public _usuarioService: UsuarioService, public router: Router) {
 
   }
 
   canActivate(): boolean {
 
-    if(this._usuarioService.estaLogueado()){
-      console.log('Paso el guard');
+    if (this._usuarioService.estaLogueado()) {
+      // console.log('Paso el guard');
       return true;
-      
-    }else{
-      console.log('Bloqueado por el guard');
+
+    } else {
+      // console.log('Bloqueado por el guard');
       this.router.navigate(['/login']);
       return false;
-      
+
     }
-    
+
   }
 }

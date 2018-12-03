@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsuarioService } from '../services/service.index';
 import { Router } from '@angular/router';
-import { Usuario } from '../models/usuario.model';
 
 
 @Component({
@@ -52,27 +51,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    // tslint:disable-next-line:prefer-const
-    let usuario = new Usuario(
-      this.forma.value.nombre,
-      this.forma.value.appaterno,
-      this.forma.value.apmaterno,
-      'asd',
-      'asd',
-      'asd',
-      'asd',
-      'asd',
-      'asd',
-      'asd',
-      'asd',
-      'asd',
-      'asd',
-      this.forma.value.email,
-      this.forma.value.password,
-
-    );
-
-    this._usuarioService.crearUsuario(usuario).subscribe(res => {
+    this._usuarioService.crearUsuario(this.forma.value).subscribe(res => {
 
       console.log(res);
 

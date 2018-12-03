@@ -5,7 +5,6 @@ import {
   ConferenciaService,
   UsuarioeventoService
 } from 'src/app/services/service.index';
-import { Conferencia } from 'src/app/models/conferencia.model';
 import swal from 'sweetalert2';
 import { SWALCONFIG_TOAST } from 'src/app/config/config';
 
@@ -17,7 +16,9 @@ import { SWALCONFIG_TOAST } from 'src/app/config/config';
 export class ConferenciacuComponent implements OnInit {
   @Output()
   action = new EventEmitter();
+
   titulo = '';
+  data: any = {};
 
   forma: FormGroup;
   ponentes: any[] = [];
@@ -28,9 +29,9 @@ export class ConferenciacuComponent implements OnInit {
     private conferenciaService: ConferenciaService,
     private usuarioeventoService: UsuarioeventoService
   ) {
+    this.data = modalService.config.initialState;
     this.getPonentesEvento();
-    const titulo: any = modalService.config.initialState;
-    this.titulo = titulo.title;
+    this.titulo = this.data.title;
   }
 
   ngOnInit() {
@@ -58,32 +59,73 @@ export class ConferenciacuComponent implements OnInit {
       duracion: new FormControl(null, [Validators.required]),
       fecha: new FormControl(null, [Validators.required])
     });
+
+    if (this.data.idconferencia) {
+      this.conferenciaService.getConferenciaById(this.data.idconferencia).subscribe(
+        (res: any) => {
+          this.forma.get('titulo').setValue(res.conferencias[0].titulo);
+          this.forma.get('descripcion').setValue(res.conferencias[0].descripcion);
+          this.forma.get('ponente').setValue((res.conferencias[0].ponente) ? res.conferencias[0].ponente._id : null);
+          this.forma.get('salon').setValue(res.conferencias[0].salon);
+          this.forma.get('hora').setValue(res.conferencias[0].hora);
+          this.forma.get('duracion').setValue(res.conferencias[0].duracion);
+          this.forma.get('fecha').setValue(res.conferencias[0].fecha);
+        },
+        (error: any) => {
+          const toast = SWALCONFIG_TOAST;
+          toast.type = 'error';
+          toast.title = 'Ocurrió un error en la petición';
+          swal(toast);
+        });
+    }
   }
 
-  registrarEvento() {
+  queAccionEs() {
+    if (this.data.idconferencia) {
+      this.actualizarConferencia(this.data.idconferencia);
+    } else {
+      this.registrarConferencia();
+    }
+  }
+
+  actualizarConferencia(idconferencia) {
+    if (this.forma.invalid) {
+      return;
+    }
+    const data = this.forma.value;
+    data.evento = this.data.idevento;
+
+    this.conferenciaService.updateConferencia(idconferencia, data).subscribe(
+      (res: any) => {
+        const toast = SWALCONFIG_TOAST;
+        toast.type = 'success';
+        toast.title = 'Se actualizó el registro correctamente';
+        this.action.emit();
+        this.modalRef.hide();
+        swal(toast);
+      },
+      (error: any) => {
+        const toast = SWALCONFIG_TOAST;
+        toast.type = 'error';
+        toast.title = 'Ocurrió un error en la petición';
+        swal(toast);
+      }
+    );
+
+  }
+
+  registrarConferencia() {
     if (this.forma.invalid) {
       return;
     }
 
-    const idevento: any = this.modalService.config.initialState;
-
-    // tslint:disable-next-line:prefer-const
-    let conferencia = new Conferencia(
-      this.forma.value.titulo,
-      this.forma.value.hora,
-      this.forma.value.salon,
-      this.forma.value.descripcion,
-      this.forma.value.duracion,
-      this.forma.value.ponente,
-      this.forma.value.fecha,
-      idevento.data
-
-    );
-
-    console.log(conferencia);
+    const conferencia = this.forma.value;
+    conferencia.evento = this.data.idevento;
 
     this.conferenciaService.crearConferencia(conferencia).subscribe(
       res => {
+        console.log(res);
+
         // tslint:disable-next-line:prefer-const
         let toast = SWALCONFIG_TOAST;
         toast.title = 'Registro creado correctamente';
@@ -93,26 +135,29 @@ export class ConferenciacuComponent implements OnInit {
         this.modalRef.hide();
       },
       error => {
-        console.log(error);
+        const toast = SWALCONFIG_TOAST;
+        toast.type = 'error';
+        toast.title = 'Ocurrió un error en la petición';
+        swal(toast);
       }
     );
   }
 
   getPonentesEvento() {
     // tslint:disable-next-line:prefer-const
-    let data: any = this.modalService.config.initialState;
-    this.usuarioeventoService
-      .getPonentesPorEvento(data.data)
-      .subscribe(
-        (res: any) => {
-          res.data.forEach(element => {
 
-            this.ponentes.push(element);
-          });
+    this.usuarioeventoService.getPonentesPorEvento(this.data.idevento).subscribe(
+      (res: any) => {
+        this.ponentes = res.data;
 
+      },
+      error => {
 
-        },
-        error => {}
-      );
+        const toast = SWALCONFIG_TOAST;
+        toast.type = 'error';
+        toast.title = 'Ocurrió un error en la petición';
+        swal(toast);
+      }
+    );
   }
 }

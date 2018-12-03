@@ -18,7 +18,7 @@ export const DTCONFIG_DELETE_EDIT_BTNS = {
         custom: [],
     },
     edit: {
-        editButtonContent: '<span class="btn btn-success tbl-button"><i title="Editar" class="fa fa-pencil"></i></span>'
+        editButtonContent: '<span class="btn btn-facebook tbl-button"><i title="Editar" class="fa fa-pencil"></i></span>'
     },
 
     delete: {
@@ -44,6 +44,12 @@ export const SWALCONFIG_CONFIRMDELETE: any = {
     cancelButtonText: 'No, Cancelar'
 };
 
+export const SWALCONFIG_ALERT: any = {
+
+    title: '¿Estás seguro?',
+    text: 'Se eliminará permamentemente el',
+    type: 'warning',
+};
 export const SWALCONFIG_TOAST: any = {
     toast: true,
     type: 'success',

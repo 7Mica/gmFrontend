@@ -7,7 +7,7 @@
   </button>
 </div>
 
-<form class="register-form" [formGroup]="forma" (ngSubmit)="registrarEvento()" #formDir="ngForm">
+<form class="register-form" [formGroup]="forma" (ngSubmit)="queAccionEs()" #formDir="ngForm">
   <div class="modal-body">
 
     <div class="row">
@@ -78,18 +78,16 @@
       </div>
 
       <div class="form-group col-md-6">
-        <select formControlName="ponente" id="ponente" name="ponente" class="form-control" [ngClass]="{
-          'red-input': (forma.get('ponente').hasError('required') && forma.get('ponente').touched )|| 
-          (formDir.submitted && forma.get('ponente').hasError('required')) }">
-          <option value=null disabled selected>Selecciona un ponente</option>
-          <option *ngFor="let item of ponentes" [value]="item._id">{{item.nombre + ' ' + item.apellidoPaterno + ' ' +item.apellidoMaterno}}</option>
-        </select>
+
+          <label for="ponente">Ponente</label>
+
+          <ng-select  formControlName="ponente" [dropdownPosition]="'bottom'"
+            [items]="ponentes" bindLabel="fullName" bindValue="_id" placeholder="Selecciona un ponente">
+          </ng-select>
   
-        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('ponente').hasError('required')) || (forma.get('ponente').hasError('required') && forma.get('ponente').touched)">Este
-          campo es
-          requerido *</p>
-  
-  
+          <p class="text-danger" *ngIf="(formDir.submitted && forma.get('ponente').hasError('required')) || (forma.get('ponente').hasError('required') && forma.get('ponente').touched)">Este
+            campo es
+            requerido *</p>  
       </div>
 
       <div class="form-group col-md-4">
@@ -147,8 +145,8 @@
   </div>
 
   <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn-block" *ngIf="!data.edit">Guardar</button>
-        <!-- <button type="submit" class="btn btn-default" *ngIf="data.edit">Actualizar</button> -->
+        <button type="submit" class="btn btn-facebook btn-block" *ngIf="!data.idconferencia">Guardar</button>
+        <button type="submit" class="btn btn-facebook btn-block" *ngIf="data.idconferencia">Actualizar</button>
      
   </div>
 </form>

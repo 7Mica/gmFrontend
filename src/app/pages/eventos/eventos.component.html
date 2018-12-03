@@ -27,7 +27,8 @@
     </div>
 
     <div class="col-md-2 col-xs-3">
-      <input type="text" (blur)="eventos = tempEventos;" (keyup)="findEvento($event)" [(ngModel)]="busqueda" id="demo-input-search2" placeholder="Buscar evento" class="form-control">
+      <input type="text" (blur)="eventos = tempEventos;" (keyup)="findEvento($event)" [(ngModel)]="busqueda" id="demo-input-search2"
+        placeholder="Buscar evento" class="form-control">
     </div>
   </div>
 
@@ -37,13 +38,12 @@
 
     <div *ngFor="let item of eventos" class="card pointer" style="width: 18rem; margin-left: 1%;" [routerLink]="['/eventos', item._id]"
       (click)="evento = true; menuActivado = false">
-      <img class="card-img-top" src="https://picsum.photos/400/200" alt="Card image cap" />
+      <img class="card-img-top" src="{{item.img}}" alt="Card image cap" />
       <div class="card-body">
         <h4 class="card-title">{{ item.titulo }}</h4>
-        <p class="card-text">{{ item.descripcion }}</p>
-        <p class="card-text">{{ item.fechainicio }}</p>
-        <p class="card-text">{{ item.fechadefinalizacion }}</p>
-        <p class="card-text">{{ item.cliente }}</p>
+        <p class="card-text">Fecha de inicio: <br>{{ item.fechainicio }}</p>
+        <p class="card-text">Fecha de clausura: <br>{{ item.fechadefinalizacion }}</p>
+        <p class="card-text">Cliente: {{ item.cliente.fullName }}</p>
       </div>
     </div>
 

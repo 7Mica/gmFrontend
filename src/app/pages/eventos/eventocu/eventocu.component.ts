@@ -1,8 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { Evento } from 'src/app/models/evento.model';
 import { EventoService, UsuarioService } from 'src/app/services/service.index';
+import { SWALCONFIG_TOAST } from 'src/app/config/config';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-eventocu',
@@ -12,20 +13,27 @@ import { EventoService, UsuarioService } from 'src/app/services/service.index';
 export class EventocuComponent implements OnInit {
   @Output()
   action = new EventEmitter();
+
   forma: FormGroup;
-  titulo: string = '';
+  data: any;
+
   clientes: any[] = [];
 
-  constructor(public modalRef: BsModalRef,
+  titulo = '';
+
+  constructor(
+    public modalRef: BsModalRef,
     public modalService: BsModalService,
     private _eventoService: EventoService,
-    private _usuarioService: UsuarioService) { 
-      this.listaClientes();
-      let titulo: any = this.modalService.config.initialState;
-      this.titulo = titulo.title;
-      console.log(this.clientes);
-      
-    }
+    private _usuarioService: UsuarioService
+  ) {
+
+    this.listaClientes();
+    this.data = this.modalService.config.initialState;
+    const titulo: any = this.modalService.config.initialState;
+    this.titulo = titulo.title;
+
+  }
 
   ngOnInit() {
 
@@ -39,7 +47,7 @@ export class EventocuComponent implements OnInit {
         descripcion: new FormControl(null, [
           Validators.required,
           Validators.minLength(2),
-          Validators.maxLength(100)
+          Validators.maxLength(300)
         ]),
         telefono: new FormControl(null, [
           Validators.required,
@@ -55,10 +63,10 @@ export class EventocuComponent implements OnInit {
           Validators.required]),
 
         fechainicio: new FormControl(null, [Validators.required]),
-        fechadefinalizacion: new FormControl(null, [Validators.required,]),
+        fechadefinalizacion: new FormControl(null, [Validators.required]),
 
         img: new FormControl(null, []),
-        
+
         calle: new FormControl(null, [
           Validators.required,
           Validators.minLength(2),
@@ -70,11 +78,6 @@ export class EventocuComponent implements OnInit {
           Validators.maxLength(50)
         ]),
         ciudad: new FormControl(null, [
-          Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(50)
-        ]),
-        referencias: new FormControl(null, [
           Validators.required,
           Validators.minLength(2),
           Validators.maxLength(50)
@@ -97,60 +100,122 @@ export class EventocuComponent implements OnInit {
         numerointerior: new FormControl(null, [
           Validators.maxLength(50),
         ]),
-        
+
       }
     );
+
+    if (this.data.idevento) {
+      this.getEventoNSetValueToForm(this.data.idevento);
+
+    }
+  }
+
+  queEs() {
+    if (this._usuarioService.tipoLogin() === false) {
+      this.forma.get('cliente').disable();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  elegirAccion() {
+    if ( this.data.idevento) {
+      this.actualizarEvento();
+    } else {
+      this.registrarEvento();
+    }
+  }
+
+  actualizarEvento() {
+    console.log(this.forma.value);
+    this._eventoService.updateEvento(this.data.idevento, this.forma.value).subscribe(
+      res => {
+        const toast = SWALCONFIG_TOAST;
+        toast.type = 'success';
+        toast.title = 'Se actualizó el evento correctamente';
+        swal(toast);
+
+        this.action.emit();
+        this.modalRef.hide();
+      },
+
+      error => {
+        const toast = SWALCONFIG_TOAST;
+        toast.type = 'error';
+        toast.title = 'Ocurrió un error al actualizar el evento';
+        swal(toast);
+
+      }
+    );
+
   }
 
   registrarEvento() {
     if (this.forma.invalid) {
-      console.log('Form no valido');
-      
       return;
     }
 
-    let evento = new Evento(
-      this.forma.value.titulo,
-      this.forma.value.descripcion,
-      this.forma.value.telefono,
-      this.forma.value.telefonodos,
-      this.forma.value.cliente,
-      this.forma.value.calle,
-      this.forma.value.numeroInterior,
-      this.forma.value.numeroExterior,
-      this.forma.value.cp,
-      this.forma.value.colonia,
-      this.forma.value.ciudad,
-      this.forma.value.estado,
-      this.forma.value.referencias,
-      this.forma.value.fechacreacion,
-      this.forma.value.fechainicio,
-    );
-
-    console.log(evento);
-
-    this._eventoService.crearEvento(evento).subscribe(
+    // tslint:disable-next-line:prefer-const
+    let toast = SWALCONFIG_TOAST;
+    this._eventoService.crearEvento(this.forma.value).subscribe(
       res => {
-        console.log("Evento guardado");
-        console.log(res);
-        
+        toast.title = 'Se creó el evento correctamente';
+        swal(toast);
+
         this.action.emit();
         this.modalRef.hide();
       },
       error => {
-        console.log(error);
+        toast.title = 'Error al obtener los eventos';
+        toast.type = 'error';
+        swal(toast);
       }
     );
   }
 
-  listaClientes(){
-    this._usuarioService.listaUsuariosClientes().subscribe((res: any) => {
-      res.data.forEach(element => {
-            
-        this.clientes.push(element);
-      });
-    }, error => {
+  listaClientes() {
+    this._usuarioService.listaUsuariosClientes().subscribe(
+      (res: any) => {
+        this.clientes = res.data;
+      },
+      error => {
+        // tslint:disable-next-line:prefer-const
+        let toast = SWALCONFIG_TOAST;
+        toast.title = 'Error al obtener los eventos';
+        toast.type = 'error';
+        swal(toast);
 
-    })
+      });
+  }
+
+  getEventoNSetValueToForm(idevento) {
+    this._eventoService.getEventoById(idevento).subscribe(
+      (res: any) => {
+
+        this.forma.get('titulo').setValue(res.data.titulo);
+        this.forma.get('descripcion').setValue(res.data.descripcion);
+        this.forma.get('telefono').setValue(res.data.telefono);
+        this.forma.get('telefonodos').setValue(res.data.telefonodos);
+        this.forma.get('cliente').setValue(res.data.cliente._id);
+        this.forma.get('fechainicio').setValue(res.data.fechainicio);
+        this.forma.get('fechadefinalizacion').setValue(res.data.fechadefinalizacion);
+        this.forma.get('calle').setValue(res.data.direccion.calle);
+        this.forma.get('estado').setValue(res.data.direccion.estado);
+        this.forma.get('ciudad').setValue(res.data.direccion.ciudad);
+        this.forma.get('cp').setValue(res.data.direccion.cp);
+        this.forma.get('colonia').setValue(res.data.direccion.colonia);
+        this.forma.get('numeroexterior').setValue(res.data.direccion.numeroExterior);
+        this.forma.get('numerointerior').setValue(res.data.direccion.numeroInterior);
+
+      },
+
+      error => {
+        const toast = SWALCONFIG_TOAST;
+        toast.type = 'error';
+        toast.title = 'Error al editar el evento';
+        swal(toast);
+      }
+    );
   }
 }

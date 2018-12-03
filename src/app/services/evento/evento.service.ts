@@ -1,95 +1,111 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { URL_SERVICIOS } from "src/app/config/config";
-import { Evento } from "src/app/models/evento.model";
-import { map } from "rxjs/operators";
-import swal from "sweetalert2";
-import { Marca } from "src/app/models/marca.model";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { URL_SERVICIOS } from 'src/app/config/config';
+import { map, filter } from 'rxjs/operators';
+import swal from 'sweetalert2';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class EventoService {
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient) { }
 
   getEventos() {
-    let url = URL_SERVICIOS + "/evento";
+    const url = URL_SERVICIOS + '/evento';
 
-    return this.http.get(url);
+    return this.http.get(url).pipe(map((item: any) => {
+      // tslint:disable-next-line:prefer-const
+      let temp = item;
+      temp.data = item.data.filter(evento => evento.cliente);
+      return temp;
+    }));
   }
 
-  removeEvento(id){
-    let url = URL_SERVICIOS + "/evento/"+id;
+  updateEvento(id, data) {
+    const url = URL_SERVICIOS + '/evento/' + id;
+    return this.http.put(url, data);
+  }
+
+  removeEvento(id) {
+    const url = URL_SERVICIOS + '/evento/' + id;
     return this.http.delete(url);
   }
 
   getEventosByOwner(idcliente) {
-    let url = URL_SERVICIOS + "/evento/byowner/"+idcliente;
+    const url = URL_SERVICIOS + '/evento/byowner/' + idcliente;
 
     return this.http.get(url);
   }
 
-  crearEvento(evento: Evento) {
-    let url = URL_SERVICIOS + "/evento";
+  crearEvento(evento) {
+    const url = URL_SERVICIOS + '/evento';
 
     return this.http.post(url, evento).pipe(
       map((resp: any) => {
-        swal("Usuario correo", "Se creó correctamente el usuario", "success");
+        swal('Usuario correo', 'Se creó correctamente el usuario', 'success');
         return resp;
       })
     );
   }
 
   getEventoById(id) {
-    let url = URL_SERVICIOS + "/evento/" + id;
+    const url = URL_SERVICIOS + '/evento/' + id;
     return this.http.get(url);
   }
 
-/******************
- * TODO REFERENTE *
- *    A MARCAS    *
- ******************/
+  /******************
+   * TODO REFERENTE *
+   *    A MARCAS    *
+   ******************/
 
- newMarca(id, marca: Marca){
-  let url = URL_SERVICIOS + "/evento/marcas/" + id;
+  newMarca(id, marca) {
+    const url = URL_SERVICIOS + '/evento/marcas/' + id;
 
-  return this.http.post(url, marca).pipe(
-    map((resp: any)=> {
-      swal("Usuario correo", "Se creó correctamente la marca", "success");
-        return resp;
-    })
-  );
- }
+    return this.http.post(url, marca);
+  }
 
- getMarcaById(id){
-   let url = URL_SERVICIOS + '/evento/marcas/'+ id;
-   return this.http.get(url);
- }
- getMarcasByEvento(id){
-   let url = URL_SERVICIOS + "/evento/marcas/lista/"+id;
+  deleteMarca(id) {
+    const url = URL_SERVICIOS + '/evento/marcas/' + id;
 
-   return this.http.get(url);
- }
+    return this.http.delete(url);
+  }
 
-/******************
- * TODO REFERENTE *
- *    A MAPAS     *
- ******************/
+  updateMarcaById(idmarca, data) {
+    const url = URL_SERVICIOS + '/evento/marcas/' + idmarca;
 
-/**
- * Nueva locación
- * @param idevento id del evento donde se guardará el mapa
- * @param coords Coordenas {lat: , lng: }
- */
- newLocation(idevento, coords){
-  let url = URL_SERVICIOS + "/evento/mapas/"+idevento;
+    return this.http.put(url, data);
+  }
 
-  return this.http.post(url, coords);
- }
+  getMarcaById(id) {
+    const url = URL_SERVICIOS + '/evento/marcas/' + id;
+    return this.http.get(url);
+  }
 
- getLocation(idevento){
-   let url = URL_SERVICIOS + "/evento/mapas/"+idevento;
+  getMarcasByEvento(id) {
+    const url = URL_SERVICIOS + '/evento/marcas/lista/' + id;
 
-   return this.http.get(url);
- }
+    return this.http.get(url);
+  }
+
+  /******************
+   * TODO REFERENTE *
+   *    A MAPAS     *
+   ******************/
+
+  /**
+   * Nueva locación
+   * @param idevento id del evento donde se guardará el mapa
+   * @param coords Coordenas {lat: , lng: }
+   */
+  newLocation(idevento, coords) {
+    const url = URL_SERVICIOS + '/evento/mapas/' + idevento;
+
+    return this.http.post(url, coords);
+  }
+
+  getLocation(idevento) {
+    const url = URL_SERVICIOS + '/evento/mapas/' + idevento;
+
+    return this.http.get(url);
+  }
 }

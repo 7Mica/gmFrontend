@@ -2,38 +2,39 @@
  * ANGULAR MODULES *
  *******************/
 
-import { NgModule } from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpModule } from "@angular/http";
-import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
 
 /***********************
  * THIRD PARTY MODULES *
  ***********************/
 
-import { DataTableModule } from "angular2-datatable";
+import { DataTableModule } from 'angular2-datatable';
 import { ChartsModule } from 'ng2-charts';
 import { ModalModule } from 'ngx-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 /**********
  * ROUTES *
  **********/
 
-import { PAGES_ROUTES } from "./pages.routes";
+import { PAGES_ROUTES } from './pages.routes';
 
 /*************************
  * MODULO DE COMPONENTES *
  *************************/
 
- import { SharedModule } from "../shared/shared.module";
+import { SharedModule } from '../shared/shared.module';
 
 /*******************
  * PAGES COMPONENT *
  *******************/
 
-import * as PagesIndex from "../config/pages.index";
+import * as PagesIndex from '../config/pages.index';
 import { ChangePasswordComponent } from './menucliente/modales/change-password/change-password.component';
 
 
@@ -75,9 +76,10 @@ import { ChangePasswordComponent } from './menucliente/modales/change-password/c
         ReactiveFormsModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyC-78ipSk2R-phjUHRzEdXvnF0Gh7TD4CE'
-          }),
+        }),
         ModalModule.forRoot(),
-        Ng2SmartTableModule
+        Ng2SmartTableModule,
+        NgSelectModule
     ],
 
     entryComponents: [
@@ -90,7 +92,7 @@ import { ChangePasswordComponent } from './menucliente/modales/change-password/c
     ],
 
     providers: [
-        
+
     ]
 })
 

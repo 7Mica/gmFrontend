@@ -3,6 +3,7 @@ import { EventoService, SharedService, UsuarioService } from 'src/app/services/s
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { EventocuComponent } from './eventocu/eventocu.component';
 import { Router } from '@angular/router';
+import { SWALCONFIG_TOAST } from 'src/app/config/config';
 
 @Component({
   selector: 'app-eventos',
@@ -12,12 +13,13 @@ import { Router } from '@angular/router';
 export class EventosComponent implements OnInit {
   eventos: any[] = [];
   tempEventos: any[] = [];
+  url = ['/eventos'];
+
+  modalRef: BsModalRef;
 
   busqueda: any;
-  modalRef: BsModalRef;
   menuActivado = false;
   evento = false;
-  url = ['/eventos'];
   cliente = false;
 
   constructor(
@@ -32,7 +34,6 @@ export class EventosComponent implements OnInit {
     }
     if (usuarioService.tipoLogin() === false) {
       this.cliente = true;
-
     }
 
   }
@@ -73,7 +74,6 @@ export class EventosComponent implements OnInit {
   }
 
   displayDesactivate(some) {
-    console.log(some);
     if (some.router.url === '/eventos') {
       this.listaEventos();
       this.menuActivado = true;
@@ -90,7 +90,6 @@ export class EventosComponent implements OnInit {
       class: 'modal-lg',
       initialState: {
         title: 'Crear nuevo evento',
-        data: {}
       }
     });
 
@@ -103,23 +102,30 @@ export class EventosComponent implements OnInit {
     const tipo = JSON.parse(localStorage.getItem('usuario'));
     if (tipo.rol === 'CLIENT') {
 
-      this._eventoService.getEventosByOwner(tipo._id).subscribe((res: any) => {
-        this.eventos = res.data;
-        this.tempEventos = res.data;
-      }, error => {
-        console.log(error);
+      this._eventoService.getEventosByOwner(tipo._id).subscribe(
+        (res: any) => {
 
-      });
+          this.eventos = res.data;
+          this.tempEventos = res.data;
+        },
+
+        error => {
+          const toast = SWALCONFIG_TOAST;
+          toast.title = 'Error al obtener eventos';
+          toast.type = 'error';
+
+        });
     } else {
       this._eventoService.getEventos().subscribe(
         (res: any) => {
-          console.log(res);
-
           this.tempEventos = res.data;
           this.eventos = res.data;
         },
+
         error => {
-          console.log(error);
+          const toast = SWALCONFIG_TOAST;
+          toast.title = 'Error al obtener eventos';
+          toast.type = 'error';
         }
       );
     }

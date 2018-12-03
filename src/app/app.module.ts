@@ -23,7 +23,7 @@ import { APP_ROUTES } from './app.routes';
  * COMPONENT MODULES *
  *********************/
 
-import { PagesModule } from "./pages/pages.module";
+import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
 import { ServiceModule } from './services/service.module';
 
@@ -43,7 +43,7 @@ import { PortalComponent } from './portal/portal.component';
     RegisterComponent,
     PortalComponent,
   ],
-  exports:[],
+  exports: [],
   imports: [
     BrowserModule,
     APP_ROUTES,
@@ -54,7 +54,7 @@ import { PortalComponent } from './portal/portal.component';
     ReactiveFormsModule,
     SweetAlert2Module,
     ModalModule.forRoot()
-    
+
   ],
   providers: [],
   bootstrap: [AppComponent]

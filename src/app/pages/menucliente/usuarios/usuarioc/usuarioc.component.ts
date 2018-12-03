@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { UsuarioeventoService, EventoService } from 'src/app/services/service.index';
-import { UsuarioEvento } from 'src/app/models/usuarioevento.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
 import { SWALCONFIG_TOAST } from 'src/app/config/config';
