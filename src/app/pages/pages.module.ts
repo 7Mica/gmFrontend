@@ -11,12 +11,12 @@ import { BrowserModule } from '@angular/platform-browser';
  * THIRD PARTY MODULES *
  ***********************/
 
-import { DataTableModule } from 'angular2-datatable';
 import { ChartsModule } from 'ng2-charts';
 import { ModalModule } from 'ngx-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 /**********
  * ROUTES *
@@ -70,7 +70,6 @@ import { ChangePasswordComponent } from './menucliente/modales/change-password/c
         PAGES_ROUTES,
         FormsModule,
         ChartsModule,
-        DataTableModule,
         BrowserModule,
         HttpModule,
         ReactiveFormsModule,
@@ -79,7 +78,8 @@ import { ChangePasswordComponent } from './menucliente/modales/change-password/c
         }),
         ModalModule.forRoot(),
         Ng2SmartTableModule,
-        NgSelectModule
+        NgSelectModule,
+        ColorPickerModule
     ],
 
     entryComponents: [

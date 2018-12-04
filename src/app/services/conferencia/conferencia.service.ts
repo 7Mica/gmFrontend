@@ -9,18 +9,11 @@ import { map, filter } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ConferenciaService {
-  constructor(public http: HttpClient, public router: Router) { }
+  constructor(public http: HttpClient,
+    public router: Router) { }
 
   getConferencias(id) {
     const url = URL_SERVICIOS + '/conferencia/lista/' + id;
-
-    // return this.http.get(url).pipe(map((item: any) => {
-    //   // tslint:disable-next-line:prefer-const
-    //   let temp = item;
-    //   temp.conferencias = item.conferencias.filter(conferencia => conferencia.ponente.marcas);
-    //   return temp;
-    // }));
-
     return this.http.get(url);
 
   }

@@ -1,3 +1,4 @@
+export { PasesService } from './pases/pases.service';
 export { UsuarioService } from './usuario/usuario.service';
 export { SettingsService } from './settings/settings.service';
 export { SharedService } from './shared/shared.service';

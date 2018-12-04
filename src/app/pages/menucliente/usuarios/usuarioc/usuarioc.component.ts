@@ -1,10 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {
-  FormGroup,
-  Validators,
-  FormControl,
-  AbstractControl
-} from '@angular/forms';
+import { FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { UsuarioeventoService, EventoService } from 'src/app/services/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -25,7 +20,7 @@ export class UsuariocComponent implements OnInit {
   ponente = false;
   prefs = [
     { name: 'Adminsitrador', value: 'ADMIN_ROLE' },
-    { name: 'Usuario', value: 'USER_ROLE' },
+    { name: 'Asistente', value: 'ASISTENTE' },
     { name: 'Staff', value: 'STAFF' },
     { name: 'Ponente', value: 'PONENTE' },
   ];

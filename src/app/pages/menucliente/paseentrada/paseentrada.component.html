@@ -1,3 +1,94 @@
-<p>
-  paseentrada works!
-</p>
+<!-- <button (click)="download()">Download</button> -->
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="canvas">
+
+      <div class="header" [ngStyle]="{'background-color': colorCabecera}">
+        <span [ngStyle]="{'color': colorCabeceraLetra}">{{titulo}}</span>
+      </div>
+
+      <div class="body-pase" [ngStyle]="{'background-color': colorCuerpo}">
+        <img src="assets/images/qr.png" alt="Código Qr">
+      </div>
+
+      <div class="entity" [ngStyle]="{'background-color': colorCuerpo}">
+        <p [ngStyle]="{'color': colorCuerpoLetra}">John Doe</p>
+      </div>
+
+      <div class="footer-pase" [ngStyle]="{'background-color': colorPie}">
+        <span [ngStyle]="{'color': colorPieLetra}">Asistente</span>
+      </div>
+
+    </div>
+  </div>
+
+  <hr>
+  <div class="col-md-3">
+
+    <div class="form-group">
+      <label for="headercolor">
+        <h3>Color de la cabecera</h3>
+      </label>
+      <input name="headercolor" [value]="colorCabecera" [style.background]="colorCabecera" [(colorPicker)]="colorCabecera"
+        [cpPosition]="'bottom'" />
+    </div>
+
+    <div class="form-group">
+      <label for="headercolor">
+        <h3>Color del cuerpo</h3>
+      </label>
+      <input name="headercolor" [value]="colorCuerpo" [style.background]="colorCuerpo" [(colorPicker)]="colorCuerpo"
+        [cpPosition]="'bottom'" />
+    </div>
+
+    <div class="form-group">
+      <label for="headercolor">
+        <h3>Color del pie del pase</h3>
+      </label>
+      <input name="headercolor" [value]="colorPie" [style.background]="colorPie" [(colorPicker)]="colorPie"
+        [cpPosition]="'bottom'" />
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+      <label for="headercolor">
+        <h3>Color de la letra de la cabecera</h3>
+      </label>
+      <input name="headercolor" [value]="colorCabeceraLetra" [style.background]="colorCabeceraLetra" [(colorPicker)]="colorCabeceraLetra"
+        [cpPosition]="'bottom'" />
+    </div>
+
+    <div class="form-group">
+      <label for="headercolor">
+        <h3>Color de la letra del cuerpo del pase</h3>
+      </label>
+      <input name="headercolor" [value]="colorCuerpoLetra" [style.background]="colorCuerpoLetra" [(colorPicker)]="colorCuerpoLetra"
+        [cpPosition]="'bottom'" />
+    </div>
+
+    <div class="form-group">
+      <label for="headercolor">
+        <h3>Color de la letra del pie del pase</h3>
+      </label>
+      <input name="headercolor" [value]="colorPieLetra" [style.background]="colorPieLetra" [(colorPicker)]="colorPieLetra"
+        [cpPosition]="'bottom'" />
+    </div>
+
+    <button class="btn btn-facebook btn-block" (click)="generarInvitaciones()">Generar invitaciones</button>
+
+  </div>
+</div>
+<br>
+<hr>
+<div class="row">
+  <div class="col-md-6">
+
+    <button class="btn btn-secondary btn-block">Restablecer colores</button>
+  </div>
+
+  <div class="col-md-6">
+    <button (click)="guardarColores()" class="btn btn-facebook btn-block">Guardar colores</button>
+  </div>
+</div>
