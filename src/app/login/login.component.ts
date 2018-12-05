@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { UsuarioService } from '../services/service.index';
+import { Login } from '../models/login.model';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -7,16 +10,42 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public router: Router) { }
+  email: string;
+  recuerdame = false;
+  constructor(public router: Router, public _usuarioService: UsuarioService) {
+    if (this._usuarioService.estaLogueado()) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   ngOnInit() {
 
-   
+    this.email = localStorage.getItem('email') || '';
+    if (this.email.length > 1) {
+      this.recuerdame = true;
+    }
+
   }
 
-  ingresar(){
-    this.router.navigate(['/dashboard']);
-    console.log('ingresando');
+  ingresar(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+
+    const usuario = new Login(form.value.email, form.value.password);
+
+    this._usuarioService.login(usuario, form.value.recuerdame).subscribe(resp => {
+
+      this.router.navigate(['dashboard']);
+
+
+    }, error => {
+
+    });
+
+
+
+
   }
 
 }

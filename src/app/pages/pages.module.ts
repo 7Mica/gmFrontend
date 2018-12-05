@@ -1,41 +1,98 @@
-import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+/*******************
+ * ANGULAR MODULES *
+ *******************/
 
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { PagesComponent } from "./pages.component";
-import { DashboardComponent } from "./dashboard/dashboard.component";
-import { ProgressComponent } from "./progress/progress.component";
-import { Graficas1Component } from "./graficas1/graficas1.component";
-import { SharedModule } from "../shared/shared.module";
-import { PAGES_ROUTES } from "./pages.routes";
+/***********************
+ * THIRD PARTY MODULES *
+ ***********************/
+
 import { ChartsModule } from 'ng2-charts';
-import { IncrementadorComponent } from "../components/incrementador/incrementador.component";
-import { GraficaComponent } from "../components/grafica/grafica.component";
-import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { ModalModule } from 'ngx-bootstrap';
+import { AgmCoreModule } from '@agm/core';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { ColorPickerModule } from 'ngx-color-picker';
 
-//temporal
+/**********
+ * ROUTES *
+ **********/
+
+import { PAGES_ROUTES } from './pages.routes';
+
+/*************************
+ * MODULO DE COMPONENTES *
+ *************************/
+
+import { SharedModule } from '../shared/shared.module';
+
+/*******************
+ * PAGES COMPONENT *
+ *******************/
+
+import * as PagesIndex from '../config/pages.index';
+import { ChangePasswordComponent } from './menucliente/modales/change-password/change-password.component';
+
 
 @NgModule({
     declarations: [
-        PagesComponent,
-        DashboardComponent,
-        ProgressComponent,
-        Graficas1Component,
-        IncrementadorComponent,
-        GraficaComponent,
-        AccountSettingsComponent
+        PagesIndex.PagesComponent,
+        PagesIndex.DashboardComponent,
+        PagesIndex.AccountSettingsComponent,
+        PagesIndex.EventosComponent,
+        PagesIndex.UsuariosComponent,
+        PagesIndex.UsuarioscuComponent,
+        PagesIndex.EventocuComponent,
+        PagesIndex.MenuclienteComponent,
+        PagesIndex.UsuariosCliente,
+        PagesIndex.ConferenciasComponent,
+        PagesIndex.EstadisticasComponent,
+        PagesIndex.MapasComponent,
+        PagesIndex.MarcasComponent,
+        PagesIndex.PaseentradaComponent,
+        PagesIndex.ConstanciasComponent,
+        PagesIndex.UsuariocComponent,
+        PagesIndex.ConferenciacuComponent,
+        PagesIndex.DetalleconferenciaComponent,
+        PagesIndex.MarcascuComponent,
+        ChangePasswordComponent,
     ],
     exports: [
-        DashboardComponent,
-        ProgressComponent,
-        Graficas1Component,
+        PagesIndex.DashboardComponent,
 
     ],
     imports: [
         SharedModule,
         PAGES_ROUTES,
         FormsModule,
-        ChartsModule
+        ChartsModule,
+        BrowserModule,
+        HttpModule,
+        ReactiveFormsModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyC-78ipSk2R-phjUHRzEdXvnF0Gh7TD4CE'
+        }),
+        ModalModule.forRoot(),
+        Ng2SmartTableModule,
+        NgSelectModule,
+        ColorPickerModule
+    ],
+
+    entryComponents: [
+        PagesIndex.UsuarioscuComponent,
+        PagesIndex.EventocuComponent,
+        PagesIndex.UsuariocComponent,
+        PagesIndex.ConferenciacuComponent,
+        PagesIndex.DetalleconferenciaComponent,
+        PagesIndex.MarcascuComponent,
+    ],
+
+    providers: [
+
     ]
 })
 

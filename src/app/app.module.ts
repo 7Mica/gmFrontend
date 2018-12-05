@@ -1,22 +1,39 @@
+/*******************
+ * ANGULAR MODULES *
+ *******************/
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CarouselModule } from 'ngx-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+/*********************
+ * 3RD PARTY MODULES *
+ *********************/
 
-// Rutas
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+import { ModalModule } from 'ngx-bootstrap';
+
+/**********
+ * ROUTES *
+ **********/
+
 import { APP_ROUTES } from './app.routes';
 
-//Modulos 
-import { PagesModule } from "./pages/pages.module";
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+/*********************
+ * COMPONENT MODULES *
+ *********************/
 
-//Servicios
+import { PagesModule } from './pages/pages.module';
+import { SharedModule } from './shared/shared.module';
 import { ServiceModule } from './services/service.module';
 
+/**************
+ * COMPONENTS *
+ **************/
+import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 import { PortalComponent } from './portal/portal.component';
-import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,16 +42,19 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     RegisterComponent,
     PortalComponent,
-    
-    
   ],
+  exports: [],
   imports: [
     BrowserModule,
     APP_ROUTES,
     PagesModule,
     FormsModule,
     ServiceModule,
-    CarouselModule.forRoot()
+    SharedModule,
+    ReactiveFormsModule,
+    SweetAlert2Module,
+    ModalModule.forRoot()
+
   ],
   providers: [],
   bootstrap: [AppComponent]

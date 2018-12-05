@@ -1,0 +1,178 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row" *ngIf="existe">
+
+            <div class="col-md-3">
+
+                <div class="col-md-12">
+                    <div class="card bg-primary pointer" routerLink="conferencias">
+                        <div class="card-body">
+                            <div class="d-flex no-block">
+                                <div class="m-r-20 align-self-center"><img src="../assets/images/icon/assets-w.png" alt="Income"></div>
+                                <div class="align-self-center">
+                                    <h6 class="text-white m-t-10 m-b-0">Conferencias</h6>
+                                    <h2 class="m-t-0 text-white">{{cantidadConferencias}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card bg-danger pointer" routerLink="usuarios">
+                        <div class="card-body">
+                            <div class="d-flex no-block">
+                                <div class="m-r-20 align-self-center"><img src="../assets/images/icon/staff-w.png" alt="Income"></div>
+                                <div class="align-self-center">
+                                    <h6 class="text-white m-t-10 m-b-0">Usuarios</h6>
+                                    <h2 class="m-t-0 text-white">{{cantidadUsuarios}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                        <div class="card bg-info pointer" routerLink="marcas">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="m-r-20 align-self-center"><img src="../assets/images/icon/company.png" alt="Income"></div>
+                                    <div class="align-self-center">
+                                        <h6 class="text-white m-t-10 m-b-0">Marcas</h6>
+                                        <h2 class="m-t-0 text-white">{{cantidadMarcas}}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <!-- <div class="col-md-12">
+                    <div class="card bg-success pointer" routerLink="estadisticas">
+                        <div class="card-body">
+                            <div class="d-flex no-block">
+                                <div class="m-r-20 align-self-center"><img src="../assets/images/icon/expense-w.png"
+                                        alt="Income"></div>
+                                <div class="align-self-center">
+                                    <h6 class="text-white m-t-10 m-b-0">Estadisticas</h6>
+                                    <h2 class="m-t-0 text-white">236,000</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="col-md-12">
+                    <div class="card bg-info pointer" routerLink="constancias">
+                        <div class="card-body">
+                            <div class="d-flex no-block">
+                                <div class="m-r-20 align-self-center"><img src="../assets/images/icon/income-w.png" alt="Income"></div>
+                                <div class="align-self-center">
+                                    <h4 class="m-t-0 text-white">Constancias</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="col-md-12">
+                    <div class="card bg-danger pointer" (click)="eliminarEvento()" *ngIf="queEs()">
+                        <div class="card-body">
+                            <div class="d-flex no-block">
+                                <div class="m-r-20 align-self-center"><img src="../assets/images/icon/trash.png" alt="Income"></div>
+                                <div class="align-self-center">
+                                    <h6 class="text-white m-t-10 m-b-0">Eliminar evento</h6>
+                                    <h2 class="m-t-0 text-white">953,000</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+
+                <div class="col-md-12">
+                    <div class="card bg-info pointer" routerLink="mapas">
+                        <div class="card-body">
+                            <div class="d-flex no-block">
+                                <div class="m-r-20 align-self-center"><img src="../assets/images/icon/location.png" alt="Income"></div>
+                                <div class="align-self-center">
+                                    <h4 class="m-t-0 text-white">Mapas</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card bg-info pointer" routerLink="paseentrada">
+                        <div class="card-body">
+                            <div class="d-flex no-block">
+                                <div class="m-r-20 align-self-center"><img src="../assets/images/icon/pass.png" alt="Income"></div>
+                                <div class="align-self-center">
+                                    <h4 class="m-t-0 text-white">Pase de entrada</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-9">
+                <div class="row text-center">
+                    <img src="https://via.placeholder.com/1000x180" alt="" class="col-md-12">
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>{{evento.titulo}}</h3>
+                        <hr>
+                        <h4>Fechas</h4>
+                        <p>Inicio: {{evento.fechainicio}} </p>
+                        <p>Fin: {{evento.fechadefinalizacion}}</p>
+
+                        <h4>Descripción</h4>
+                        <p>{{evento.descripcion}}</p>
+
+                    </div>
+                </div>
+                <br>
+
+                <div class="row" *ngIf="evento.cliente">
+                    <div class="col-md-6">
+                        <h4>Contratación</h4>
+                        <p>{{evento.cliente.fullName}}</p>
+                    </div>
+                    <br>
+                    <div class="col-md-6">
+                        <h4>Estado de evento</h4>
+                        <p>Activo</p>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="evento.direccion">
+                    <div class="col-md-6">
+                        <h4>Dirección</h4>
+                        <p>{{evento.direccion.calle}} número ext {{evento.direccion.numeroExterior}}, número int {{evento.direccion.numeroInterior}}. 
+                            Colonia {{evento.direccion.colonia}}. {{evento.direccion.ciudad}}, {{evento.direccion.estado}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Contacto</h4>
+                        <p>Tel: {{evento.telefono}}</p>
+                        <p>Tel: {{evento.telefonodos}}</p>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button" name="editar" id="editar" class="btn btn-facebook btn-block" (click)="editarEvento(evento._id)" ><i title="Editar" class="fa fa-pencil"></i> Editar</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" name="eliminar" id="eliminar" (click)="eliminarEvento(evento._id)" *ngIf="queEs()" class="btn btn-danger btn-block"><i title="Eliminar" class="fa fa-times"></i> Eliminar</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

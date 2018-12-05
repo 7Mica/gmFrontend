@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+/*******************************
+ *    CLASES PERSONALISADAS    *
+ * FUERA DEL TEMA DE BOOTSTRAP *
+ *******************************/
+.tbl-button {
+  margin-right: 10px !important;
+}
+ .vertical-hr { 
+  
+  border:         none;
+  border-left:    1px solid hsla(200, 10%, 50%,100);
+  height:         100vh;
+  width:          1px;       
+}
+
+.red-input {
+  border:1px solid red;
+
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+ 

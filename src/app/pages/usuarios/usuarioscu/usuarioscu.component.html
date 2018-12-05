@@ -1,0 +1,306 @@
+<div class="modal-header">
+
+  <h3 class="modal-title pull-left"> {{ title }} </h3>
+
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form class="register-form" [formGroup]="forma" (ngSubmit)="queEs()" #formDir="ngForm">
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12 div-title">
+        <h4>Datos personales</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="nombre">Nombres</label>
+        <input maxlength="50" minlength="2" type="text" [ngClass]="{
+          'red-input': (forma.get('nombre').hasError('required') && forma.get('nombre').touched) || 
+          (formDir.submitted && forma.get('nombre').hasError('required') || forma.get('nombre').hasError('minlength') || forma.get('nombre').hasError(maxlength)) }"
+          formControlName="nombre" name="nombre" class="form-control" placeholder="Nombres *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('nombre').hasError('required')) || (forma.get('nombre').hasError('required') && forma.get('nombre').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('nombre').hasError('minlength')">Este campo
+          tiene un minimo de 2 caracteres *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('nombre').hasError('maxlength')">Este campo
+          tiene un maximo de 50 caracteres *</p>
+
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="appaterno">Apellido paterno</label>
+        <input maxlength="50" minlength="2" type="text" [ngClass]="{
+          'red-input': (forma.get('appaterno').hasError('required') && forma.get('appaterno').touched) || 
+          (formDir.submitted && forma.get('appaterno').hasError('required') || forma.get('appaterno').hasError('minlength') || forma.get('appaterno').hasError(maxlength)) }"
+          formControlName="appaterno" name="appaterno" class="form-control" placeholder="Apellido Paterno *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('appaterno').hasError('required')) || (forma.get('appaterno').hasError('required') && forma.get('appaterno').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('appaterno').hasError('minlength')) || (forma.get('appaterno').hasError('minlength') && forma.get('appaterno').touched)">Este
+          campo
+          tiene un minimo de 2 caracteres *</p>
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('appaterno').hasError('maxlength')) || (forma.get('appaterno').hasError('maxlength') && forma.get('appaterno').touched)">Este
+          campo
+          tiene un maximo de 50 caracteres *</p>
+
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="apmaterno">Apellido Materno</label>
+        <input maxlength="50" minlength="2" type="text" [ngClass]="{
+          'red-input': (forma.get('apmaterno').hasError('required') && forma.get('apmaterno').touched) || 
+          (formDir.submitted && forma.get('apmaterno').hasError('required') || forma.get('apmaterno').hasError('minlength') || forma.get('apmaterno').hasError(maxlength)) }"
+          formControlName="apmaterno" name="apmaterno" class="form-control" placeholder="Apellido Materno*" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('apmaterno').hasError('required')) || (forma.get('apmaterno').hasError('required') && forma.get('apmaterno').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('apmaterno').hasError('minlength')) || (forma.get('apmaterno').hasError('minlength') && forma.get('apmaterno').touched)">Este
+          campo
+          tiene un minimo de 2 caracteres *</p>
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('apmaterno').hasError('maxlength')) || (forma.get('apmaterno').hasError('maxlength') && forma.get('apmaterno').touched)">Este
+          campo
+          tiene un maximo de 50 caracteres *</p>
+
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 div-title">
+        <h4>Dirección</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="calle">Nombre de la calle</label>
+        <input maxlength="50" minlength="2" type="text" [ngClass]="{
+              'red-input': (forma.get('calle').hasError('required') && forma.get('calle').touched) || 
+              (formDir.submitted && forma.get('calle').hasError('required') || forma.get('calle').hasError('minlength') || forma.get('calle').hasError(maxlength)) }"
+          formControlName="calle" name="calle" class="form-control" placeholder="Nombre de la calle *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('calle').hasError('required')) || (forma.get('calle').hasError('required') && forma.get('calle').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('calle').hasError('minlength')">Este campo
+          tiene un minimo de 2 caracteres *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('calle').hasError('maxlength')">Este campo
+          tiene un maximo de 50 caracteres *</p>
+
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="numeroexterior">Número exterior</label>
+        <input maxlength="50" minlength="1" type="text" [ngClass]="{
+                'red-input': (forma.get('numeroexterior').hasError('required') && forma.get('numeroexterior').touched) || 
+                (formDir.submitted && forma.get('numeroexterior').hasError('required') || forma.get('numeroexterior').hasError('minlength') || forma.get('numeroexterior').hasError(maxlength)) }"
+          formControlName="numeroexterior" name="numeroexterior" class="form-control" placeholder="Número exterior *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('numeroexterior').hasError('required')) || (forma.get('numeroexterior').hasError('required') && forma.get('numeroexterior').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('numeroexterior').hasError('minlength')">Este
+          campo
+          tiene un minimo de 2 caracteres *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('numeroexterior').hasError('maxlength')">Este
+          campo
+          tiene un maximo de 50 caracteres *</p>
+
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="numerointerior">Número interior</label>
+        <input maxlength="50" type="text" [ngClass]="{
+                    'red-input': (forma.get('numerointerior').hasError('required') && forma.get('numerointerior').touched) || 
+                    (formDir.submitted && forma.get('numerointerior').hasError('required') || forma.get('numerointerior').hasError('minlength') || forma.get('numerointerior').hasError(maxlength)) }"
+          formControlName="numerointerior" name="numerointerior" class="form-control" placeholder="Número interior *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('numerointerior').hasError('required')) || (forma.get('numerointerior').hasError('required') && forma.get('numerointerior').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('numerointerior').hasError('minlength')">Este
+          campo
+          tiene un minimo de 2 caracteres *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('numerointerior').hasError('maxlength')">Este
+          campo
+          tiene un maximo de 50 caracteres *</p>
+
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="codigopostal">Código postal</label>
+        <input maxlength="5" minlength="5" type="text" [ngClass]="{
+                'red-input': (forma.get('codigopostal').hasError('required') && forma.get('codigopostal').touched) || 
+                (formDir.submitted && forma.get('codigopostal').hasError('required') || forma.get('codigopostal').hasError('minlength') || forma.get('codigopostal').hasError(maxlength)) }"
+          formControlName="codigopostal" name="codigopostal" class="form-control" placeholder="Código postal *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('codigopostal').hasError('required')) || (forma.get('codigopostal').hasError('required') && forma.get('codigopostal').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('codigopostal').hasError('minlength')">Este campo
+          tiene un minimo de 5 caracteres *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('codigopostal').hasError('maxlength')">Este campo
+          tiene un maximo de 5 caracteres *</p>
+
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="colonia">Colonia</label>
+        <input maxlength="50" minlength="2" type="text" [ngClass]="{
+                  'red-input': (forma.get('colonia').hasError('required') && forma.get('colonia').touched) || 
+                  (formDir.submitted && forma.get('colonia').hasError('required') || forma.get('colonia').hasError('minlength') || forma.get('colonia').hasError(maxlength)) }"
+          formControlName="colonia" name="colonia" class="form-control" placeholder="Colonia *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('colonia').hasError('required')) || (forma.get('colonia').hasError('required') && forma.get('colonia').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('colonia').hasError('minlength')">Este campo
+          tiene un minimo de 2 caracteres *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('colonia').hasError('maxlength')">Este campo
+          tiene un maximo de 50 caracteres *</p>
+
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="ciudad">Ciudad</label>
+        <input maxlength="50" minlength="2" type="text" [ngClass]="{
+                    'red-input': (forma.get('ciudad').hasError('required') && forma.get('ciudad').touched) || 
+                    (formDir.submitted && forma.get('ciudad').hasError('required') || forma.get('ciudad').hasError('minlength') || forma.get('ciudad').hasError(maxlength)) }"
+          formControlName="ciudad" name="ciudad" class="form-control" placeholder="Ciudad *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('ciudad').hasError('required')) || (forma.get('ciudad').hasError('required') && forma.get('ciudad').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('ciudad').hasError('minlength')">Este campo
+          tiene un minimo de 2 caracteres *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('ciudad').hasError('maxlength')">Este campo
+          tiene un maximo de 50 caracteres *</p>
+
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="estado">Estado</label>
+        <input maxlength="50" minlength="2" type="text" [ngClass]="{
+                      'red-input': (forma.get('estado').hasError('required') && forma.get('estado').touched) || 
+                      (formDir.submitted && forma.get('estado').hasError('required') || forma.get('estado').hasError('minlength') || forma.get('estado').hasError(maxlength)) }"
+          formControlName="estado" name="estado" class="form-control" placeholder="Estado *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('estado').hasError('required')) || (forma.get('estado').hasError('required') && forma.get('estado').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('estado').hasError('minlength')">Este campo
+          tiene un minimo de 2 caracteres *</p>
+        <p class="text-danger" *ngIf="formDir.submitted && forma.get('estado').hasError('maxlength')">Este campo
+          tiene un maximo de 50 caracteres *</p>
+
+      </div>
+
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 div-title">
+        <h4>Datos de usuario</h4>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="form-group col-md-6" *ngIf="(isEdit === true)? false : true">
+        <input type="email" [ngClass]="{
+          'red-input': (forma.get('email').hasError('required') && forma.get('email').touched || forma.get('email').hasError('email') && forma.get('email').touched) || 
+          (formDir.submitted && forma.get('email').hasError('required') || forma.get('email').hasError('email')) }"
+          formControlName="email" name="email" class="form-control" placeholder="Email *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('email').hasError('required')) || (forma.get('email').hasError('required') && forma.get('email').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('email').hasError('email')) || (forma.get('email').hasError('email') && forma.get('email').touched)">El
+          formato del email no es valido *</p>
+
+      </div>
+
+      <div class="form-group col-md-6" *ngIf="(isEdit === true)? false : true">
+        <input type="email" [ngClass]="{
+          'red-input': (forma.get('emailconfirm').hasError('required') && forma.get('emailconfirm').touched || forma.get('emailconfirm').hasError('matchemail') && forma.get('emailconfirm').touched) || 
+          (formDir.submitted && forma.get('emailconfirm').hasError('required') || forma.get('emailconfirm').hasError('matchemail')) }"
+          formControlName="emailconfirm" name="emailconfirm" class="form-control" placeholder="Confirma tu email *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('emailconfirm').hasError('required')) || (forma.get('emailconfirm').hasError('required') && forma.get('emailconfirm').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('emailconfirm').hasError('matchemail')) || (forma.get('emailconfirm').hasError('matchemail') && forma.get('emailconfirm').touched)">Los
+          email deben coincidir*</p>
+
+      </div>
+
+      <div class="form-group col-md-6" *ngIf="(isEdit === true)? false : true">
+        <input type="password" [ngClass]="{
+          'red-input': (forma.get('password').hasError('required') && forma.get('password').touched) || 
+          (formDir.submitted && forma.get('password').hasError('required') || forma.get('password').hasError('minlength')) }"
+          formControlName="password" name="password" class="form-control" placeholder="Contraseña *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('password').hasError('required')) || (forma.get('password').hasError('required') && forma.get('password').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('password').hasError('minlength')) || (forma.get('password').hasError('minlength') && forma.get('password').touched)">Este
+          campo
+          tiene un minimo de 5 caracteres *</p>
+
+      </div>
+
+      <div class="form-group col-md-6" *ngIf="(isEdit === true)? false : true">
+        <input type="password" [ngClass]="{
+          'red-input': (forma.get('passwordconfirm').hasError('required') && forma.get('passwordconfirm').touched || forma.get('passwordconfirm').hasError('matchpassword') && forma.get('passwordconfirm').touched) || 
+          (formDir.submitted && forma.get('passwordconfirm').hasError('required') || forma.get('passwordconfirm').hasError('matchpassword')) }"
+          formControlName="passwordconfirm" name="passwordconfirm" class="form-control" placeholder="Confirma tu contraseña *" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('passwordconfirm').hasError('required')) || (forma.get('passwordconfirm').hasError('required') && forma.get('passwordconfirm').touched)">Este
+          campo es
+          requerido *</p>
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('passwordconfirm').hasError('matchpassword')) || (forma.get('passwordconfirm').hasError('matchpassword') && forma.get('passwordconfirm').touched)">Las
+          contraseñas deben coincidir *</p>
+
+      </div>
+
+      <div class="form-group col-md-6">
+        <select formControlName="rol" id="rol" name="rol" class="form-control" [ngClass]="{
+          'red-input': (forma.get('rol').hasError('required') && forma.get('rol').touched )|| 
+          (formDir.submitted && forma.get('rol').hasError('required')) }">
+          <option value=null disabled selected>Selecciona un rol</option>
+          <option *ngFor="let item of prefs" [value]="item.value">{{item.name}}</option>
+        </select>
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('rol').hasError('required')) || (forma.get('rol').hasError('required') && forma.get('rol').touched)">Este
+          campo es
+          requerido *</p>
+
+
+      </div>
+
+      <div class="form-group col-md-6">
+        <input type="file" (change)="uploadDocument($event.target.files[0])" name="img" id="img" class="form-control">
+      </div>
+
+    </div>
+
+    <!-- </div> -->
+
+  </div>
+
+  <div class="modal-footer">
+
+    <button type="submit" class="btn btn-facebook btn-block" *ngIf="!data.edit">Guardar</button>
+    <button type="submit" class="btn btn-facebook btn-block" *ngIf="data.edit">Actualizar</button>
+
+  </div>
+
+</form>

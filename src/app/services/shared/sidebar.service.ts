@@ -3,41 +3,44 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class SidebarService {
 
-  menu: any = [
+  menuAdmin: any = [
     {
-      titulo: 'Dashboard',
-      icono: 'material-icons',
+      titulo: 'Herramientas',
+      icono: 'ti-dashboard',
       url: '/dashboard'
     },
     {
-      titulo: 'Graficas',
-      icono: 'material-icons',
-      url: '/graficas1'
-    },
-    {
       titulo: 'Eventos',
-      icono: 'material-icons',
+      icono: 'ti-blackboard',
       url: '/eventos'
     },
     {
       titulo: 'Usuarios',
-      icono: 'material-icons',
+      icono: 'ti-user',
       url: '/usuarios'
     },
     {
       titulo: 'Mensajes',
-      icono: 'material-icons',
+      icono: 'ti-comment-alt',
       url: '/mensajes'
     },
     {
       titulo: 'Portal',
-      icono: 'material-icons',
+      icono: 'ti-layout-cta-btn-left',
       url: '/portal'
     },
     {
       titulo: 'Papelera',
-      icono: 'material-icons',
+      icono: 'ti-trash',
       url: '/papelera'
+    }
+  ];
+
+  menuCliente: any = [
+    {
+      titulo: 'Eventos',
+      icono: 'material-icons',
+      url: '/eventos'
     }
   ];
 
