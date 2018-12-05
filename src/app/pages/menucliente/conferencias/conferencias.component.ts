@@ -51,8 +51,6 @@ export class ConferenciasComponent implements OnInit {
     this.conferenciaService.getConferencias(idevento).subscribe(
       (res: any) => {
         // this.conferencias = res.conferencias.filter(item => item.ponente.marcas);
-        console.log(res);
-
         this.conferencias = res.conferencias;
         this.tempConferencias = res.conferencias;
       },

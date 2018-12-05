@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_SERVICIOS } from 'src/app/config/config';
 import swal from 'sweetalert2';
 
@@ -13,7 +13,6 @@ export class UsuarioeventoService {
 
   crearUsuario(usuario) {
     const url = URL_SERVICIOS + '/usuarioevento';
-
     return this.http.post(url, usuario).pipe(
       map((resp: any) => {
         swal('Usuario correo', 'Se creó correctamente el usuario', 'success');

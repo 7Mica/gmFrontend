@@ -120,7 +120,7 @@ export class EventocuComponent implements OnInit {
   }
 
   elegirAccion() {
-    if ( this.data.idevento) {
+    if (this.data.idevento) {
       this.actualizarEvento();
     } else {
       this.registrarEvento();

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl, AbstractControl, FormBuilder } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { UsuarioeventoService, EventoService } from 'src/app/services/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -19,11 +19,12 @@ export class UsuariocComponent implements OnInit {
   forma: FormGroup;
   ponente = false;
   prefs = [
-    { name: 'Adminsitrador', value: 'ADMIN_ROLE' },
     { name: 'Asistente', value: 'ASISTENTE' },
     { name: 'Staff', value: 'STAFF' },
     { name: 'Ponente', value: 'PONENTE' },
   ];
+
+  imagen: File;
 
   isEdit = false;
   marcas: any[] = [];
@@ -33,7 +34,8 @@ export class UsuariocComponent implements OnInit {
     public modalService: BsModalService,
     public _usuarioService: UsuarioeventoService,
     private activatedRoute: ActivatedRoute,
-    private eventoService: EventoService
+    private eventoService: EventoService,
+    private formBuilder: FormBuilder
   ) {
 
   }
@@ -44,7 +46,7 @@ export class UsuariocComponent implements OnInit {
     this.data = data;
     this.getMarcas();
 
-    this.forma = new FormGroup(
+    this.forma = this.formBuilder.group(
       {
         nombre: new FormControl(null, [
           Validators.required,
@@ -71,6 +73,7 @@ export class UsuariocComponent implements OnInit {
           Validators.minLength(2),
           Validators.maxLength(50)
         ]),
+        img: new FormControl(null, []),
         ciudad: new FormControl(null, [
           Validators.required,
           Validators.minLength(2),
@@ -117,7 +120,6 @@ export class UsuariocComponent implements OnInit {
           this.forma.get('emailconfirm').disable();
           this.forma.get('password').disable();
           this.forma.get('passwordconfirm').disable();
-
           this.forma.get('nombre').setValue(res.data.nombre);
           this.forma.get('appaterno').setValue(res.data.apellidoPaterno);
           this.forma.get('apmaterno').setValue(res.data.apellidoMaterno);
@@ -131,8 +133,8 @@ export class UsuariocComponent implements OnInit {
           this.forma.get('rol').setValue(res.data.rol);
           if (res.data.rol === 'PONENTE') {
             this.ponente = true;
-            this.forma.get('marca').setValue(res.data.marcas);
             this.forma.get('marca').enable();
+            this.forma.get('marca').setValue(res.data.marcas);
           } else {
             this.ponente = false;
             this.forma.get('marca').disable();
@@ -151,8 +153,15 @@ export class UsuariocComponent implements OnInit {
     }
   }
 
+  uploadDocument(archivo: File) {
+    if (!archivo) {
+      this.imagen = null;
+      return;
+    }
+    this.imagen = archivo;
+  }
+
   onChange(event) {
-    console.log(event.target.value);
     if (event.target.value === 'PONENTE') {
       this.forma.get('marca').enable();
       this.ponente = true;
@@ -209,15 +218,35 @@ export class UsuariocComponent implements OnInit {
 
       return;
     }
-    // tslint:disable-next-line:prefer-const
-    let toast: any = SWALCONFIG_TOAST;
-    // tslint:disable-next-line:prefer-const
-    let usuarioevento = this.forma.value;
-    usuarioevento.idevento = this.data.idevento;
-    this._usuarioService.actualizarUsuario(id, usuarioevento).subscribe(
+    const uploadData = new FormData();
+    uploadData.append('nombre', this.forma.get('nombre').value);
+    uploadData.append('email', this.forma.get('email').value);
+    uploadData.append('appaterno', this.forma.get('appaterno').value);
+    uploadData.append('apmaterno', this.forma.get('apmaterno').value);
+    uploadData.append('calle', this.forma.get('calle').value);
+    uploadData.append('estado', this.forma.get('estado').value);
+    uploadData.append('ciudad', this.forma.get('ciudad').value);
+    uploadData.append('codigopostal', this.forma.get('codigopostal').value);
+    uploadData.append('colonia', this.forma.get('colonia').value);
+    uploadData.append('numeroexterior', this.forma.get('numeroexterior').value);
+    uploadData.append('numerointerior', this.forma.get('numerointerior').value);
+    uploadData.append('rol', this.forma.get('rol').value);
+    uploadData.append('marca', this.forma.get('marca').value);
+    uploadData.append('email', this.forma.get('email').value);
+    uploadData.append('password', this.forma.get('password').value);
+    uploadData.append('evento', this.data.idevento);
+    if (this.imagen) {
+      uploadData.append('img', this.imagen, this.imagen.name);
+    } else {
+      uploadData.append('img', null);
+    }
+
+    const toast: any = SWALCONFIG_TOAST;
+    this._usuarioService.actualizarUsuario(id, uploadData).subscribe(
       res => {
 
         toast.title = 'Se actualizó el registro';
+        toast.type = 'success';
         swal(toast);
         this.action.emit();
         this.modalRef.hide();
@@ -235,16 +264,34 @@ export class UsuariocComponent implements OnInit {
     if (this.forma.invalid) {
       return;
     }
+    const uploadData = new FormData();
+    uploadData.append('nombre', this.forma.get('nombre').value);
+    uploadData.append('email', this.forma.get('email').value);
+    uploadData.append('appaterno', this.forma.get('appaterno').value);
+    uploadData.append('apmaterno', this.forma.get('apmaterno').value);
+    uploadData.append('calle', this.forma.get('calle').value);
+    uploadData.append('estado', this.forma.get('estado').value);
+    uploadData.append('ciudad', this.forma.get('ciudad').value);
+    uploadData.append('codigopostal', this.forma.get('codigopostal').value);
+    uploadData.append('colonia', this.forma.get('colonia').value);
+    uploadData.append('numeroexterior', this.forma.get('numeroexterior').value);
+    uploadData.append('numerointerior', this.forma.get('numerointerior').value);
+    uploadData.append('rol', this.forma.get('rol').value);
+    uploadData.append('marca', this.forma.get('marca').value);
+    uploadData.append('email', this.forma.get('email').value);
+    uploadData.append('password', this.forma.get('password').value);
+    uploadData.append('evento', this.data.idevento);
+    if (this.imagen) {
+      uploadData.append('img', this.imagen, this.imagen.name);
+    } else {
+      uploadData.append('img', null);
+    }
 
-    // tslint:disable-next-line:prefer-const
-    let usuario = this.forma.value;
-    usuario.evento = this.data.idevento;
-
-    // tslint:disable-next-line:prefer-const
-    let toast = SWALCONFIG_TOAST;
-    this._usuarioService.crearUsuario(this.forma.value).subscribe(
+    const toast = SWALCONFIG_TOAST;
+    this._usuarioService.crearUsuario(uploadData).subscribe(
       res => {
         toast.title = 'Usuario creado correctamente';
+        toast.type = 'success';
         swal(toast);
         this.action.emit();
         this.modalRef.hide();

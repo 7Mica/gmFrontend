@@ -37,7 +37,7 @@ export const DTCONFIG_DELETE_EDIT_BTNS = {
 export const SWALCONFIG_CONFIRMDELETE: any = {
 
     title: '¿Estás seguro?',
-    text: 'Se eliminará permamentemente el',
+    text: 'Se eliminará permamentemente el registro?',
     type: 'warning',
     showCancelButton: true,
     confirmButtonText: 'Sí, eliminar',
@@ -58,3 +58,6 @@ export const SWALCONFIG_TOAST: any = {
     title: 'Se eliminó el registro',
     timer: 4000
 };
+
+export const IMAGEHOSTUSUARIO  = 'http://localhost:3000/usuario/img/';
+export const IMAGEHOSTUSUARIOEVENTO  = 'http://localhost:3000/usuarioevento/img/';

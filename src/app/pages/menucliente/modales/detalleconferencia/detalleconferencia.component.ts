@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ConferenciaService, EventoService } from 'src/app/services/service.index';
 import { Observable, Observer } from 'rxjs';
-import { SWALCONFIG_CONFIRMDELETE, SWALCONFIG_TOAST } from 'src/app/config/config';
+import { SWALCONFIG_CONFIRMDELETE, SWALCONFIG_TOAST, IMAGEHOSTUSUARIOEVENTO } from 'src/app/config/config';
 import swal from 'sweetalert2';
 
 @Component({
@@ -18,6 +18,10 @@ export class DetalleconferenciaComponent implements OnInit {
   ponente: any = {};
   marca: any;
   data: any;
+
+  img: any;
+
+  // Configuración de graficas
   barChartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: true
@@ -29,8 +33,7 @@ export class DetalleconferenciaComponent implements OnInit {
   barChartType = 'bar';
   barChartLegend = true;
 
-  constructor(public modalRef: BsModalRef,
-    public modalService: BsModalService,
+  constructor(private modalRef: BsModalRef, private modalService: BsModalService,
     private conferenciaService: ConferenciaService,
     private eventoService: EventoService) {
 
@@ -41,6 +44,9 @@ export class DetalleconferenciaComponent implements OnInit {
 
       this.conferencia = res.conferencias[0];
       this.ponente = this.conferencia.ponente;
+      this.ponente.img = IMAGEHOSTUSUARIOEVENTO + this.ponente.img;
+
+
 
     },
       _error => {
@@ -69,22 +75,22 @@ export class DetalleconferenciaComponent implements OnInit {
   }
 
   borrarConferencia(conferencia) {
-    swal(SWALCONFIG_CONFIRMDELETE)
+    const swalert = SWALCONFIG_CONFIRMDELETE;
+    swalert.text = '¿La conferencia será borrada permanentemente?';
+    swal(swalert)
       .then(res => {
         if (res.value) {
           console.log('Conferencia borrada');
           this.conferenciaService.eliminarConferencia(conferencia).subscribe(
             _res => {
-              // tslint:disable-next-line:prefer-const
-              let toast: any = SWALCONFIG_TOAST;
+              const toast: any = SWALCONFIG_TOAST;
               swal(toast);
               this.modalRef.hide();
               this.action.emit();
             },
 
             _error => {
-              // tslint:disable-next-line:prefer-const
-              let toast: any = SWALCONFIG_TOAST;
+              const toast: any = SWALCONFIG_TOAST;
               toast.titulo = 'Algo salió mal en la petición';
               toast.type = 'error';
               swal(toast);

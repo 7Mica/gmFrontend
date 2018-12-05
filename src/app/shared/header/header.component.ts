@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/service.index';
+import { IMAGEHOSTUSUARIO } from 'src/app/config/config';
 
 @Component({
   selector: 'app-header',
@@ -8,15 +9,20 @@ import { UsuarioService } from 'src/app/services/service.index';
 })
 export class HeaderComponent implements OnInit {
 
-  usuario: string = '';
+  usuario: string;
+  img: any;
+  email: string;
   constructor(private _usuarioService: UsuarioService) {
     this.usuario = _usuarioService.infoUsuarioActual().nombre;
-   }
+
+    this.email = _usuarioService.infoUsuarioActual().email;
+    this.img = IMAGEHOSTUSUARIO + _usuarioService.infoUsuarioActual().img;
+  }
 
   ngOnInit() {
   }
 
-  cerrarSesion(){
+  cerrarSesion() {
 
     this._usuarioService.logout();
 

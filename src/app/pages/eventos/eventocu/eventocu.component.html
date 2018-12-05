@@ -103,10 +103,7 @@
 
       <div class="form-group col-md-6">
         <label for="img">Imagen del evento</label>
-        <input type="file" class="form-control" [ngClass]="{
-                      'red-input': (forma.get('img').hasError('required') && forma.get('img').touched) || 
-                      (formDir.submitted && forma.get('img').hasError('required')) }"
-          formControlName="img" name="img" class="form-control" placeholder="Imagen del evento*" />
+        <input type="file" class="form-control" formControlName="img" name="img" class="form-control" placeholder="Imagen del evento*" />
 
         <p class="text-danger" *ngIf="(formDir.submitted && forma.get('img').hasError('required')) || (forma.get('img').hasError('required') && forma.get('img').touched)">Este
           campo es

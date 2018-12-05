@@ -77,7 +77,7 @@ export class UsuarioService {
 
   }
 
-  actualizarUsuario(id, usuario: any) {
+  actualizarUsuario(id, usuario) {
     const url = URL_SERVICIOS + '/usuario/' + id;
 
     return this.http.put(url, usuario);

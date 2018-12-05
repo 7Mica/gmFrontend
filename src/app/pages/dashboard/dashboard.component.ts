@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivationEnd } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
+import { UsuarioService } from 'src/app/services/service.index';
 
 @Component({
   selector: 'app-dashboard',

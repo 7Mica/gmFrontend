@@ -92,6 +92,10 @@ export class EventoService {
    *    A MAPAS     *
    ******************/
 
+  saveCroquis(croquis, idevento) {
+    const url = URL_SERVICIOS + '/evento/mapas/croquis' + idevento;
+    this.http.post(url, croquis);
+  }
   /**
    * Nueva locación
    * @param idevento id del evento donde se guardará el mapa
