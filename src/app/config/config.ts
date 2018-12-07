@@ -61,3 +61,4 @@ export const SWALCONFIG_TOAST: any = {
 
 export const IMAGEHOSTUSUARIO  = 'http://localhost:3000/usuario/img/';
 export const IMAGEHOSTUSUARIOEVENTO  = 'http://localhost:3000/usuarioevento/img/';
+export const IMAGEHOSTCROQUIS  = 'http://localhost:3000/evento/img/croquis/';

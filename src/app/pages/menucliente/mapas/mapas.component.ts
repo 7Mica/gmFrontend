@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MouseEvent, GoogleMapsAPIWrapper } from '@agm/core';
 import { EventoService } from 'src/app/services/service.index';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { SWALCONFIG_TOAST } from 'src/app/config/config';
+import { SWALCONFIG_TOAST, IMAGEHOSTCROQUIS } from 'src/app/config/config';
 import swal from 'sweetalert2';
 
 @Component({
@@ -19,12 +19,14 @@ export class MapasComponent implements OnInit {
 
   croquis: File;
   croquisForm: FormGroup;
+  croquisImg: any;
 
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
     private eventoService: EventoService,
     private formBuilder: FormBuilder) {
     this.idevento = this.activatedRoute.snapshot.params.idevento;
+
     this.getMapa();
 
     this.croquisForm = this.formBuilder.group(
@@ -72,9 +74,28 @@ export class MapasComponent implements OnInit {
     const uploadData = new FormData();
     if (this.croquis) {
       uploadData.append('croquis', this.croquis, this.croquis.name);
+      uploadData.append('idevento', this.idevento);
     } else {
       uploadData.append('croquis', null);
     }
+
+    this.eventoService.saveCroquis(uploadData).subscribe(
+      (res: any) => {
+        const toast = SWALCONFIG_TOAST;
+        toast.type = 'success';
+        toast.title = 'El registro se insertó correctamente';
+        swal(toast);
+        this.croquisImg = IMAGEHOSTCROQUIS + `${res.data.croquis}?random= ${Math.random()}`;
+
+      },
+      error => {
+        const toast = SWALCONFIG_TOAST;
+        toast.type = 'error';
+        toast.title = 'Ocurrió un error en la petición';
+        swal(toast);
+
+      }
+    );
   }
 
   getMapa() {
@@ -85,6 +106,8 @@ export class MapasComponent implements OnInit {
         this.lng = 7.815982;
 
       } else {
+
+        this.croquisImg = IMAGEHOSTCROQUIS + `${res.evento.croquis}`;
         this.lat = parseFloat(res.evento.mapa.latitude);
         this.lng = parseFloat(res.evento.mapa.longitude);
       }

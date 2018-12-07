@@ -57,14 +57,19 @@
                         </div>
                     </div>
                     <div class="tab-pane  p-20" id="profile" role="tabpanel">
-                        <div class="p-20">
-                            <div class="row text-center">
 
-                                <img src="https://via.placeholder.com/700x450" alt="croquis">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <img src="{{croquisImg}}" alt="croquis">
+
                             </div>
+                        </div>
+
+                        <div class="p-20">
+
                             <br>
-                            <div class="row">
-                                <form [formGroup]="croquisForm">
+                            <form [formGroup]="croquisForm">
+                                <div class="row justify-content-md-center">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="croquis">Croquis</label>
@@ -81,11 +86,8 @@
                                             Subir croquis
                                         </button>
                                     </div>
-                                </form>
-
-
-                            </div>
-
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

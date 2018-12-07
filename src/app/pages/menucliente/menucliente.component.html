@@ -33,18 +33,18 @@
                 </div>
 
                 <div class="col-md-12">
-                        <div class="card bg-info pointer" routerLink="marcas">
-                            <div class="card-body">
-                                <div class="d-flex no-block">
-                                    <div class="m-r-20 align-self-center"><img src="../assets/images/icon/company.png" alt="Income"></div>
-                                    <div class="align-self-center">
-                                        <h6 class="text-white m-t-10 m-b-0">Marcas</h6>
-                                        <h2 class="m-t-0 text-white">{{cantidadMarcas}}</h2>
-                                    </div>
+                    <div class="card bg-info pointer" routerLink="marcas">
+                        <div class="card-body">
+                            <div class="d-flex no-block">
+                                <div class="m-r-20 align-self-center"><img src="../assets/images/icon/company.png" alt="Income"></div>
+                                <div class="align-self-center">
+                                    <h6 class="text-white m-t-10 m-b-0">Marcas</h6>
+                                    <h2 *ngIf="cantidadMarcas" class="m-t-0 text-white">{{cantidadMarcas}}</h2>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
                 <!-- <div class="col-md-12">
                     <div class="card bg-success pointer" routerLink="estadisticas">
@@ -152,8 +152,10 @@
                 <div class="row" *ngIf="evento.direccion">
                     <div class="col-md-6">
                         <h4>Dirección</h4>
-                        <p>{{evento.direccion.calle}} número ext {{evento.direccion.numeroExterior}}, número int {{evento.direccion.numeroInterior}}. 
-                            Colonia {{evento.direccion.colonia}}. {{evento.direccion.ciudad}}, {{evento.direccion.estado}}</p>
+                        <p>{{evento.direccion.calle}} número ext {{evento.direccion.numeroExterior}}, número int
+                            {{evento.direccion.numeroInterior}}.
+                            Colonia {{evento.direccion.colonia}}. {{evento.direccion.ciudad}},
+                            {{evento.direccion.estado}}</p>
                     </div>
                     <div class="col-md-6">
                         <h4>Contacto</h4>
@@ -161,13 +163,15 @@
                         <p>Tel: {{evento.telefonodos}}</p>
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="col-md-6">
-                        <button type="button" name="editar" id="editar" class="btn btn-facebook btn-block" (click)="editarEvento(evento._id)" ><i title="Editar" class="fa fa-pencil"></i> Editar</button>
+                        <button type="button" name="editar" id="editar" class="btn btn-facebook btn-block" (click)="editarEvento(evento._id)"><i
+                                title="Editar" class="fa fa-pencil"></i> Editar</button>
                     </div>
                     <div class="col-md-6">
-                        <button type="button" name="eliminar" id="eliminar" (click)="eliminarEvento(evento._id)" *ngIf="queEs()" class="btn btn-danger btn-block"><i title="Eliminar" class="fa fa-times"></i> Eliminar</button>
+                        <button type="button" name="eliminar" id="eliminar" (click)="eliminarEvento(evento._id)" *ngIf="queEs()"
+                            class="btn btn-danger btn-block"><i title="Eliminar" class="fa fa-times"></i> Eliminar</button>
                     </div>
                 </div>
 
