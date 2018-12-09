@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from 'src/app/config/config';
 
@@ -8,8 +7,7 @@ import { URL_SERVICIOS } from 'src/app/config/config';
 })
 export class PasesService {
 
-  constructor(private http: HttpClient,
-    private router: Router) { }
+  constructor(private http: HttpClient) { }
 
     mandarPases(data) {
       const url = URL_SERVICIOS + '/pases/invitaciones';

@@ -1,97 +1,227 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-          <a class="navbar-brand" href="#">Instituto Tecnológico de Tepic</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Home
-                  <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Services</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Entrar</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-  
-      <header>
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-          </ol>
-          <div class="carousel-inner" role="listbox">
-            <!-- Slide One - Set the background image for this slide in the line below -->
-            <div class="carousel-item active" style="background-image: url('http://placehold.it/1920x1080')">
-              <div class="carousel-caption d-none d-md-block">
-                <h3>First Slide</h3>
-                <p>This is a description for the first slide.</p>
-              </div>
-            </div>
-            <!-- Slide Two - Set the background image for this slide in the line below -->
-            <div class="carousel-item" style="background-image: url('http://placehold.it/1920x1080')">
-              <div class="carousel-caption d-none d-md-block">
-                <h3>Second Slide</h3>
-                <p>This is a description for the second slide.</p>
-              </div>
-            </div>
-            <!-- Slide Three - Set the background image for this slide in the line below -->
-            <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
-              <div class="carousel-caption d-none d-md-block">
-                <h3>Third Slide</h3>
-                <p>This is a description for the third slide.</p>
-              </div>
-            </div>
+  <div class="container">
+    <a class="navbar-brand" href="#" style="color: rgba(255, 255, 255, 0.5)">Instituto Tecnológico de Tepic</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
 
-            <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
-              <div class="carousel-caption d-none d-md-block">
-                <h3>Fourth Slide</h3>
-                <p>This is a description for the third slide.</p>
-              </div>
-            </div>
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/portal">Portal
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/servicios">Servicios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contacto">Contacto</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Entrar</a>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+      <!-- Slide One - Set the background image for this slide in the line below -->
+      <div class="carousel-item active" style="background-image: url('http://placehold.it/1920x1080')">
+        <div class="carousel-caption d-none d-md-block">
+          <h3>First Slide</h3>
+          <p>This is a description for the first slide.</p>
+        </div>
+      </div>
+      <!-- Slide Two - Set the background image for this slide in the line below -->
+      <div class="carousel-item" style="background-image: url('http://placehold.it/1920x1080')">
+        <div class="carousel-caption d-none d-md-block">
+          <h3>Second Slide</h3>
+          <p>This is a description for the second slide.</p>
+        </div>
+      </div>
+      <!-- Slide Three - Set the background image for this slide in the line below -->
+      <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+        <div class="carousel-caption d-none d-md-block">
+          <h3>Third Slide</h3>
+          <p>This is a description for the third slide.</p>
+        </div>
+      </div>
+
+      <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+        <div class="carousel-caption d-none d-md-block">
+          <h3>Fourth Slide</h3>
+          <p>This is a description for the third slide.</p>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</header>
+
+<!-- Page Content -->
+<section class="py-5">
+  <div class="container">
+    <h1>Lorem ipsum dolor</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Maxime vero error tenetur dignissimos vel optio, perferendis illo
+      eius incidunt libero dolorum sed iure, ducimus cupiditate. Necessitatibus dolorem non repellendus tempora.</p>
+
+
+    <div class="row">
+
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+        <div class="box-part text-center">
+
+          <i class="fa fa-instagram fa-3x" aria-hidden="true"></i>
+
+          <div class="title">
+            <h4>Instagram</h4>
           </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
+
+          <div class="text">
+            <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret
+              qui ad.</span>
+          </div>
+
+          <a href="#">Learn More</a>
+
         </div>
-      </header>
-  
-      <!-- Page Content -->
-      <section class="py-5">
-        <div class="container">
-          <h1>Half Slider by Start Bootstrap</h1>
-          <p>The background images for the slider are set directly in the HTML using inline CSS. The rest of the styles for this template are contained within the
-            <code>half-slider.css</code>
-            file.</p>
+      </div>
+
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+        <div class="box-part text-center">
+
+          <i class="fa fa-twitter fa-3x" aria-hidden="true"></i>
+
+          <div class="title">
+            <h4>Twitter</h4>
+          </div>
+
+          <div class="text">
+            <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret
+              qui ad.</span>
+          </div>
+
+          <a href="#">Learn More</a>
+
         </div>
-      </section>
-  
-      <!-- Footer -->
-      <footer class="py-5 bg-dark">
-        <div class="container">
-          <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+      </div>
+
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+        <div class="box-part text-center">
+
+          <i class="fa fa-facebook fa-3x" aria-hidden="true"></i>
+
+          <div class="title">
+            <h4>Facebook</h4>
+          </div>
+
+          <div class="text">
+            <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret
+              qui ad.</span>
+          </div>
+
+          <a href="#">Learn More</a>
+
         </div>
-        <!-- /.container -->
-      </footer>
+      </div>
+
+      <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                   
+              <div class="box-part text-center">
+                            
+                            <i class="fa fa-pinterest-p fa-3x" aria-hidden="true"></i>
+                            
+                <div class="title">
+                  <h4>Pinterest</h4>
+                </div>
+                            
+                <div class="text">
+                  <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+                </div>
+                            
+                <a href="#">Learn More</a>
+                            
+               </div>
+            </div>	 
+            
+             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                   
+              <div class="box-part text-center">
+                  
+                  <i class="fa fa-google-plus fa-3x" aria-hidden="true"></i>
+                        
+                <div class="title">
+                  <h4>Google</h4>
+                </div>
+                            
+                <div class="text">
+                  <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+                </div>
+                            
+                <a href="#">Learn More</a>
+                            
+               </div>
+            </div>	 
+            
+             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                   
+              <div class="box-part text-center">
+                            
+                            <i class="fa fa-github fa-3x" aria-hidden="true"></i>
+                            
+                <div class="title">
+                  <h4>Github</h4>
+                </div>
+                            
+                <div class="text">
+                  <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+                </div>
+                            
+                <a href="#">Learn More</a>
+                            
+               </div>
+            </div> -->
+
+    </div>
+
+
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+  <div class="container">
+    <p class="m-0 text-center text-white">Copyright &copy; Instituto Tecnológico de Tepic</p>
+  </div>
+  <!-- /.container -->
+</footer>

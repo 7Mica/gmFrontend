@@ -33,6 +33,11 @@
 
       </div>
 
+
+      <div class="col-md-6" align="center" *ngIf="data.edit">
+        <qrcode [qrdata]="data._id" [size]="100" [level]="'M'"></qrcode>
+      </div>
+
       <div class="form-group col-md-6">
         <label for="appaterno">Apellido paterno</label>
         <input maxlength="50" minlength="2" type="text" [ngClass]="{
@@ -304,7 +309,8 @@
       </div>
 
       <div class="form-group col-md-6">
-        <input type="file" (change)="uploadDocument($event.target.files[0])" accept=".png, .jpg, .jpeg" name="img" id="img" class="form-control">
+        <input type="file" (change)="uploadDocument($event.target.files[0])" accept=".png, .jpg, .jpeg" name="img" id="img"
+          class="form-control">
       </div>
 
     </div>

@@ -1,2 +1,22 @@
-<h1> {{ titulo }}</h1>
-<p>Aquí van para generar constancias y enviar invitaciones</p>
+<h2> Centro de información </h2>
+<hr>
+<br>
+<div class="row">
+
+    <div class="col-md-6">
+            <h3>Tipos de usuarios</h3>
+        <div class="card" *ngIf="pieChartData.length > 0">
+            <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <h3>Entidades</h3>
+        <div class="card" *ngIf="entidades.length > 0" >
+            <canvas baseChart [data]="entidades" [labels]="pieEntidadesLabels" [options]="lineChartOptions" [chartType]="pieChartType"
+                (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+        </div>
+    </div>
+
+</div>

@@ -1,3 +1,107 @@
-<p>
-  constancias works!
-</p>
+<div class="row">
+  <div class="col-md-8">
+    <div class="canvas" style="background-color: white;width: 700px; height: 900px;">
+
+      <div class="row">
+        <div class="col-md-4">
+          <img src="{{leftimage}}" alt=""  width="150" height="150" style="margin-top: 10px; margin-left: 10px;">
+          <input class="pointer" type="file" style="opacity:0" accept="image/*" (change)="changeListener($event)" name="leftimage">
+          <p>Selecciona una imagen</p>
+        </div>
+
+        <div class="col-md-4" style="height: 140px; text-align: center; margin-top: 20px;">
+          <p [innerHTML]="header">
+          </p>
+        </div>
+
+        <div class="col-md-4 ">
+          <img class="pull-right" src="{{rightimage}}"  width="150" height="150" alt="" style="margin-top: 10px; margin-right: 10px;">
+          <input class="pointer" type="file" style="opacity:0" accept="image/*" (change)="changeListener($event)" name="rightimage">
+          <p>Selecciona una imagen</p>
+        </div>
+      </div>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="row">
+        <div class="col-md-11" style="margin-left: 20px;">
+          <p [innerHTML]="dirigido"></p>
+
+        </div>
+      </div>
+
+      <br>
+      <br>
+      <div class="row">
+        <div class="col-md-11" style="margin-left: 20px; text-align: justify;">
+          <p [innerHTML]="body">
+          </p>
+
+        </div>
+      </div>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="row justify-content-md-center">
+        <div class="col-md-4" style="text-align: center;">
+          <p style="border-top-style: solid;">Firma del responsable</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <h3>Etiquetas de reemplazo</h3>
+      <p>
+        Utiliza las siguientes etiquedas para que sean reemplazadas con información de cada asistente al evento
+      </p>
+
+      <ul>
+        <li><b>**nombreCompleto**</b> : Se reemplazará por el nombre completo del asistente.</li>
+        <li><b>**fechaActual**</b> : Se reemplazará por la fecha de creación de esta constancia.</li>
+        <li><b>**evento**</b> : Se reemplazará por el nombre del evento.</li>
+      </ul>
+
+      <div class="form-group">
+        <label for="header">Cabecera</label>
+        <textarea (keyup.enter)="enter($event)" [(ngModel)]="header" type="text" name="header" id="header" class="form-control"
+          rows="5"></textarea>
+
+      </div>
+      <div class="form-group">
+        <label for="dirigido">Dirigido a:</label>
+        <textarea (keyup.enter)="enterDirigido($event)" [(ngModel)]="dirigido" type="text" name="dirigido" id="dirigido"
+          class="form-control" rows="5"></textarea>
+
+      </div>
+
+      <div class="form-group">
+        <label for="body">Cuerpo</label>
+        <textarea (keyup.enter)="enterBody($event)" [(ngModel)]="body" type="text" name="body" id="body" class="form-control"
+          rows="5"></textarea>
+
+      </div>
+
+      <div class="form-group">
+        <button (click)="guardarConstancia()" class="btn btn-facebook btn-block">Guardar</button>
+        <button (click)="generarConstancias()" class="btn btn-facebook btn-block">Generar Constancias</button>
+      </div>
+
+
+
+
+    </div>
+
+  </div>

@@ -34,6 +34,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 import { PortalComponent } from './portal/portal.component';
+import { AboutComponent } from './portal/about/about.component';
+import { ContactComponent } from './portal/contact/contact.component';
+import { ServiciosComponent } from './portal/servicios/servicios.component';
 
 
 @NgModule({
@@ -42,6 +45,9 @@ import { PortalComponent } from './portal/portal.component';
     LoginComponent,
     RegisterComponent,
     PortalComponent,
+    AboutComponent,
+    ContactComponent,
+    ServiciosComponent,
   ],
   exports: [],
   imports: [

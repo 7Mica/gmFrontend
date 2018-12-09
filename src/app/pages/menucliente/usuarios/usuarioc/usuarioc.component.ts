@@ -37,13 +37,12 @@ export class UsuariocComponent implements OnInit {
     private eventoService: EventoService,
     private formBuilder: FormBuilder
   ) {
-
   }
 
   ngOnInit() {
-    // tslint:disable-next-line:prefer-const
-    let data: any = this.modalService.config.initialState;
-    this.data = data;
+    this.data = this.modalService.config.initialState;
+    console.log(this.data);
+
     this.getMarcas();
 
     this.forma = this.formBuilder.group(
@@ -232,7 +231,6 @@ export class UsuariocComponent implements OnInit {
     uploadData.append('numerointerior', this.forma.get('numerointerior').value);
     uploadData.append('rol', this.forma.get('rol').value);
     uploadData.append('marca', this.forma.get('marca').value);
-    uploadData.append('email', this.forma.get('email').value);
     uploadData.append('password', this.forma.get('password').value);
     uploadData.append('evento', this.data.idevento);
     if (this.imagen) {
@@ -278,7 +276,6 @@ export class UsuariocComponent implements OnInit {
     uploadData.append('numerointerior', this.forma.get('numerointerior').value);
     uploadData.append('rol', this.forma.get('rol').value);
     uploadData.append('marca', this.forma.get('marca').value);
-    uploadData.append('email', this.forma.get('email').value);
     uploadData.append('password', this.forma.get('password').value);
     uploadData.append('evento', this.data.idevento);
     if (this.imagen) {

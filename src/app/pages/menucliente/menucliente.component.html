@@ -126,12 +126,23 @@
                     <div class="col-md-12">
                         <h3>{{evento.titulo}}</h3>
                         <hr>
+
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-8">
                         <h4>Fechas</h4>
                         <p>Inicio: {{evento.fechainicio}} </p>
                         <p>Fin: {{evento.fechadefinalizacion}}</p>
 
                         <h4>Descripción</h4>
                         <p>{{evento.descripcion}}</p>
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <qrcode [qrdata]="idevento" [size]="200" [level]="'M'"></qrcode>
 
                     </div>
                 </div>

@@ -112,4 +112,23 @@ export class EventoService {
 
     return this.http.get(url);
   }
+
+/********************************
+ * TODO REFERENTE A CONSTANCIAS *
+ ********************************/
+
+  saveConstancia(data) {
+    const url = URL_SERVICIOS + '/constancias';
+    return this.http.post(url, data);
+  }
+
+  getConstancia(idevento) {
+    const url = URL_SERVICIOS + '/constancias/' + idevento;
+    return this.http.get(url);
+  }
+
+  generarConstancias(data) {
+    const url = URL_SERVICIOS + '/constancias/generate';
+    return this.http.post(url, data);
+  }
 }

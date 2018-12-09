@@ -13,8 +13,8 @@ const pagesRoutes: Routes = [
       {
         path: 'dashboard',
         component: PagesIndex.DashboardComponent,
-        // canActivate: [ClienteGuardGuard],
-        data: { titulo: 'Dashboard' }
+        canActivate: [ClienteGuardGuard],
+        data: { titulo: 'Centro de información' }
       },
       {
         path: 'usuarios',

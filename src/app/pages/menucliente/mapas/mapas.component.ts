@@ -57,7 +57,7 @@ export class MapasComponent implements OnInit {
     this.eventoService.newLocation(this.idevento, { lat: this.lat, lng: this.lng }).subscribe(res => {
       const toast = SWALCONFIG_TOAST;
       toast.type = 'success';
-      toast.title = 'Se actualizó la localización';
+      toast.title = 'Se actualizó la localizacióne';
       swal(toast);
 
     }, error => {
