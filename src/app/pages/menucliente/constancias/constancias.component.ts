@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventoService } from 'src/app/services/service.index';
-import { SWALCONFIG_TOAST } from 'src/app/config/config';
+import { SWALCONFIG_TOAST, SWALCONFIG_CONFIRMDELETE } from 'src/app/config/config';
 import swal from 'sweetalert2';
 
 @Component({
@@ -88,23 +88,42 @@ export class ConstanciasComponent implements OnInit {
   }
 
   generarConstancias() {
-    this.eventoService.generarConstancias({
-      evento: this.activatedRoute.snapshot.params.idevento,
-      cuerpo: this.body,
-      cabecera: this.header,
-      dirigido: this.dirigido,
-      leftimage: this.leftimage,
-      rightimage: this.rightimage
-    }).subscribe(
+    const confirmDelete = SWALCONFIG_CONFIRMDELETE;
+    confirmDelete.text = '¿Desea generar las constancias de todos los usuarios?';
+    confirmDelete.title = 'Advertencia';
+    confirmDelete.type = 'warning';
+    swal(confirmDelete).then(
       res => {
-        console.log(res);
 
-      },
-      error => {
-        console.log(error);
+        if (res.value) {
 
-      }
-    );
+          this.eventoService.generarConstancias({
+            evento: this.activatedRoute.snapshot.params.idevento,
+            cuerpo: this.body,
+            cabecera: this.header,
+            dirigido: this.dirigido,
+            leftimage: this.leftimage,
+            rightimage: this.rightimage
+          }).subscribe(
+            resp => {
+              console.log(resp);
+
+            },
+            error => {
+              console.log(error);
+
+            }
+          );
+
+        } else {
+          // Boton cancel presionado
+        }
+
+
+      }).catch(
+        error => {
+
+        });
   }
 
   getConstancia() {

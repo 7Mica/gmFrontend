@@ -10,21 +10,22 @@
           <p><b>Hora:</b> {{conferencia.hora}}</p>
           <p><b>Salón:</b> {{conferencia.salon}}</p>
           <p><b>Duración:</b> {{conferencia.duracion}} </p>
-          <p><b>Fecha: </b>{{conferencia.fecha}}</p>
+          <p><b>Fecha: </b> {{ conferencia.fecha | date: 'dd/MM/yyyy'}}</p>
           <p>{{conferencia.descripcion}}</p>
 
         </div>
 
-      </div>
-
-      <div class="col-md-12" align="center">
-
-        <!-- <div class="col-md-12">
-          <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-            [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-        </div> -->
         <div class="col-md-4">
-          <qrcode [qrdata]="data.idconferencia" [size]="200" [level]="'M'"></qrcode>
+          <qrcode [qrdata]="data.idconferencia" [size]="150" [level]="'M'"></qrcode>
+        </div>
+
+      </div>
+      <hr>
+
+      <div class="row">
+        <div class="col-md-12" align="center">
+            <h3>Asistentes a la conferencia</h3>
+          <ng2-smart-table #tabla [settings]="settings" [source]="source"></ng2-smart-table>
         </div>
       </div>
 

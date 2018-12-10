@@ -39,7 +39,8 @@
                             <p class="card-text" *ngIf="item.ponente;">Ponente: {{item.ponente.fullName}}</p>
                             <p class="card-text" *ngIf="!item.ponente" >Ponente: Sin ponente asignado</p>
                             <p class="card-text">Hora: {{item.hora}}</p>
-                            <p class="card-text">Fecha: {{item.fecha}}</p>
+                            <p class="card-text">Fecha: {{item.fecha | date: 'dd/MM/yyyy'}}
+                                </p>
                         </div>
                     </div>
                 </div>

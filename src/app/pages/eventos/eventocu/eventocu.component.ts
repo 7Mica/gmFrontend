@@ -198,8 +198,8 @@ export class EventocuComponent implements OnInit {
         this.forma.get('telefono').setValue(res.data.telefono);
         this.forma.get('telefonodos').setValue(res.data.telefonodos);
         this.forma.get('cliente').setValue(res.data.cliente._id);
-        this.forma.get('fechainicio').setValue(res.data.fechainicio);
-        this.forma.get('fechadefinalizacion').setValue(res.data.fechadefinalizacion);
+        this.forma.get('fechainicio').setValue(new Date(res.data.fechainicio));
+        this.forma.get('fechadefinalizacion').setValue(new Date(res.data.fechadefinalizacion));
         this.forma.get('calle').setValue(res.data.direccion.calle);
         this.forma.get('estado').setValue(res.data.direccion.estado);
         this.forma.get('ciudad').setValue(res.data.direccion.ciudad);

@@ -133,8 +133,8 @@
 
                     <div class="col-md-8">
                         <h4>Fechas</h4>
-                        <p>Inicio: {{evento.fechainicio}} </p>
-                        <p>Fin: {{evento.fechadefinalizacion}}</p>
+                        <p>Inicio:  {{evento.fechainicio | date: 'dd/MM/yyyy'}}</p>
+                        <p>Fin: {{evento.fechadefinalizacion | date: 'dd/MM/yyyy'}}</p>
 
                         <h4>Descripción</h4>
                         <p>{{evento.descripcion}}</p>

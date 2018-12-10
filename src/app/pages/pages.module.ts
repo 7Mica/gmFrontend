@@ -18,6 +18,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { QRCodeModule } from 'angularx-qrcode';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 /**********
  * ROUTES *
@@ -81,7 +82,8 @@ import { ChangePasswordComponent } from './menucliente/modales/change-password/c
         Ng2SmartTableModule,
         NgSelectModule,
         ColorPickerModule,
-        QRCodeModule
+        QRCodeModule,
+        BsDatepickerModule.forRoot()
     ],
 
     entryComponents: [

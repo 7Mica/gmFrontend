@@ -102,7 +102,6 @@ export class UsuarioscuComponent implements OnInit {
     if (this.data.edit) {
       this._usuarioService.getUsuarioById(this.data._id).subscribe(
         (res: any) => {
-          console.log(res);
 
           this.isEdit = true;
           this.forma.get('email').disable();

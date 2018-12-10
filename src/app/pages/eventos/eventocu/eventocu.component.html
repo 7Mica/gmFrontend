@@ -37,8 +37,8 @@
       <div class="form-group col-md-6" *ngIf="queEs()">
         <label for="cliente">Cliente</label>
 
-        <ng-select  formControlName="cliente" [dropdownPosition]="'bottom'"
-          [items]="clientes" bindLabel="fullName" bindValue="_id" placeholder="Selecciona un cliente">
+        <ng-select formControlName="cliente" [dropdownPosition]="'bottom'" [items]="clientes" bindLabel="fullName"
+          bindValue="_id" placeholder="Selecciona un cliente">
         </ng-select>
 
         <p class="text-danger" *ngIf="(formDir.submitted && forma.get('cliente').hasError('required')) || (forma.get('cliente').hasError('required') && forma.get('cliente').touched)">Este
@@ -255,10 +255,16 @@
     <div class="row">
       <div class="form-group col-md-6">
         <label for="fechainicio">Fecha de inicio</label>
-        <input type="date" [ngClass]="{
+        <input type="text" placement="top" [ngClass]="{
+          'red-input': (forma.get('fechainicio').hasError('required') && forma.get('fechainicio').touched) || 
+          (formDir.submitted && forma.get('fechainicio').hasError('required') || forma.get('fechainicio').hasError('minlength') || forma.get('fechainicio').hasError(maxlength)) }"
+          formControlName="fechainicio" name="fechainicio" class="form-control" placeholder="Fecha de inicio *" class="form-control"
+          bsDatepicker>
+
+        <!-- <input type="date" [ngClass]="{
                 'red-input': (forma.get('fechainicio').hasError('required') && forma.get('fechainicio').touched) || 
                 (formDir.submitted && forma.get('fechainicio').hasError('required') || forma.get('fechainicio').hasError('minlength') || forma.get('fechainicio').hasError(maxlength)) }"
-          formControlName="fechainicio" name="fechainicio" class="form-control" placeholder="Fecha de inicio *" />
+          formControlName="fechainicio" name="fechainicio" class="form-control" placeholder="Fecha de inicio *" /> -->
 
         <p class="text-danger" *ngIf="(formDir.submitted && forma.get('fechainicio').hasError('required')) || (forma.get('fechainicio').hasError('required') && forma.get('fechainicio').touched)">Este
           campo es
@@ -272,10 +278,17 @@
 
       <div class="form-group col-md-6">
         <label for="fechadefinalizacion">Fecha de clausura</label>
-        <input type="date" [ngClass]="{
+
+        <input type="text" placement="top" [ngClass]="{
+          'red-input': (forma.get('fechadefinalizacion').hasError('required') && forma.get('fechadefinalizacion').touched) || 
+          (formDir.submitted && forma.get('fechadefinalizacion').hasError('required') || forma.get('fechadefinalizacion').hasError('minlength') || forma.get('fechadefinalizacion').hasError(maxlength)) }"
+          formControlName="fechadefinalizacion" name="fechadefinalizacion" class="form-control" placeholder="Fecha de clausura *"
+          class="form-control" bsDatepicker>
+
+        <!-- <input type="date" [ngClass]="{
                   'red-input': (forma.get('fechadefinalizacion').hasError('required') && forma.get('fechadefinalizacion').touched) || 
                   (formDir.submitted && forma.get('fechadefinalizacion').hasError('required') || forma.get('fechadefinalizacion').hasError('minlength') || forma.get('fechadefinalizacion').hasError(maxlength)) }"
-          formControlName="fechadefinalizacion" name="fechadefinalizacion" class="form-control" placeholder="Fecha de clausura *" />
+          formControlName="fechadefinalizacion" name="fechadefinalizacion" class="form-control" placeholder="Fecha de clausura *" /> -->
 
         <p class="text-danger" *ngIf="(formDir.submitted && forma.get('fechadefinalizacion').hasError('required')) || (forma.get('fechadefinalizacion').hasError('required') && forma.get('fechadefinalizacion').touched)">Este
           campo es
@@ -298,8 +311,8 @@
   </div>
 
   <div class="modal-footer">
-        <button type="submit" class="btn btn-facebook btn-block" *ngIf="!data.idevento">Guardar</button>
-        <button type="submit" class="btn btn-facebook btn-block" *ngIf="data.idevento">Actualizar</button>
-   
+    <button type="submit" class="btn btn-facebook btn-block" *ngIf="!data.idevento">Guardar</button>
+    <button type="submit" class="btn btn-facebook btn-block" *ngIf="data.idevento">Actualizar</button>
+
   </div>
 </form>

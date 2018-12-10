@@ -69,7 +69,7 @@ export class ConferenciacuComponent implements OnInit {
           this.forma.get('salon').setValue(res.conferencias[0].salon);
           this.forma.get('hora').setValue(res.conferencias[0].hora);
           this.forma.get('duracion').setValue(res.conferencias[0].duracion);
-          this.forma.get('fecha').setValue(res.conferencias[0].fecha);
+          this.forma.get('fecha').setValue(new Date(res.conferencias[0].fecha));
         },
         (error: any) => {
           const toast = SWALCONFIG_TOAST;

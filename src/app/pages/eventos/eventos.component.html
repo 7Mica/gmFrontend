@@ -41,8 +41,8 @@
       <img class="card-img-top" src="{{item.img}}" alt="Card image cap" />
       <div class="card-body">
         <h4 class="card-title">{{ item.titulo }}</h4>
-        <p class="card-text">Fecha de inicio: <br>{{ item.fechainicio }}</p>
-        <p class="card-text">Fecha de clausura: <br>{{ item.fechadefinalizacion }}</p>
+        <p class="card-text">Fecha de inicio: <br>{{ item.fechainicio | date: 'dd/MM/yyyy'}}</p>
+        <p class="card-text">Fecha de clausura: <br> {{ item.fechadefinalizacion | date: 'dd/MM/yyyy'}}</p>
         <p class="card-text">Cliente: {{ item.cliente.fullName }}</p>
       </div>
     </div>

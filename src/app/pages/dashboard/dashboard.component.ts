@@ -61,7 +61,6 @@ export class DashboardComponent implements OnInit {
   getUsuariosTotalesEvento() {
     this.statsService.usuariosPorEventoStats().subscribe(
       (res: any) => {
-        console.log(res.total);
 
         this.pieChartData.push((res.total.usuarios.asistentes));
         this.pieChartData.push(res.total.usuarios.staff);

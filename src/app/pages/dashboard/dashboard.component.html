@@ -14,7 +14,7 @@
     <div class="col-md-6">
         <h3>Entidades</h3>
         <div class="card" *ngIf="entidades.length > 0" >
-            <canvas baseChart [data]="entidades" [labels]="pieEntidadesLabels" [options]="lineChartOptions" [chartType]="pieChartType"
+            <canvas baseChart [data]="entidades" [labels]="pieEntidadesLabels" [chartType]="pieChartType"
                 (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
         </div>
     </div>

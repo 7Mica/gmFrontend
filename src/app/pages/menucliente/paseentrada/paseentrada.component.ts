@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import * as jsPDF from 'jspdf';
 import { PasesService, UsuarioService, UsuarioeventoService } from 'src/app/services/service.index';
 import { Subject } from 'rxjs';
-import { SWALCONFIG_TOAST } from 'src/app/config/config';
+import { SWALCONFIG_TOAST, SWALCONFIG_CONFIRMDELETE } from 'src/app/config/config';
 import swal from 'sweetalert2';
 
 @Component({
@@ -25,33 +25,51 @@ export class PaseentradaComponent implements OnInit {
     private router: Router,
     private pasesService: PasesService) {
 
-      this.getColoresPase();
+    this.getColoresPase();
   }
 
   ngOnInit() {
   }
 
-  generarInvitaciones () {
+  generarInvitaciones() {
 
-    const data = {
-      colorCabecera: this.colorCabecera,
-      colorCuerpo: this.colorCuerpo,
-      colorPie: this.colorPie,
-      colorCabeceraLetra: this.colorCabeceraLetra,
-      colorCuerpoLetra: this.colorCuerpoLetra,
-      colorPieLetra: this.colorPieLetra,
-      idevento: this.activatedRoute.snapshot.params.idevento
-    };
+    const confirmPases = SWALCONFIG_CONFIRMDELETE;
+    confirmPases.text = '¿Desea generar los pases para todos los usuarios?';
+    confirmPases.title = 'Advertencia';
+    confirmPases.type = 'warning';
+    swal(confirmPases).then(
+      confirm => {
+        if (confirm.value) {
 
-    this.pasesService.mandarPases(data).subscribe(
-      (res: any) => {
-        console.log(res);
+          console.log('lol');
 
-      },
-      (error: any) => {
-        console.log(error);
+          const data = {
+            colorCabecera: this.colorCabecera,
+            colorCuerpo: this.colorCuerpo,
+            colorPie: this.colorPie,
+            colorCabeceraLetra: this.colorCabeceraLetra,
+            colorCuerpoLetra: this.colorCuerpoLetra,
+            colorPieLetra: this.colorPieLetra,
+            idevento: this.activatedRoute.snapshot.params.idevento
+          };
 
-      });
+          this.pasesService.mandarPases(data).subscribe(
+            (res: any) => {
+              console.log(res);
+
+            },
+            (error: any) => {
+              console.log(error);
+
+            });
+
+        } else {
+          // Boton cancelar presionado
+        }
+      }
+    ).catch();
+
+
 
   }
 
@@ -109,23 +127,5 @@ export class PaseentradaComponent implements OnInit {
 
   }
 
-  download() {
-
-    // tslint:disable-next-line:prefer-const
-    let doc = new jsPDF();
-    doc.text(20, 20, 'Hello world!');
-    doc.text(20, 30, 'This is client-side Javascript, pumping out a PDF.');
-    doc.addPage();
-    doc.text(20, 20, 'Do you like that?');
-
-    // Save the PDF
-    doc.save('Test.pdf');
-  }
-
-  fontSize(e) {
-    console.log(e);
-
-
-  }
 
 }

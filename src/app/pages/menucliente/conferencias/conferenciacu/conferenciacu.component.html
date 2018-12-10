@@ -90,12 +90,19 @@
             requerido *</p>  
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-5">
         <label for="fecha">Fecha</label>
-        <input  type="date" [ngClass]="{
+
+        <input type="text" placement="top" [ngClass]="{
+          'red-input': (forma.get('fecha').hasError('required') && forma.get('fecha').touched) || 
+          (formDir.submitted && forma.get('fecha').hasError('required') || forma.get('fecha').hasError('minlength') || forma.get('fecha').hasError(maxlength)) }"
+          formControlName="fecha" name="fecha" class="form-control" placeholder="Fecha de inicio *" class="form-control"
+          bsDatepicker>
+
+        <!-- <input  type="date" [ngClass]="{
                 'red-input': (forma.get('fecha').hasError('required') && forma.get('fecha').touched) || 
                 (formDir.submitted && forma.get('fecha').hasError('required')) }"
-          formControlName="fecha" name="fecha" class="form-control" />
+          formControlName="fecha" name="fecha" class="form-control" /> -->
 
         <p class="text-danger" *ngIf="(formDir.submitted && forma.get('fecha').hasError('required')) || (forma.get('fecha').hasError('required') && forma.get('fecha').touched)">Este
           campo es
