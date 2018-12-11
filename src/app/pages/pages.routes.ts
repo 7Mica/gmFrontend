@@ -23,6 +23,12 @@ const pagesRoutes: Routes = [
         data: { titulo: 'Usuarios' }
       },
       {
+        path: 'mensajes',
+        component: PagesIndex.MensajesComponent,
+        canActivate: [ClienteGuardGuard],
+        data: { titulo: 'Mensajes' }
+      },
+      {
         path: 'account-settings',
         component: PagesIndex.AccountSettingsComponent,
         canActivate: [ClienteGuardGuard],

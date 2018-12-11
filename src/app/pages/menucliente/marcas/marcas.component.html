@@ -1,4 +1,9 @@
-<h2>Marcas</h2>
+<div class="row">
+  <div class="col-md-12" align="left">
+    <h2>Marcas</h2>
+    <hr>
+  </div>
+</div>
 <div class="row">
   <div class="col-md-3 col-xs-3">
     <button (click)="openModal()" type="button" class="btn btn-facebook waves-effect btn-rounded waves-light">Crear
@@ -11,11 +16,12 @@
       Ordenar
     </button>
     <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 36px, 0px); top: 0px; left: 0px; will-change: transform;">
-        <a class="dropdown-item pointer" (click)="sortBy('nombre')">Nombre</a>
+      <a class="dropdown-item pointer" (click)="sortBy('nombre')">Nombre</a>
     </div>
   </div>
   <div class="col-md-2">
-    <input type="text" (blur)="marcas = tempMarcas;" (keyup)="findMarca($event)" [(ngModel)]="busqueda" id="demo-input-search2" placeholder="Buscar marca" class="form-control">
+    <input type="text" (blur)="marcas = tempMarcas;" (keyup)="findMarca($event)" [(ngModel)]="busqueda" id="demo-input-search2"
+      placeholder="Buscar marca" class="form-control">
   </div>
 </div>
 <br>
@@ -27,12 +33,12 @@
           <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
             <div class="card-body text-center">
               <p>
-                <img class=" img-fluid" src="{{item.img}}"
-                  alt="card image" />
+                <img class=" img-fluid" src="{{item.img}}" alt="card image" />
               </p>
               <h4 class="card-title">{{item.titulo}}</h4>
-              <b>Representante: </b> <p class="card-text">
-                 {{item.representante}}
+              <b>Representante: </b>
+              <p class="card-text">
+                {{item.representante}}
               </p>
             </div>
           </div>
@@ -42,16 +48,16 @@
             <div class="card-body text-center mt-4">
               <b>Ciudad: </b>
               <p class="card-text">
-               {{item.ciudad}}
+                {{item.ciudad}}
               </p>
               <b>Estado: </b>
               <p class="card-text">
-               {{item.estado}}
+                {{item.estado}}
               </p>
               <b>Telefono: </b>
               <p class="card-text">
-               {{item.telefono}} <br>
-               {{item.telefonodos}}
+                {{item.telefono}} <br>
+                {{item.telefonodos}}
               </p>
               <ul class="list-inline">
                 <li class="list-inline-item">
@@ -64,7 +70,7 @@
                     <i class="fa fa-trash"></i> Eliminar
                   </a>
                 </li>
-                
+
               </ul>
             </div>
           </div>

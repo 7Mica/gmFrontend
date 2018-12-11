@@ -25,7 +25,7 @@ export class MenuclienteComponent implements OnInit {
   modalRef: BsModalRef;
 
   idevento: string;
-  evento: any = {};
+  evento: any;
   cantidadConferencias: number;
   cantidadMarcas: number;
   cantidadUsuarios: number;
@@ -143,26 +143,26 @@ export class MenuclienteComponent implements OnInit {
 
       });
 
-      this.usuarioEventoService.getCountById(idevento).subscribe(
-        (res: any) => {
-          this.cantidadUsuarios = res.data;
+    this.usuarioEventoService.getCountById(idevento).subscribe(
+      (res: any) => {
+        this.cantidadUsuarios = res.data;
 
-        },
+      },
 
-        error => {
+      error => {
 
-        }
-      );
+      }
+    );
 
-      this.eventoService.getMarcasByEvento(idevento).subscribe(
-        (res: any) => {
-          this.cantidadMarcas = res.data.marcas.length;
+    this.eventoService.getMarcasByEvento(idevento).subscribe(
+      (res: any) => {
+        this.cantidadMarcas = res.data.marcas.length;
 
-        },
+      },
 
-        error => {
+      error => {
 
-        }
-      );
+      }
+    );
   }
 }

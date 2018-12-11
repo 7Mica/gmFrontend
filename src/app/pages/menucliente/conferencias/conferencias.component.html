@@ -1,4 +1,9 @@
-<h2>Conferencias</h2>
+<div class="row">
+    <div class="col-md-12" align="left">
+        <h2>Conferencias</h2>
+        <hr>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-3 col-xs-3">
         <button (click)="openModal()" type="button" class="btn btn-facebook waves-effect btn-rounded waves-light">Crear
@@ -35,12 +40,12 @@
                         <img class="img-fluid col-md-12" src="{{item.img}}" alt="card image">
                         <div class="card-body">
                             <h4 class="card-title">{{item.titulo}}</h4>
-                            
+
                             <p class="card-text" *ngIf="item.ponente;">Ponente: {{item.ponente.fullName}}</p>
-                            <p class="card-text" *ngIf="!item.ponente" >Ponente: Sin ponente asignado</p>
+                            <p class="card-text" *ngIf="!item.ponente">Ponente: Sin ponente asignado</p>
                             <p class="card-text">Hora: {{item.hora}}</p>
                             <p class="card-text">Fecha: {{item.fecha | date: 'dd/MM/yyyy'}}
-                                </p>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -51,7 +56,7 @@
                             <p class="card-text">{{item.descripcion}}</p>
                             <p class="card-text"><b>Salon:</b> {{item.salon}}</p>
                             <p class="card-text"><b>Duración:</b> {{item.duracion}}</p>
-                            
+
                             <!-- <ul class="list-inline">
                                 <li class="list-inline-item">
                                     <a class="social-icon text-xs-center" >
@@ -61,7 +66,8 @@
                             </ul> -->
                         </div>
                     </div>
-                    <button type="button" class="btn waves-effect waves-light btn-block btn-secondary" (click)="modificarConferencia(item._id)"><i class="fa fa-pencil"></i> Editar</button>
+                    <button type="button" class="btn waves-effect waves-light btn-block btn-secondary" (click)="modificarConferencia(item._id)"><i
+                            class="fa fa-pencil"></i> Editar</button>
                 </div>
             </div>
         </div>

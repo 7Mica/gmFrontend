@@ -1,10 +1,85 @@
-<h2> Centro de información </h2>
+<div class="row">
+    <div class="col-md-12" align="center">
+        
+        <h2> Centro de información </h2>
+    </div>
+</div>
 <hr>
 <br>
-<div class="row">
 
+<div class="row">
+    <div class="col-md-12">
+        <h2>Números de hoy</h2>
+        <hr>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <div class="card">
+            <div class="box bg-primary text-center">
+                <h1 class="font-light text-white">1,738</h1>
+                <h6 class="text-white">Registros de hoy</h6>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card">
+            <div class="box bg-success text-center">
+                <h1 class="font-light text-white">5963</h1>
+                <h6 class="text-white">Conferencias para hoy</h6>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card">
+            <div class="box bg-warning text-center">
+                <h1 class="font-light text-white">10</h1>
+                <h6 class="text-white">Asistentes con asistencia hoy</h6>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card">
+            <div class="box bg-dark text-center">
+                <h1 class="font-light text-white">29</h1>
+                <h6 class="text-white">Asistentes con media asistencia</h6>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card">
+            <div class="box bg-info text-center">
+                <h1 class="font-light text-white">2,064</h1>
+                <h6 class="text-white">Sessions</h6>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card">
+            <div class="box bg-megna text-center">
+                <h1 class="font-light text-white">1.5s</h1>
+                <h6 class="text-white">Avg. Session</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><br><br>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>
+            Números por entidades
+        </h2>
+        <hr>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-6">
-            <h3>Tipos de usuarios</h3>
+        <h3>Tipos de usuarios</h3>
         <div class="card" *ngIf="pieChartData.length > 0">
             <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" (chartHover)="chartHovered($event)"
                 (chartClick)="chartClicked($event)"></canvas>
@@ -13,9 +88,9 @@
 
     <div class="col-md-6">
         <h3>Entidades</h3>
-        <div class="card" *ngIf="entidades.length > 0" >
-            <canvas baseChart [data]="entidades" [labels]="pieEntidadesLabels" [chartType]="pieChartType"
-                (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+        <div class="card" *ngIf="entidades.length > 0">
+            <canvas baseChart [data]="entidades" [labels]="pieEntidadesLabels" [chartType]="pieChartType" (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
         </div>
     </div>
 

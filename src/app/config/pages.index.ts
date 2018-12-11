@@ -1,3 +1,4 @@
+export { MensajesComponent } from '../pages/mensajes/mensajes.component';
 export { PagesComponent } from '../pages/pages.component';
 export { DashboardComponent } from '../pages/dashboard/dashboard.component';
 export { AccountSettingsComponent } from '../pages/account-settings/account-settings.component';

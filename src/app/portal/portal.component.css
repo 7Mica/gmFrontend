@@ -15,13 +15,14 @@
   }
   
 
-  body{
+  body {
     background: #eee;
 }
-span{
+span {
     font-size:15px;
 }
-a{
+
+a {
   text-decoration:none; 
   color: #0062cc;
 }

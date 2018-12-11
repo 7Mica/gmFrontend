@@ -1,7 +1,8 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="#" style="color: rgba(255, 255, 255, 0.5)">Instituto Tecnológico de Tepic</a>
+    <img src="assets/images/itt.png" width="36" height="36" alt="">
+    <a class="navbar-brand" style="color: rgba(255, 255, 255, 0.5)"> Instituto Tecnológico de Tepic</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -10,21 +11,21 @@
 
       <ul class="navbar-nav ml-auto">
 
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/portal">Portal
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/portal" routerLinkActive="active">Portal
             <span class="sr-only">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/about">About</a>
+          <a class="nav-link" routerLink="/portal" routerLinkActive="active" fragment="about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/servicios">Servicios</a>
+          <a class="nav-link" routerLink="/portal" routerLinkActive="active" fragment="servicios">Servicios</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/contacto">Contacto</a>
+          <a class="nav-link" routerLink="/portal" routerLinkActive="active" fragment="contacto">Contacto</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" routerLink="/login">Entrar</a>
         </li>
 
@@ -44,31 +45,31 @@
     </ol>
     <div class="carousel-inner" role="listbox">
       <!-- Slide One - Set the background image for this slide in the line below -->
-      <div class="carousel-item active" style="background-image: url('http://placehold.it/1920x1080')">
-        <div class="carousel-caption d-none d-md-block">
-          <h3>First Slide</h3>
-          <p>This is a description for the first slide.</p>
+      <div class="carousel-item active" style="background-image: url('assets/images/portal/sc.jpg')">
+        <div class="carousel-caption d-none d-md-block" style="background-color: rgba(0, 0, 0, 0.568)">
+          <h3 style="color:white; font: bold;">First Slide</h3>
+          <p><b>This is a description for the first slide.</b></p>
         </div>
       </div>
       <!-- Slide Two - Set the background image for this slide in the line below -->
-      <div class="carousel-item" style="background-image: url('http://placehold.it/1920x1080')">
-        <div class="carousel-caption d-none d-md-block">
-          <h3>Second Slide</h3>
-          <p>This is a description for the second slide.</p>
+      <div class="carousel-item" style="background-image: url('assets/images/portal/ced.jpg')">
+        <div class="carousel-caption d-none d-md-block" style="background-color: rgba(0, 0, 0, 0.568)">
+          <h3 style="color:white; font: bold;">Second Slide</h3>
+          <p style="color:white; font: bold;">This is a description for the second slide.</p>
         </div>
       </div>
       <!-- Slide Three - Set the background image for this slide in the line below -->
-      <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
-        <div class="carousel-caption d-none d-md-block">
-          <h3>Third Slide</h3>
-          <p>This is a description for the third slide.</p>
+      <div class="carousel-item" style="background-image: url('assets/images/portal/conferencia.jpg')">
+        <div class="carousel-caption" style="background-color: rgba(0, 0, 0, 0.568);">
+          <h3 style="color:white; font: bold;">Third Slide</h3>
+          <p style="color:white; font: bold;">This is a description for the third slide.</p>
         </div>
       </div>
 
-      <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
-        <div class="carousel-caption d-none d-md-block">
-          <h3>Fourth Slide</h3>
-          <p>This is a description for the third slide.</p>
+      <div class="carousel-item" style="background-image: url('assets/images/portal/conferencias-cursos-img.jpg')">
+        <div class="carousel-caption d-none d-md-block" style="background-color: rgba(0, 0, 0, 0.568)">
+          <h3 style="color:white; font: bold;">Fourth Slide</h3>
+          <p style="color:white; font: bold;">This is a description for the third slide.</p>
         </div>
       </div>
     </div>
@@ -86,12 +87,25 @@
 <!-- Page Content -->
 <section class="py-5">
   <div class="container">
-    <h1>Lorem ipsum dolor</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      Maxime vero error tenetur dignissimos vel optio, perferendis illo
-      eius incidunt libero dolorum sed iure, ducimus cupiditate. Necessitatibus dolorem non repellendus tempora.</p>
 
 
+    <div class="row" id="about">
+      <div class="col-md-5">
+        <h1>Sobre nosotros</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Maxime vero error tenetur dignissimos vel optio, perferendis illo
+          eius incidunt libero dolorum sed iure, ducimus cupiditate. Necessitatibus dolorem non repellendus tempora.</p>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          Eum quae suscipit omnis aliquid quidem ad asperiores ab velit at reprehenderit nobis tempora,
+          animi iusto deserunt tenetur itaque, praesentium inventore neque!
+        </p>
+      </div>
+      <div class="col-md-7" align="right">
+        <img src="https://via.placeholder.com/450x300" alt="">
+      </div>
+    </div>
+    <hr id="servicios">
     <div class="row">
 
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -212,7 +226,34 @@
             </div> -->
 
     </div>
+    <hr id="contacto">
+    <div class="row">
+      <div class="col-md-6">
+        <h1>Contactanos</h1>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+          Quod assumenda officiis corporis voluptatem autem tempora nobis! Facilis,
+          iusto odit aliquam molestiae laboriosam suscipit eaque, ipsa dicta tempora facere
+          distinctio! Quas!</p>
 
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="someemail" placeholder="">
+          <small id="someemail" class="form-text text-muted">Coloca tu email</small>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" name="email" id="email" aria-describedby="someemail" placeholder="">
+          <small id="someemail" class="form-text text-muted">Coloca tu email</small>
+        </div>
+
+        <button class="btn btn-facebook btn-blcok">Enviar</button>
+
+      </div>
+    </div>
 
 
   </div>
