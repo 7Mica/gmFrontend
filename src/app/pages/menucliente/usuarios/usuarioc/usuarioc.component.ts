@@ -41,8 +41,6 @@ export class UsuariocComponent implements OnInit {
 
   ngOnInit() {
     this.data = this.modalService.config.initialState;
-    console.log(this.data);
-
     this.getMarcas();
 
     this.forma = this.formBuilder.group(

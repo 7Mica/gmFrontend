@@ -124,10 +124,8 @@ export class ConferenciacuComponent implements OnInit {
 
     this.conferenciaService.crearConferencia(conferencia).subscribe(
       res => {
-        console.log(res);
 
-        // tslint:disable-next-line:prefer-const
-        let toast = SWALCONFIG_TOAST;
+        const toast = SWALCONFIG_TOAST;
         toast.title = 'Registro creado correctamente';
         toast.type = 'success';
         swal(toast);
@@ -144,8 +142,6 @@ export class ConferenciacuComponent implements OnInit {
   }
 
   getPonentesEvento() {
-    // tslint:disable-next-line:prefer-const
-
     this.usuarioeventoService.getPonentesPorEvento(this.data.idevento).subscribe(
       (res: any) => {
         this.ponentes = res.data;
