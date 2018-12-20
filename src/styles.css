@@ -27,4 +27,16 @@
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
+
+.modal-header {
+  background-color: #3b5998 !important;
+  color: white;
+}
+.modal-header > h4 {
+  color: white;
+}
+.modal-header > button > span {
+  color: white;
+  cursor: pointer;
+}
  

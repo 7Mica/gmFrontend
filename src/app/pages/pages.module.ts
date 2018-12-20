@@ -38,8 +38,6 @@ import { SharedModule } from '../shared/shared.module';
 
 import * as PagesIndex from '../config/pages.index';
 import { ChangePasswordComponent } from './menucliente/modales/change-password/change-password.component';
-import { MensajesComponent } from './mensajes/mensajes.component';
-
 
 @NgModule({
     declarations: [
@@ -64,6 +62,7 @@ import { MensajesComponent } from './mensajes/mensajes.component';
         PagesIndex.MarcascuComponent,
         ChangePasswordComponent,
         PagesIndex.MensajesComponent,
+        PagesIndex.NuevomensajeComponent,
     ],
     exports: [
         PagesIndex.DashboardComponent,
@@ -95,6 +94,7 @@ import { MensajesComponent } from './mensajes/mensajes.component';
         PagesIndex.ConferenciacuComponent,
         PagesIndex.DetalleconferenciaComponent,
         PagesIndex.MarcascuComponent,
+        PagesIndex.NuevomensajeComponent
     ],
 
     providers: [

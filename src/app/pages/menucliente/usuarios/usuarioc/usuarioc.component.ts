@@ -3,8 +3,7 @@ import { FormGroup, Validators, FormControl, AbstractControl, FormBuilder } from
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { UsuarioeventoService, EventoService } from 'src/app/services/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
-import swal from 'sweetalert2';
-import { SWALCONFIG_TOAST } from 'src/app/config/config';
+import { AlertMessages } from 'src/app/config/alert-messages';
 
 @Component({
   selector: 'app-usuarioc',
@@ -120,13 +119,13 @@ export class UsuariocComponent implements OnInit {
           this.forma.get('nombre').setValue(res.data.nombre);
           this.forma.get('appaterno').setValue(res.data.apellidoPaterno);
           this.forma.get('apmaterno').setValue(res.data.apellidoMaterno);
-          this.forma.get('calle').setValue(res.data.direccion.calle);
-          this.forma.get('estado').setValue(res.data.direccion.estado);
-          this.forma.get('ciudad').setValue(res.data.direccion.ciudad);
-          this.forma.get('codigopostal').setValue(res.data.direccion.cp);
-          this.forma.get('colonia').setValue(res.data.direccion.colonia);
-          this.forma.get('numeroexterior').setValue(res.data.direccion.numeroExterior);
-          this.forma.get('numerointerior').setValue(res.data.direccion.numeroInterior);
+          this.forma.get('calle').setValue((res.data.direccion) ? res.data.direccion.calle : '');
+          this.forma.get('estado').setValue((res.data.direccion) ? res.data.direccion.estado : '');
+          this.forma.get('ciudad').setValue((res.data.direccion) ? res.data.direccion.ciudad : '');
+          this.forma.get('codigopostal').setValue((res.data.direccion) ? res.data.direccion.cp : '');
+          this.forma.get('colonia').setValue((res.data.direccion) ? res.data.direccion.colonia : '');
+          this.forma.get('numeroexterior').setValue((res.data.direccion) ? res.data.direccion.numeroExterior : '');
+          this.forma.get('numerointerior').setValue((res.data.direccion) ? res.data.direccion.numeroInterior : '');
           this.forma.get('rol').setValue(res.data.rol);
           if (res.data.rol === 'PONENTE') {
             this.ponente = true;
@@ -139,12 +138,8 @@ export class UsuariocComponent implements OnInit {
 
         },
         error => {
-          // tslint:disable-next-line:prefer-const
-          let toast = SWALCONFIG_TOAST;
-          toast.title = 'Error en la petición';
-          toast.type = 'error';
+          AlertMessages.showToast('Error al optner información del usuario', 'Error', 3000, 'error');
 
-          swal(toast);
         }
       );
     }
@@ -237,21 +232,16 @@ export class UsuariocComponent implements OnInit {
       uploadData.append('img', null);
     }
 
-    const toast: any = SWALCONFIG_TOAST;
     this._usuarioService.actualizarUsuario(id, uploadData).subscribe(
       res => {
 
-        toast.title = 'Se actualizó el registro';
-        toast.type = 'success';
-        swal(toast);
+        AlertMessages.showToast('Se actualizó el registro', 'Éxito', 3000, 'success');
+
         this.action.emit();
         this.modalRef.hide();
       },
       error => {
-        toast.title = 'Ocurrió un error en la petición';
-        toast.type = 'error';
-        swal(toast);
-
+        AlertMessages.showToast('Ocurrio un error en la petición', 'Error', 3000, 'error');
       }
     );
   }
@@ -282,19 +272,16 @@ export class UsuariocComponent implements OnInit {
       uploadData.append('img', null);
     }
 
-    const toast = SWALCONFIG_TOAST;
     this._usuarioService.crearUsuario(uploadData).subscribe(
       res => {
-        toast.title = 'Usuario creado correctamente';
-        toast.type = 'success';
-        swal(toast);
+
+        AlertMessages.showToast('Usuario creado correctamente', 'Éxito', 3000, 'success');
         this.action.emit();
         this.modalRef.hide();
       },
       error => {
-        toast.title = 'Ocurrió algo con la petición';
-        toast.type = 'error';
-        swal(toast);
+        AlertMessages.showToast(error.error.body, 'Error', 3000, 'errror');
+
       }
     );
   }

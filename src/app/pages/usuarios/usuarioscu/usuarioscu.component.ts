@@ -8,8 +8,7 @@ import {
 } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { UsuarioService } from 'src/app/services/service.index';
-import { SWALCONFIG_TOAST } from 'src/app/config/config';
-import swal from 'sweetalert2';
+import { AlertMessages } from 'src/app/config/alert-messages';
 
 @Component({
   selector: 'app-usuarioscu',
@@ -189,20 +188,16 @@ export class UsuarioscuComponent implements OnInit {
       uploadData.append('img', null);
     }
 
-    const toast: any = SWALCONFIG_TOAST;
     this._usuarioService.actualizarUsuario(id, uploadData).subscribe(
       res => {
-        toast.title = 'Se actualizó el registro';
-        toast.type = 'success';
-        swal(toast);
+
+        AlertMessages.showToast('Se actualizó el registro', 'Éxito!', 3000, 'success');
         this.action.emit();
         this.modalRef.hide();
       },
       error => {
-        console.log(error);
-        toast.title = 'Ocurrió un error en la petición';
-        toast.type = 'error';
-        swal(toast);
+        AlertMessages.showToast('Ocurrió un error en la petición', 'Error', 3000, 'error');
+
 
       }
     );
@@ -235,15 +230,13 @@ export class UsuarioscuComponent implements OnInit {
     }
     this._usuarioService.crearUsuario(uploadData).subscribe(
       res => {
-        const toast = SWALCONFIG_TOAST;
-        toast.type = 'success';
-        toast.title = 'Usuario creado correctamente';
-        swal(toast);
+        AlertMessages.showToast('Usuario creado correctamente', 'Éxito!', 3000, 'success');
         this.action.emit();
         this.modalRef.hide();
       },
       error => {
-        console.log(error);
+        AlertMessages.showToast(error.error.body, 'Error', 3000, 'error');
+
       }
     );
   }

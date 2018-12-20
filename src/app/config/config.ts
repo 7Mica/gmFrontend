@@ -76,6 +76,7 @@ export const SWALCONFIG_TOAST: any = {
     type: 'success',
     showConfirmButton: false,
     position: 'top-end',
+    text: '',
     title: 'Se eliminó el registro',
     timer: 4000
 };
