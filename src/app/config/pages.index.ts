@@ -1,3 +1,4 @@
+export { EdicionPortalComponent } from '../pages/edicion-portal/edicion-portal.component';
 export { NuevomensajeComponent } from '../pages/mensajes/nuevomensaje/nuevomensaje.component';
 export { MensajesComponent } from '../pages/mensajes/mensajes.component';
 export { PagesComponent } from '../pages/pages.component';

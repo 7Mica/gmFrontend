@@ -23,6 +23,12 @@ const pagesRoutes: Routes = [
         data: { titulo: 'Usuarios' }
       },
       {
+        path: 'editar-portal',
+        component: PagesIndex.EdicionPortalComponent,
+        canActivate: [ClienteGuardGuard],
+        data: { titulo: 'Editar Portal' }
+      },
+      {
         path: 'mensajes',
         component: PagesIndex.MensajesComponent,
         canActivate: [ClienteGuardGuard],

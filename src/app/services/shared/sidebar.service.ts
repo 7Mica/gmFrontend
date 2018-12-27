@@ -27,7 +27,7 @@ export class SidebarService {
     {
       titulo: 'Portal',
       icono: 'ti-layout-cta-btn-left',
-      url: '/portal'
+      url: '/editar-portal'
     },
     {
       titulo: 'Papelera',
