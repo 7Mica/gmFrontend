@@ -25,7 +25,6 @@
             "styles": [
               "src/styles.css",
               "src/assets/css/pages/dashboard1.css",
-              "src/assets/plugins/c3-master/c3.min.css",
               "src/assets/plugins/bootstrap/css/bootstrap.css",
               "src/assets/css/style.css",
               "src/assets/css/pages/login-register-lock.css",
