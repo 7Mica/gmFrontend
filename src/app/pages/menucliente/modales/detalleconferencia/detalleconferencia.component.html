@@ -4,45 +4,29 @@
 
       <h2>{{conferencia.titulo}}</h2>
 
-      <p><b>Hora:</b> {{conferencia.hora}}</p>
-      <p><b>Salón:</b> {{conferencia.salon}}</p>
-      <p><b>Duración:</b> {{conferencia.duracion}} </p>
-      <p><b>Fecha: </b>{{conferencia.fecha}}</p>
-      <p>{{conferencia.descripcion}}</p>
       <hr>
+      <div class="row">
+        <div class="col-md-8">
+          <p><b>Hora:</b> {{conferencia.hora}}</p>
+          <p><b>Salón:</b> {{conferencia.salon}}</p>
+          <p><b>Duración:</b> {{conferencia.duracion}} </p>
+          <p><b>Fecha: </b> {{ conferencia.fecha | date: 'dd/MM/yyyy'}}</p>
+          <p>{{conferencia.descripcion}}</p>
 
-      <div class="col-md-12">
-
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-          <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-expanded="true"><span
-                class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Asistencia</span></a>
-          </li>
-          <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-expanded="false"><span
-                class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Ausentes</span></a>
-          </li>
-          <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab" aria-expanded="false"><span
-                class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Algo más</span></a>
-          </li>
-        </ul>
-        <!-- Tab panes -->
-        <div class="tab-content tabcontent-border">
-          <div class="tab-pane active" id="home" role="tabpanel" aria-expanded="true">
-            <div class="p-20">
-              <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-                [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-            </div>
-          </div>
-          <div class="tab-pane p-20" id="profile" role="tabpanel" aria-expanded="false">
-            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-              [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-          </div>
-          <div class="tab-pane p-20" id="messages" role="tabpanel" aria-expanded="false">
-            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-              [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-          </div>
         </div>
 
+        <div class="col-md-4">
+          <qrcode [qrdata]="data.idconferencia" [size]="150" [level]="'M'"></qrcode>
+        </div>
+
+      </div>
+      <hr>
+
+      <div class="row">
+        <div class="col-md-12" align="center">
+            <h3>Asistentes a la conferencia</h3>
+          <ng2-smart-table #tabla [settings]="settings" [source]="source"></ng2-smart-table>
+        </div>
       </div>
 
     </div>
@@ -61,19 +45,14 @@
 
           </div>
 
-          <div style="margin: 24px 0;">
-            <a href="#"><i class="fa fa-dribbble"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-          </div>
-          <p><button>Contact</button></p>
+          <p><a class="abtn" href="mailto:{{ponente.email}}">Contacto</a></p>
         </div>
       </div>
       <div class="col-md-12">
         <div class="card">
 
-          <button (click)="borrarConferencia(conferencia._id)" style="background-color: red !important;"> <i title="Editar" class="fa fa-trash"></i> Eliminar conferencia</button>
+          <button (click)="borrarConferencia(conferencia._id)" style="background-color: red !important;"> <i title="Editar"
+              class="fa fa-trash"></i> Eliminar conferencia</button>
 
         </div>
       </div>

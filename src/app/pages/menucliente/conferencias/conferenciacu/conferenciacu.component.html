@@ -1,6 +1,6 @@
 <div class="modal-header">
 
-  <h3 class="modal-title pull-left"> {{ titulo }} </h3>
+  <h4 class="modal-title pull-left"> {{ titulo }} </h4>
 
   <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
     <span aria-hidden="true">&times;</span>
@@ -51,9 +51,9 @@
 
       </div>
 
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="hora">Hora</label>
-        <input  type="time" [ngClass]="{
+        <input type="time" [ngClass]="{
               'red-input': (forma.get('hora').hasError('required') && forma.get('hora').touched) || 
               (formDir.submitted && forma.get('hora').hasError('required')) }"
           formControlName="hora" name="hora" class="form-control" placeholder="Hora del evento *" />
@@ -64,7 +64,7 @@
 
       </div>
 
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-2">
         <label for="duracion">Duración</label>
         <input type="number" min="0" max="99" [ngClass]="{
               'red-input': (forma.get('duracion').hasError('required') && forma.get('duracion').touched) || 
@@ -79,28 +79,35 @@
 
       <div class="form-group col-md-6">
 
-          <label for="ponente">Ponente</label>
+        <label for="ponente">Ponente</label>
 
-          <ng-select  formControlName="ponente" [dropdownPosition]="'bottom'"
-            [items]="ponentes" bindLabel="fullName" bindValue="_id" placeholder="Selecciona un ponente">
-          </ng-select>
-  
-          <p class="text-danger" *ngIf="(formDir.submitted && forma.get('ponente').hasError('required')) || (forma.get('ponente').hasError('required') && forma.get('ponente').touched)">Este
-            campo es
-            requerido *</p>  
+        <ng-select formControlName="ponente" [dropdownPosition]="'bottom'" [items]="ponentes" bindLabel="fullName"
+          bindValue="_id" placeholder="Selecciona un ponente">
+        </ng-select>
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('ponente').hasError('required')) || (forma.get('ponente').hasError('required') && forma.get('ponente').touched)">Este
+          campo es
+          requerido *</p>
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-5">
         <label for="fecha">Fecha</label>
-        <input  type="date" [ngClass]="{
+
+        <input type="text" placement="top" [ngClass]="{
+          'red-input': (forma.get('fecha').hasError('required') && forma.get('fecha').touched) || 
+          (formDir.submitted && forma.get('fecha').hasError('required') || forma.get('fecha').hasError('minlength') || forma.get('fecha').hasError(maxlength)) }"
+          formControlName="fecha" name="fecha" class="form-control" placeholder="Fecha de inicio *" class="form-control"
+          bsDatepicker>
+
+        <!-- <input  type="date" [ngClass]="{
                 'red-input': (forma.get('fecha').hasError('required') && forma.get('fecha').touched) || 
                 (formDir.submitted && forma.get('fecha').hasError('required')) }"
-          formControlName="fecha" name="fecha" class="form-control" />
+          formControlName="fecha" name="fecha" class="form-control" /> -->
 
         <p class="text-danger" *ngIf="(formDir.submitted && forma.get('fecha').hasError('required')) || (forma.get('fecha').hasError('required') && forma.get('fecha').touched)">Este
           campo es
           requerido *</p>
-        
+
 
       </div>
 
@@ -123,20 +130,20 @@
 
       </div>
 
- 
+
       <div class="form-group col-md-6">
-          <label for="img">Imagen del evento</label>
-          <input type="file" class="form-control" [ngClass]="{
+        <label for="img">Imagen del evento</label>
+        <input type="file" class="form-control" [ngClass]="{
                       'red-input': (forma.get('img').hasError('required') && forma.get('img').touched) || 
                       (formDir.submitted && forma.get('img').hasError('required')) }"
-            formControlName="img" name="img" class="form-control" placeholder="Imagen del evento*" />
-  
-          <p class="text-danger" *ngIf="(formDir.submitted && forma.get('img').hasError('required')) || (forma.get('img').hasError('required') && forma.get('img').touched)">Este
-            campo es
-            requerido *</p>
-        
-  
-        </div>
+          formControlName="img" name="img" class="form-control" placeholder="Imagen del evento*" />
+
+        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('img').hasError('required')) || (forma.get('img').hasError('required') && forma.get('img').touched)">Este
+          campo es
+          requerido *</p>
+
+
+      </div>
 
     </div>
 
@@ -145,8 +152,8 @@
   </div>
 
   <div class="modal-footer">
-        <button type="submit" class="btn btn-facebook btn-block" *ngIf="!data.idconferencia">Guardar</button>
-        <button type="submit" class="btn btn-facebook btn-block" *ngIf="data.idconferencia">Actualizar</button>
-     
+    <button type="submit" class="btn btn-facebook btn-block" *ngIf="!data.idconferencia">Guardar</button>
+    <button type="submit" class="btn btn-facebook btn-block" *ngIf="data.idconferencia">Actualizar</button>
+
   </div>
 </form>

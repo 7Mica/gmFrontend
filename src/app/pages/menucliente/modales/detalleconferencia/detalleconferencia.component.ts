@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ConferenciaService, EventoService } from 'src/app/services/service.index';
 import { Observable, Observer } from 'rxjs';
-import { SWALCONFIG_CONFIRMDELETE, SWALCONFIG_TOAST, IMAGEHOSTUSUARIOEVENTO } from 'src/app/config/config';
+import { SWALCONFIG_CONFIRMDELETE, SWALCONFIG_TOAST, IMAGEHOSTUSUARIOEVENTO, TABLE } from 'src/app/config/config';
 import swal from 'sweetalert2';
 
 @Component({
@@ -18,35 +18,40 @@ export class DetalleconferenciaComponent implements OnInit {
   ponente: any = {};
   marca: any;
   data: any;
-
   img: any;
+  settings = TABLE;
+  source: any[] = [];
 
-  // Configuración de graficas
-  barChartOptions: any = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };
-
-  watcher: Observable<String>;
-
-  barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  barChartType = 'bar';
-  barChartLegend = true;
-
-  constructor(private modalRef: BsModalRef, private modalService: BsModalService,
+  constructor(private modalRef: BsModalRef,
+    private modalService: BsModalService,
     private conferenciaService: ConferenciaService,
     private eventoService: EventoService) {
 
     this.data = this.modalService.config.initialState;
+    this.settings.columns = {
 
+      nombre: {
+        title: 'Nombre'
+      },
+      apellidoPaterno: {
+        title: 'Apellido Paterno'
+      },
+      apellidoMaterno: {
+        title: 'Apellido Materno'
+      }
+
+    };
 
     this.conferenciaService.getConferenciaById(this.data.idconferencia).subscribe((res: any) => {
+
+      this.source = res.conferencias[0].asistentes
+                      .filter(conferencia => conferencia.asistencia[0].entrada && conferencia.asistencia[0].salida);
+
+
 
       this.conferencia = res.conferencias[0];
       this.ponente = this.conferencia.ponente;
       this.ponente.img = IMAGEHOSTUSUARIOEVENTO + this.ponente.img;
-
-
 
     },
       _error => {
@@ -106,46 +111,6 @@ export class DetalleconferenciaComponent implements OnInit {
 
       });
 
-  }
-
-  /************
-   * GRAFICOS *
-   ************/
-
-  // tslint:disable-next-line:member-ordering
-  public barChartData: any[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-  ];
-
-  // events
-  public chartClicked(e: any): void {
-    console.log(e);
-  }
-
-  public chartHovered(e: any): void {
-    console.log(e);
-  }
-
-  public randomize(): void {
-    // Only Change 3 values
-    const data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      (Math.random() * 100),
-      56,
-      (Math.random() * 100),
-      40];
-    const clone = JSON.parse(JSON.stringify(this.barChartData));
-    clone[0].data = data;
-    this.barChartData = clone;
-    /**
-     * (My guess), for Angular to recognize the change in the dataset
-     * it has to change the dataset variable directly,
-     * so one way around it, is to clone the data, change it and then
-     * assign it;
-     */
   }
 
 

@@ -92,9 +92,9 @@ export class EventoService {
    *    A MAPAS     *
    ******************/
 
-  saveCroquis(croquis, idevento) {
-    const url = URL_SERVICIOS + '/evento/mapas/croquis' + idevento;
-    this.http.post(url, croquis);
+  saveCroquis(croquis) {
+    const url = URL_SERVICIOS + '/evento/mapas/croquis';
+    return this.http.post(url, croquis);
   }
   /**
    * Nueva locación
@@ -111,5 +111,24 @@ export class EventoService {
     const url = URL_SERVICIOS + '/evento/mapas/' + idevento;
 
     return this.http.get(url);
+  }
+
+/********************************
+ * TODO REFERENTE A CONSTANCIAS *
+ ********************************/
+
+  saveConstancia(data) {
+    const url = URL_SERVICIOS + '/constancias';
+    return this.http.post(url, data);
+  }
+
+  getConstancia(idevento) {
+    const url = URL_SERVICIOS + '/constancias/' + idevento;
+    return this.http.get(url);
+  }
+
+  generarConstancias(data) {
+    const url = URL_SERVICIOS + '/constancias/generate';
+    return this.http.post(url, data);
   }
 }

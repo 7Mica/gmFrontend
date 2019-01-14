@@ -5,7 +5,7 @@ export class SidebarService {
 
   menuAdmin: any = [
     {
-      titulo: 'Herramientas',
+      titulo: 'Centro de información',
       icono: 'ti-dashboard',
       url: '/dashboard'
     },
@@ -27,7 +27,7 @@ export class SidebarService {
     {
       titulo: 'Portal',
       icono: 'ti-layout-cta-btn-left',
-      url: '/portal'
+      url: '/editar-portal'
     },
     {
       titulo: 'Papelera',

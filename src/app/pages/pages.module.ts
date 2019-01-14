@@ -17,6 +17,8 @@ import { AgmCoreModule } from '@agm/core';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { QRCodeModule } from 'angularx-qrcode';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 /**********
  * ROUTES *
@@ -36,7 +38,6 @@ import { SharedModule } from '../shared/shared.module';
 
 import * as PagesIndex from '../config/pages.index';
 import { ChangePasswordComponent } from './menucliente/modales/change-password/change-password.component';
-
 
 @NgModule({
     declarations: [
@@ -60,6 +61,9 @@ import { ChangePasswordComponent } from './menucliente/modales/change-password/c
         PagesIndex.DetalleconferenciaComponent,
         PagesIndex.MarcascuComponent,
         ChangePasswordComponent,
+        PagesIndex.MensajesComponent,
+        PagesIndex.NuevomensajeComponent,
+        PagesIndex.EdicionPortalComponent,
     ],
     exports: [
         PagesIndex.DashboardComponent,
@@ -79,7 +83,9 @@ import { ChangePasswordComponent } from './menucliente/modales/change-password/c
         ModalModule.forRoot(),
         Ng2SmartTableModule,
         NgSelectModule,
-        ColorPickerModule
+        ColorPickerModule,
+        QRCodeModule,
+        BsDatepickerModule.forRoot()
     ],
 
     entryComponents: [
@@ -89,6 +95,7 @@ import { ChangePasswordComponent } from './menucliente/modales/change-password/c
         PagesIndex.ConferenciacuComponent,
         PagesIndex.DetalleconferenciaComponent,
         PagesIndex.MarcascuComponent,
+        PagesIndex.NuevomensajeComponent
     ],
 
     providers: [

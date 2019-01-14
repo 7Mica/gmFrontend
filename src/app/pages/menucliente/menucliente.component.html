@@ -5,7 +5,7 @@
             <div class="col-md-3">
 
                 <div class="col-md-12">
-                    <div class="card bg-primary pointer" routerLink="conferencias">
+                    <div class="card btn-facebook pointer" routerLink="conferencias">
                         <div class="card-body">
                             <div class="d-flex no-block">
                                 <div class="m-r-20 align-self-center"><img src="../assets/images/icon/assets-w.png" alt="Income"></div>
@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="col-md-12">
-                    <div class="card bg-danger pointer" routerLink="usuarios">
+                    <div class="card btn-facebook pointer" routerLink="usuarios">
                         <div class="card-body">
                             <div class="d-flex no-block">
                                 <div class="m-r-20 align-self-center"><img src="../assets/images/icon/staff-w.png" alt="Income"></div>
@@ -33,18 +33,18 @@
                 </div>
 
                 <div class="col-md-12">
-                        <div class="card bg-info pointer" routerLink="marcas">
-                            <div class="card-body">
-                                <div class="d-flex no-block">
-                                    <div class="m-r-20 align-self-center"><img src="../assets/images/icon/company.png" alt="Income"></div>
-                                    <div class="align-self-center">
-                                        <h6 class="text-white m-t-10 m-b-0">Marcas</h6>
-                                        <h2 class="m-t-0 text-white">{{cantidadMarcas}}</h2>
-                                    </div>
+                    <div class="card bg-info pointer" routerLink="marcas">
+                        <div class="card-body">
+                            <div class="d-flex no-block">
+                                <div class="m-r-20 align-self-center"><img src="../assets/images/icon/company.png" alt="Income"></div>
+                                <div class="align-self-center">
+                                    <h6 class="text-white m-t-10 m-b-0">Marcas</h6>
+                                    <h2 *ngIf="cantidadMarcas" class="m-t-0 text-white"><span>{{cantidadMarcas}}</span></h2>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
                 <!-- <div class="col-md-12">
                     <div class="card bg-success pointer" routerLink="estadisticas">
@@ -117,7 +117,7 @@
             </div>
 
 
-            <div class="col-md-9">
+            <div class="col-md-9" *ngIf ="evento">
                 <div class="row text-center">
                     <img src="https://via.placeholder.com/1000x180" alt="" class="col-md-12">
                 </div>
@@ -126,18 +126,29 @@
                     <div class="col-md-12">
                         <h3>{{evento.titulo}}</h3>
                         <hr>
+
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-8">
                         <h4>Fechas</h4>
-                        <p>Inicio: {{evento.fechainicio}} </p>
-                        <p>Fin: {{evento.fechadefinalizacion}}</p>
+                        <p>Inicio: {{evento.fechainicio | date: 'dd/MM/yyyy'}}</p>
+                        <p>Fin: {{evento.fechadefinalizacion | date: 'dd/MM/yyyy'}}</p>
 
                         <h4>Descripción</h4>
                         <p>{{evento.descripcion}}</p>
 
                     </div>
+
+                    <div class="col-md-4">
+                        <qrcode [qrdata]="idevento" [size]="200" [level]="'M'"></qrcode>
+
+                    </div>
                 </div>
                 <br>
 
-                <div class="row" *ngIf="evento.cliente">
+                <div class="row" >
                     <div class="col-md-6">
                         <h4>Contratación</h4>
                         <p>{{evento.cliente.fullName}}</p>
@@ -149,11 +160,13 @@
                     </div>
                 </div>
 
-                <div class="row" *ngIf="evento.direccion">
+                <div class="row" >
                     <div class="col-md-6">
                         <h4>Dirección</h4>
-                        <p>{{evento.direccion.calle}} número ext {{evento.direccion.numeroExterior}}, número int {{evento.direccion.numeroInterior}}. 
-                            Colonia {{evento.direccion.colonia}}. {{evento.direccion.ciudad}}, {{evento.direccion.estado}}</p>
+                        <p>{{evento.direccion.calle}} número ext {{evento.direccion.numeroExterior}}, número int
+                            {{evento.direccion.numeroInterior}}.
+                            Colonia {{evento.direccion.colonia}}. {{evento.direccion.ciudad}},
+                            {{evento.direccion.estado}}</p>
                     </div>
                     <div class="col-md-6">
                         <h4>Contacto</h4>
@@ -161,13 +174,15 @@
                         <p>Tel: {{evento.telefonodos}}</p>
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="col-md-6">
-                        <button type="button" name="editar" id="editar" class="btn btn-facebook btn-block" (click)="editarEvento(evento._id)" ><i title="Editar" class="fa fa-pencil"></i> Editar</button>
+                        <button type="button" name="editar" id="editar" class="btn btn-facebook btn-block" (click)="editarEvento(evento._id)"><i
+                                title="Editar" class="fa fa-pencil"></i> Editar</button>
                     </div>
                     <div class="col-md-6">
-                        <button type="button" name="eliminar" id="eliminar" (click)="eliminarEvento(evento._id)" *ngIf="queEs()" class="btn btn-danger btn-block"><i title="Eliminar" class="fa fa-times"></i> Eliminar</button>
+                        <button type="button" name="eliminar" id="eliminar" (click)="eliminarEvento(evento._id)" *ngIf="queEs()"
+                            class="btn btn-danger btn-block"><i title="Eliminar" class="fa fa-times"></i> Eliminar</button>
                     </div>
                 </div>
 

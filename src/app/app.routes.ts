@@ -7,13 +7,19 @@ import { PortalComponent } from './portal/portal.component';
 
 
 
+
 const appRoutes: Routes = [
 
     { path: 'portal', component: PortalComponent },
     { path: 'login', component: LoginComponent },
     // { path: 'register', component: RegisterComponent },
-    { path: '**', component: NopagefoundComponent }
+    { path: '**', component: NopagefoundComponent },
+    { path: '', redirectTo: 'portal', pathMatch: 'full' }
 ];
 
 
-export const APP_ROUTES = RouterModule.forRoot( appRoutes, { useHash: true } );
+export const APP_ROUTES = RouterModule.forRoot(appRoutes, {
+    useHash: true,
+    anchorScrolling: 'enabled',
+
+});

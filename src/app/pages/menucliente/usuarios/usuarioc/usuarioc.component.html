@@ -1,6 +1,6 @@
 <div class="modal-header">
 
-  <h3 class="modal-title pull-left"> {{ data.titulo }} </h3>
+  <h4 class="modal-title pull-left"> {{ data.titulo }} </h4>
 
   <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
     <span aria-hidden="true">&times;</span>
@@ -31,6 +31,11 @@
         <p class="text-danger" *ngIf="formDir.submitted && forma.get('nombre').hasError('maxlength')">Este campo
           stiene un maximo de 50 caracteres *</p>
 
+      </div>
+
+
+      <div class="col-md-6" align="center" *ngIf="data.edit">
+        <qrcode [qrdata]="data._id" [size]="100" [level]="'M'"></qrcode>
       </div>
 
       <div class="form-group col-md-6">
@@ -289,12 +294,12 @@
       </div>
 
       <div class="form-group col-md-6" *ngIf="ponente">
-        <select formControlName="marca" id="marca" name="marca" class="form-control" [ngClass]="{
-        'red-input': (forma.get('marca').hasError('required') && forma.get('marca').touched )|| 
-        (formDir.submitted && forma.get('marca').hasError('required')) }">
-          <option value=null disabled selected>Selecciona un marca</option>
-          <option *ngFor="let marca of marcas" [value]="marca._id">{{marca.titulo}}</option>
-        </select>
+
+        <ng-select formControlName="marca" [dropdownPosition]="'bottom'" [items]="marcas" bindLabel="titulo" bindValue="_id"
+          placeholder="Selecciona una marca" class="form-control" [ngClass]="{
+            'red-input': (forma.get('marca').hasError('required') && forma.get('marca').touched )|| 
+            (formDir.submitted && forma.get('marca').hasError('required')) }">
+        </ng-select>
 
         <p class="text-danger" *ngIf="(formDir.submitted && forma.get('marca').hasError('required')) || (forma.get('marca').hasError('required') && forma.get('marca').touched)">Este
           campo es
@@ -304,7 +309,8 @@
       </div>
 
       <div class="form-group col-md-6">
-        <input type="file" (change)="uploadDocument($event.target.files[0])" accept=".png, .jpg, .jpeg" name="img" id="img" class="form-control">
+        <input type="file" (change)="uploadDocument($event.target.files[0])" accept=".png, .jpg, .jpeg" name="img" id="img"
+          class="form-control">
       </div>
 
     </div>

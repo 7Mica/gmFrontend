@@ -1,5 +1,11 @@
 <div class="row">
+    <div class="col-md-12" align="left">
+        <h2>Mapas</h2>
+        <hr>
+    </div>
+</div>
 
+<div class="row">
     <div class="col-md-12">
 
 
@@ -13,7 +19,7 @@
                                 class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Localización
                                 del evento</span></a> </li>
                     <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i
-                                    class="ti-user"></i></span> <span class="hidden-xs-down">Croquís</span></a> </li>
+                                    class="ti-user"></i></span> <span class="hidden-xs-down">Croquis</span></a> </li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content tabcontent-border">
@@ -57,14 +63,19 @@
                         </div>
                     </div>
                     <div class="tab-pane  p-20" id="profile" role="tabpanel">
-                        <div class="p-20">
-                            <div class="row text-center">
 
-                                <img src="https://via.placeholder.com/700x450" alt="croquis">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <img src="{{croquisImg}}" alt="croquis">
+
                             </div>
+                        </div>
+
+                        <div class="p-20">
+
                             <br>
-                            <div class="row">
-                                <form [formGroup]="croquisForm">
+                            <form [formGroup]="croquisForm">
+                                <div class="row justify-content-md-center">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="croquis">Croquis</label>
@@ -81,11 +92,8 @@
                                             Subir croquis
                                         </button>
                                     </div>
-                                </form>
-
-
-                            </div>
-
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

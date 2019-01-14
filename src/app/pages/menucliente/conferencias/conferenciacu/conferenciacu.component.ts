@@ -69,7 +69,7 @@ export class ConferenciacuComponent implements OnInit {
           this.forma.get('salon').setValue(res.conferencias[0].salon);
           this.forma.get('hora').setValue(res.conferencias[0].hora);
           this.forma.get('duracion').setValue(res.conferencias[0].duracion);
-          this.forma.get('fecha').setValue(res.conferencias[0].fecha);
+          this.forma.get('fecha').setValue(new Date(res.conferencias[0].fecha));
         },
         (error: any) => {
           const toast = SWALCONFIG_TOAST;
@@ -124,10 +124,8 @@ export class ConferenciacuComponent implements OnInit {
 
     this.conferenciaService.crearConferencia(conferencia).subscribe(
       res => {
-        console.log(res);
 
-        // tslint:disable-next-line:prefer-const
-        let toast = SWALCONFIG_TOAST;
+        const toast = SWALCONFIG_TOAST;
         toast.title = 'Registro creado correctamente';
         toast.type = 'success';
         swal(toast);
@@ -144,8 +142,6 @@ export class ConferenciacuComponent implements OnInit {
   }
 
   getPonentesEvento() {
-    // tslint:disable-next-line:prefer-const
-
     this.usuarioeventoService.getPonentesPorEvento(this.data.idevento).subscribe(
       (res: any) => {
         this.ponentes = res.data;

@@ -25,12 +25,12 @@
             "styles": [
               "src/styles.css",
               "src/assets/css/pages/dashboard1.css",
-              "src/assets/plugins/c3-master/c3.min.css",
               "src/assets/plugins/bootstrap/css/bootstrap.css",
               "src/assets/css/style.css",
               "src/assets/css/pages/login-register-lock.css",
               "src/assets/css/colors/default.css",
-              "src/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css"
+              "src/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css",
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
             ],
             "scripts": [
               "node_modules/jspdf/dist/jspdf.min.js"

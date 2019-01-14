@@ -68,7 +68,7 @@ export class UsuariosComponent implements OnInit {
 
   eliminarUsuario(id) {
     const config = SWALCONFIG_CONFIRMDELETE;
-    config.text = config.text + 'evento';
+    config.text = 'Se eliminará permamentemente el registro';
 
     swal(config).then(result => {
       if (result.value) {

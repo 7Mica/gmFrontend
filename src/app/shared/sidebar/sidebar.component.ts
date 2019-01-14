@@ -9,13 +9,13 @@ import { SidebarService, UsuarioService } from '../../services/service.index';
 export class SidebarComponent implements OnInit {
   menu: any = [];
   constructor(public _sidebar: SidebarService, private usuarioService: UsuarioService) {
-    
-    if(this.usuarioService.tipoLogin()){
+
+    if (this.usuarioService.tipoLogin()) {
       this.menu = this._sidebar.menuAdmin;
-    }else{
+    } else {
       this.menu = this._sidebar.menuCliente;
     }
-   }
+  }
 
   ngOnInit() {
   }

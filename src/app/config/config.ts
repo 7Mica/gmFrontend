@@ -26,6 +26,27 @@ export const DTCONFIG_DELETE_EDIT_BTNS = {
     }
 };
 
+export const TABLE = {
+    mode: 'external',
+    columns: {},
+    noDataMessage: 'No hay datos disponibles',
+    attr: {
+        class: 'display nowrap table table-hover table-striped table-bordered'
+    },
+    pager: {
+        perPage: 5
+    },
+    actions: {
+        columnTitle: '',
+        add: false,
+        edit: false,
+        delete: false,
+        new: false,
+        position: 'right',
+        custom: [],
+    }
+};
+
 /**********************
  * CONFIGURACION SWAL *
  **********************/
@@ -40,8 +61,8 @@ export const SWALCONFIG_CONFIRMDELETE: any = {
     text: 'Se eliminará permamentemente el registro?',
     type: 'warning',
     showCancelButton: true,
-    confirmButtonText: 'Sí, eliminar',
-    cancelButtonText: 'No, Cancelar'
+    confirmButtonText: 'Sí',
+    cancelButtonText: 'No'
 };
 
 export const SWALCONFIG_ALERT: any = {
@@ -55,9 +76,11 @@ export const SWALCONFIG_TOAST: any = {
     type: 'success',
     showConfirmButton: false,
     position: 'top-end',
+    text: '',
     title: 'Se eliminó el registro',
     timer: 4000
 };
 
 export const IMAGEHOSTUSUARIO  = 'http://localhost:3000/usuario/img/';
 export const IMAGEHOSTUSUARIOEVENTO  = 'http://localhost:3000/usuarioevento/img/';
+export const IMAGEHOSTCROQUIS  = 'http://localhost:3000/evento/img/croquis/';

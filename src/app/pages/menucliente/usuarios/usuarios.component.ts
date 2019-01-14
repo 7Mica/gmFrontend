@@ -22,26 +22,26 @@ export class UsuariosComponent implements OnInit {
 
   constructor(private router: Router, public modalService: BsModalService,
     public _usuarioService: UsuarioeventoService, private activatedRoute: ActivatedRoute) {
-      this.source = new LocalDataSource();
-      this.settings.columns = {
+    this.source = new LocalDataSource();
+    this.settings.columns = {
 
-        nombre: {
-          title: 'Nombre'
-        },
-        apellidoPaterno: {
-          title: 'Apellido Paterno'
-        },
-        apellidoMaterno: {
-          title: 'Apellido Materno'
-        },
-        email: {
-          title: 'Email'
-        },
-        rol: {
-          title: 'Rol de usuario'
-        },
+      nombre: {
+        title: 'Nombre'
+      },
+      apellidoPaterno: {
+        title: 'Apellido Paterno'
+      },
+      apellidoMaterno: {
+        title: 'Apellido Materno'
+      },
+      email: {
+        title: 'Email'
+      },
+      rol: {
+        title: 'Rol de usuario'
+      },
 
-      };
+    };
     this.getUsuarios();
   }
 
@@ -84,9 +84,9 @@ export class UsuariosComponent implements OnInit {
       class: 'modal-lg',
       initialState: {
         titulo: 'Editar usuario',
-          edit: true,
-          _id: event.data._id,
-          idevento: this.activatedRoute.snapshot.params.idevento
+        edit: true,
+        _id: event.data._id,
+        idevento: this.activatedRoute.snapshot.params.idevento
       }
     });
 
