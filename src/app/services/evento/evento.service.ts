@@ -21,6 +21,12 @@ export class EventoService {
     }));
   }
 
+  sendMessage(body) {
+    const url = URL_SERVICIOS + '/send/message';
+
+    return this.http.post(url, body);
+  }
+
   updateEvento(id, data) {
     const url = URL_SERVICIOS + '/evento/' + id;
     return this.http.put(url, data);

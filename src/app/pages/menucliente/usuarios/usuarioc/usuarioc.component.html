@@ -279,6 +279,7 @@
       </div>
 
       <div class="form-group col-md-6">
+        <label>Rol del usuario</label>
         <select (change)="onChange($event)" formControlName="rol" id="rol" name="rol" class="form-control" [ngClass]="{
         'red-input': (forma.get('rol').hasError('required') && forma.get('rol').touched )|| 
         (formDir.submitted && forma.get('rol').hasError('required')) }">
@@ -294,9 +295,9 @@
       </div>
 
       <div class="form-group col-md-6" *ngIf="ponente">
-
+        <label>Institución</label>
         <ng-select formControlName="marca" [dropdownPosition]="'bottom'" [items]="marcas" bindLabel="titulo" bindValue="_id"
-          placeholder="Selecciona una marca" class="form-control" [ngClass]="{
+          placeholder="Selecciona una institución" class="form-control" [ngClass]="{
             'red-input': (forma.get('marca').hasError('required') && forma.get('marca').touched )|| 
             (formDir.submitted && forma.get('marca').hasError('required')) }">
         </ng-select>
@@ -309,6 +310,7 @@
       </div>
 
       <div class="form-group col-md-6">
+        <label>Foto de perfil</label>
         <input type="file" (change)="uploadDocument($event.target.files[0])" accept=".png, .jpg, .jpeg" name="img" id="img"
           class="form-control">
       </div>

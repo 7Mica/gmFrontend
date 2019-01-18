@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UsuarioService } from 'src/app/services/service.index';
+import { UsuarioService, EventoService } from 'src/app/services/service.index';
 import { AlertMessages } from 'src/app/config/alert-messages';
 
 @Component({
@@ -19,7 +19,8 @@ export class NuevomensajeComponent implements OnInit {
 
   constructor(public modalRef: BsModalRef,
     public modalService: BsModalService,
-    private api: UsuarioService) {
+    private api: UsuarioService,
+    private eventoService: EventoService) {
 
     this.dataModal = modalService.config.initialState;
 
@@ -47,6 +48,10 @@ export class NuevomensajeComponent implements OnInit {
       }
     );
 
+  }
+
+  sendMessage() {
+    console.log(this.mensajeForm.value);
   }
 
   // this.action.emit();
