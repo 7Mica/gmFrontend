@@ -22,7 +22,7 @@ export class EventoService {
   }
 
   sendMessage(body) {
-    const url = URL_SERVICIOS + '/send/message';
+    const url = URL_SERVICIOS + '/usuario/sendmessage';
 
     return this.http.post(url, body);
   }

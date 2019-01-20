@@ -51,7 +51,14 @@ export class NuevomensajeComponent implements OnInit {
   }
 
   sendMessage() {
-    console.log(this.mensajeForm.value);
+    this.eventoService.sendMessage(this.mensajeForm.value).subscribe(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   // this.action.emit();
