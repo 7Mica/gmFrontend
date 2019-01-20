@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService, Utils } from 'ngx-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsuarioService, EventoService } from 'src/app/services/service.index';
 import { AlertMessages } from 'src/app/config/alert-messages';
@@ -53,6 +53,7 @@ export class NuevomensajeComponent implements OnInit {
   sendMessage() {
     this.eventoService.sendMessage(this.mensajeForm.value).subscribe(
       res => {
+        AlertMessages.showToast('El mensaje ha sido enviado', '', 3000, 'success');
         console.log(res);
       },
       error => {
