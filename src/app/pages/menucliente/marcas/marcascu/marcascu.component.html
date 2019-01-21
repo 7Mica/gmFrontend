@@ -22,7 +22,7 @@
         <input minlength="2" maxlength="50" type="text" [ngClass]="{
                 'red-input': (forma.get('titulo').hasError('required') && forma.get('titulo').touched) || 
                 (formDir.submitted && forma.get('titulo').hasError('required') || forma.get('titulo').hasError('minlength') || forma.get('titulo').hasError(maxlength)) }"
-          formControlName="titulo" name="titulo" class="form-control" placeholder="Titulo del evento *" />
+          formControlName="titulo" name="titulo" class="form-control" placeholder="Titulo del institución *" />
 
         <p class="text-danger" *ngIf="(formDir.submitted && forma.get('titulo').hasError('required')) || (forma.get('titulo').hasError('required') && forma.get('titulo').touched)">Este
           campo es
@@ -139,14 +139,9 @@
 
       <div class="form-group col-md-6">
         <label for="img">Imagen de la conferencia</label>
-        <input type="file" class="form-control" [ngClass]="{
-                        'red-input': (forma.get('img').hasError('required') && forma.get('img').touched) || 
-                        (formDir.submitted && forma.get('img').hasError('required')) }"
-          formControlName="img" name="img" class="form-control" placeholder="Imagen del evento*" />
+        <input type="file" class="form-control" accept="image/*" (change)="changeListener($event)">
 
-        <p class="text-danger" *ngIf="(formDir.submitted && forma.get('img').hasError('required')) || (forma.get('img').hasError('required') && forma.get('img').touched)">Este
-          campo es
-          requerido *</p>
+       
 
 
       </div>

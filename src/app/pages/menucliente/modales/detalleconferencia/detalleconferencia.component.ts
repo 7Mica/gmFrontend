@@ -45,7 +45,7 @@ export class DetalleconferenciaComponent implements OnInit {
     this.conferenciaService.getConferenciaById(this.data.idconferencia).subscribe((res: any) => {
 
       this.source = res.conferencias[0].asistentes
-                      .filter(conferencia => conferencia.asistencia[0].entrada && conferencia.asistencia[0].salida);
+        .filter(conferencia => conferencia.asistencia[0].entrada && conferencia.asistencia[0].salida);
 
 
 
@@ -68,8 +68,8 @@ export class DetalleconferenciaComponent implements OnInit {
 
   getMarca(idmarca) {
     this.eventoService.getMarcaById(idmarca).subscribe((res: any) => {
-
-      this.marca = (res.data) ? res.data.marcas[0] : null;
+      console.log(res.data);
+      this.marca = (res.data.length > 0) ? res.data[0].marcas[0] : null;
 
     }, error => {
       const toast = SWALCONFIG_TOAST;

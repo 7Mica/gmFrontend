@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { BsModalRef, BsModalService, Utils } from 'ngx-bootstrap';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsuarioService, EventoService } from 'src/app/services/service.index';
 import { AlertMessages } from 'src/app/config/alert-messages';
@@ -11,13 +11,14 @@ import { SWALCONFIG_CONFIRMDELETE } from 'src/app/config/config';
   templateUrl: './nuevomensaje.component.html',
   styleUrls: ['./nuevomensaje.component.css']
 })
-export class NuevomensajeComponent implements OnInit {
+export class NuevomensajeComponent implements OnInit, OnDestroy {
   @Output()
   action = new EventEmitter();
 
   mensajeForm: FormGroup;
   dataModal: any;
   clientes: any[] = [];
+  dateNow = new Date();
 
   constructor(public modalRef: BsModalRef,
     public modalService: BsModalService,
@@ -29,13 +30,24 @@ export class NuevomensajeComponent implements OnInit {
     this.mensajeForm = new FormGroup({
       titulo: new FormControl(null, Validators.required),
       cliente: new FormControl(null, [Validators.required]),
-      cuerpomensaje: new FormControl(null, Validators.required)
+      cuerpo: new FormControl(null, Validators.required)
     });
 
     this.getClientes();
   }
 
   ngOnInit() {
+    if (this.dataModal.data) {
+
+      this.mensajeForm.get('titulo').setValue(this.dataModal.data.titulo);
+      this.mensajeForm.get('cliente').setValue(this.dataModal.data.tocliente);
+      this.mensajeForm.get('cuerpo').setValue(this.dataModal.data.cuerpo);
+      this.mensajeForm.get('cliente').disable();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.cerrar();
   }
 
   getClientes() {
@@ -61,16 +73,24 @@ export class NuevomensajeComponent implements OnInit {
           res => {
             this.modalRef.hide();
             AlertMessages.showToast('Mensaje enviado correctamente', '', 3000, 'success');
+            this.action.emit(true);
           },
           error => {
-            console.log(error);
+            AlertMessages.showToast(error, 'Error', 3000, 'error');
           }
         );
       }
-    }).catch();
+    }).catch(err => { AlertMessages.showToast('Error al elegir opción', '', 3000, 'error'); });
 
   }
 
-  // this.action.emit();
-  // this.modalRef.hide();
+  cerrar() {
+    if (!this.api.tipoLogin()) {
+      this.action.emit(true);
+      this.modalRef.hide();
+    } else {
+      this.modalRef.hide();
+    }
+  }
+
 }

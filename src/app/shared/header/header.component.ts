@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   usuario: string;
   img: any;
   email: string;
-  constructor(private _usuarioService: UsuarioService) {
+  constructor(public _usuarioService: UsuarioService) {
     this.usuario = _usuarioService.infoUsuarioActual().nombre;
 
     this.email = _usuarioService.infoUsuarioActual().email;
