@@ -3,6 +3,8 @@ import { BsModalRef, BsModalService, Utils } from 'ngx-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsuarioService, EventoService } from 'src/app/services/service.index';
 import { AlertMessages } from 'src/app/config/alert-messages';
+import swal from 'sweetalert2';
+import { SWALCONFIG_CONFIRMDELETE } from 'src/app/config/config';
 
 @Component({
   selector: 'app-nuevomensaje',
@@ -51,15 +53,22 @@ export class NuevomensajeComponent implements OnInit {
   }
 
   sendMessage() {
-    this.eventoService.sendMessage(this.mensajeForm.value).subscribe(
-      res => {
-        AlertMessages.showToast('El mensaje ha sido enviado', '', 3000, 'success');
-        console.log(res);
-      },
-      error => {
-        console.log(error);
+    const confirm = SWALCONFIG_CONFIRMDELETE;
+    confirm.text = 'Se enviará el mensaje al cliente';
+    swal(confirm).then(resp => {
+      if (resp.value) {
+        this.eventoService.sendMessage(this.mensajeForm.value).subscribe(
+          res => {
+            this.modalRef.hide();
+            AlertMessages.showToast('Mensaje enviado correctamente', '', 3000, 'success');
+          },
+          error => {
+            console.log(error);
+          }
+        );
       }
-    );
+    }).catch();
+
   }
 
   // this.action.emit();
