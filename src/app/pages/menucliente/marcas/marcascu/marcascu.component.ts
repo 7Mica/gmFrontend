@@ -15,8 +15,9 @@ export class MarcascuComponent implements OnInit {
   action = new EventEmitter();
 
   data: any = {};
-
+  title: any;
   forma: FormGroup;
+  image: any;
 
   constructor(
     public modalRef: BsModalRef,
@@ -24,6 +25,7 @@ export class MarcascuComponent implements OnInit {
     private eventoService: EventoService,
   ) {
     this.data = this.modalService.config.initialState;
+    this.title = this.data.title;
   }
 
   ngOnInit() {
@@ -33,7 +35,6 @@ export class MarcascuComponent implements OnInit {
         Validators.minLength(2),
         Validators.maxLength(50)
       ]),
-      img: new FormControl(null, []),
       telefono: new FormControl(null, [
         Validators.required,
         Validators.minLength(2),
@@ -70,14 +71,15 @@ export class MarcascuComponent implements OnInit {
     if (this.data.idmarca) {
       this.eventoService.getMarcaById(this.data.idmarca).subscribe(
         (res: any) => {
-
-          this.forma.get('titulo').setValue(res.data.marcas[0].titulo);
-          this.forma.get('telefono').setValue(res.data.marcas[0].telefono);
-          this.forma.get('ciudad').setValue(res.data.marcas[0].ciudad);
-          this.forma.get('estado').setValue(res.data.marcas[0].estado);
-          this.forma.get('representante').setValue(res.data.marcas[0].representante);
-          this.forma.get('ambito').setValue(res.data.marcas[0].ambito);
-          this.forma.get('telefonodos').setValue(res.data.marcas[0].telefonodos);
+          console.log(res);
+          this.forma.get('titulo').setValue(res.data[0].marcas[0].titulo);
+          this.forma.get('telefono').setValue(res.data[0].marcas[0].telefono);
+          this.forma.get('ciudad').setValue(res.data[0].marcas[0].ciudad);
+          this.forma.get('estado').setValue(res.data[0].marcas[0].estado);
+          this.forma.get('representante').setValue(res.data[0].marcas[0].representante);
+          this.forma.get('ambito').setValue(res.data[0].marcas[0].ambito);
+          this.forma.get('telefonodos').setValue(res.data[0].marcas[0].telefonodos);
+          this.image = res.data[0].marcas[0].img;
 
         },
 
@@ -92,6 +94,20 @@ export class MarcascuComponent implements OnInit {
     }
   }
 
+  changeListener($event): void {
+    this.readThis($event.target);
+  }
+
+  readThis(inputValue: any): void {
+    const file: File = inputValue.files[0];
+    const myReader: FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+      this.image = myReader.result;
+    };
+    myReader.readAsDataURL(file);
+  }
+
   queAccionEs() {
     if (this.data.idmarca) {
       this.actualziarMarca(this.data.idmarca, this.data.idevento);
@@ -103,7 +119,7 @@ export class MarcascuComponent implements OnInit {
   actualziarMarca(idmarca, idevento) {
     const marca = this.forma.value;
     marca.evento = idevento;
-
+    marca.img = this.image;
     this.eventoService.updateMarcaById(idmarca, marca).subscribe(
       res => {
         console.log(res);
@@ -134,8 +150,9 @@ export class MarcascuComponent implements OnInit {
     }
 
     const idevento: any = this.modalService.config.initialState;
-
-    this.eventoService.newMarca(idevento.data, this.forma.value).subscribe(
+    const marca = this.forma.value;
+    marca.img = this.image;
+    this.eventoService.newMarca(idevento.data, marca).subscribe(
       res => {
         const toast = SWALCONFIG_TOAST;
         toast.type = 'success';

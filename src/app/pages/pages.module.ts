@@ -64,6 +64,7 @@ import { ChangePasswordComponent } from './menucliente/modales/change-password/c
         PagesIndex.MensajesComponent,
         PagesIndex.NuevomensajeComponent,
         PagesIndex.EdicionPortalComponent,
+        PagesIndex.PapeleraComponent,
     ],
     exports: [
         PagesIndex.DashboardComponent,

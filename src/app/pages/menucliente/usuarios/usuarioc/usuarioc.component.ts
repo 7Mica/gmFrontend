@@ -168,9 +168,7 @@ export class UsuariocComponent implements OnInit {
 
   getMarcas() {
     this.eventoService.getMarcasByEvento(this.data.idevento).subscribe((res: any) => {
-      res.data.marcas.forEach(element => {
-        this.marcas.push(element);
-      });
+      this.marcas = res.data.marcas;
 
     }, error => {
 

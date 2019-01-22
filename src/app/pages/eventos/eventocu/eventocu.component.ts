@@ -18,7 +18,7 @@ export class EventocuComponent implements OnInit {
   data: any;
 
   clientes: any[] = [];
-
+  image: any;
   titulo = '';
 
   constructor(
@@ -65,7 +65,7 @@ export class EventocuComponent implements OnInit {
         fechainicio: new FormControl(null, [Validators.required]),
         fechadefinalizacion: new FormControl(null, [Validators.required]),
 
-        img: new FormControl(null, []),
+        // img: new FormControl(null, []),
 
         calle: new FormControl(null, [
           Validators.required,
@@ -119,6 +119,20 @@ export class EventocuComponent implements OnInit {
     }
   }
 
+  changeListener($event): void {
+    this.readThis($event.target);
+  }
+
+  readThis(inputValue: any): void {
+    const file: File = inputValue.files[0];
+    const myReader: FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+      this.image = myReader.result;
+    };
+    myReader.readAsDataURL(file);
+  }
+
   elegirAccion() {
     if (this.data.idevento) {
       this.actualizarEvento();
@@ -129,7 +143,9 @@ export class EventocuComponent implements OnInit {
 
   actualizarEvento() {
     console.log(this.forma.value);
-    this._eventoService.updateEvento(this.data.idevento, this.forma.value).subscribe(
+    const data = this.forma.value;
+    data.img = this.image;
+    this._eventoService.updateEvento(this.data.idevento, data).subscribe(
       res => {
         const toast = SWALCONFIG_TOAST;
         toast.type = 'success';
@@ -156,9 +172,10 @@ export class EventocuComponent implements OnInit {
       return;
     }
 
-    // tslint:disable-next-line:prefer-const
-    let toast = SWALCONFIG_TOAST;
-    this._eventoService.crearEvento(this.forma.value).subscribe(
+    const toast = SWALCONFIG_TOAST;
+    const data = this.forma.value;
+    data.img = this.image;
+    this._eventoService.crearEvento(data).subscribe(
       res => {
         toast.title = 'Se creó el evento correctamente';
         swal(toast);
@@ -207,6 +224,7 @@ export class EventocuComponent implements OnInit {
         this.forma.get('colonia').setValue(res.data.direccion.colonia);
         this.forma.get('numeroexterior').setValue(res.data.direccion.numeroExterior);
         this.forma.get('numerointerior').setValue(res.data.direccion.numeroInterior);
+        this.image = this.image = res.data.img;
 
       },
 

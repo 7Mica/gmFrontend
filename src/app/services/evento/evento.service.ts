@@ -21,6 +21,31 @@ export class EventoService {
     }));
   }
 
+  sendMessage(body) {
+    const url = URL_SERVICIOS + '/usuario/sendmessage';
+
+    return this.http.post(url, body);
+  }
+
+  messageReaded(mensaje) {
+    const url = URL_SERVICIOS + '/usuario/leido';
+
+    return this.http.post(url, { mensaje: mensaje });
+  }
+
+  getMessageByCliente(cliente) {
+
+    const url = URL_SERVICIOS + '/usuario/getbycliente/' + cliente;
+    return this.http.get(url);
+
+  }
+
+  getMessages() {
+    const url = URL_SERVICIOS + '/usuario/getmessages';
+
+    return this.http.get(url);
+  }
+
   updateEvento(id, data) {
     const url = URL_SERVICIOS + '/evento/' + id;
     return this.http.put(url, data);
@@ -113,9 +138,9 @@ export class EventoService {
     return this.http.get(url);
   }
 
-/********************************
- * TODO REFERENTE A CONSTANCIAS *
- ********************************/
+  /********************************
+   * TODO REFERENTE A CONSTANCIAS *
+   ********************************/
 
   saveConstancia(data) {
     const url = URL_SERVICIOS + '/constancias';

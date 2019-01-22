@@ -12,6 +12,12 @@ import { StatsService } from 'src/app/services/stats/stats.service';
 })
 export class DashboardComponent implements OnInit {
 
+
+  /***************************
+   * DESACTIVADO HASTA TENER *
+   *      DATOS REALES       *
+   ***************************/
+
   public lineChartOptions: any = {
     responsive: true,
     maintainAspectRatio: false

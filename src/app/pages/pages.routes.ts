@@ -22,16 +22,21 @@ const pagesRoutes: Routes = [
         canActivate: [ClienteGuardGuard],
         data: { titulo: 'Usuarios' }
       },
-      {
-        path: 'editar-portal',
-        component: PagesIndex.EdicionPortalComponent,
-        canActivate: [ClienteGuardGuard],
-        data: { titulo: 'Editar Portal' }
-      },
+      // {
+      //   path: 'papelera',
+      //   component: PagesIndex.PapeleraComponent,
+      //   canActivate: [ClienteGuardGuard],
+      //   data: { titulo: 'Papelera' }
+      // },
+      // {
+      //   path: 'editar-portal',
+      //   component: PagesIndex.EdicionPortalComponent,
+      //   canActivate: [ClienteGuardGuard],
+      //   data: { titulo: 'Editar Portal' }
+      // },
       {
         path: 'mensajes',
         component: PagesIndex.MensajesComponent,
-        canActivate: [ClienteGuardGuard],
         data: { titulo: 'Mensajes' }
       },
       {

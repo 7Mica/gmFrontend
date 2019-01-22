@@ -24,23 +24,28 @@ export class SidebarService {
       icono: 'ti-comment-alt',
       url: '/mensajes'
     },
-    {
-      titulo: 'Portal',
-      icono: 'ti-layout-cta-btn-left',
-      url: '/editar-portal'
-    },
-    {
-      titulo: 'Papelera',
-      icono: 'ti-trash',
-      url: '/papelera'
-    }
+    // {
+    //   titulo: 'Portal',
+    //   icono: 'ti-layout-cta-btn-left',
+    //   url: '/editar-portal'
+    // },
+    // {
+    //   titulo: 'Papelera',
+    //   icono: 'ti-trash',
+    //   url: '/papelera'
+    // }
   ];
 
   menuCliente: any = [
     {
       titulo: 'Eventos',
-      icono: 'material-icons',
+      icono: 'ti-blackboard',
       url: '/eventos'
+    },
+    {
+      titulo: 'Mensajes',
+      icono: 'ti-comment-alt',
+      url: '/mensajes'
     }
   ];
 

@@ -1,7 +1,7 @@
 <div class="modal-header">
   <h4 class="modal-title">{{ dataModal.title }}</h4>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-    <span class="pointer" aria-hidden="true">&times;</span>
+    <span class="pointer" aria-hidden="true" (click)="cerrar()">&times;</span>
   </button>
 </div>
 <form [formGroup]="mensajeForm" (ngSubmit)="sendMessage()">
@@ -12,9 +12,9 @@
 
         <div class="form-group">
           <label for="titulo">Titulo del mensaje</label>
-          <input type="text" name="titulo" formControlName="titulo" class="form-control" placeholder=""
-            aria-describedby="helpTitulo">
-          <small id="helpTitulo" class="text-muted">Escribe el titulo del mensaje</small>
+          <input type="text" name="titulo" [attr.disabled]="dataModal.data" formControlName="titulo" class="form-control"
+            placeholder="" aria-describedby="helpTitulo">
+          <small id="helpTitulo" class="text-muted" *ngIf="!dataModal.data">Escribe el titulo del mensaje</small>
         </div>
 
         <div class="form-group">
@@ -24,14 +24,18 @@
           </ng-select>
         </div>
 
-
+        <div class="form-group" *ngIf="dataModal.data">
+          <label>Fecha del mensaje:</label> <br>
+          <label>{{ dataModal.data.fechaenviado | date: 'dd/MM/yyyy hh:mm:ss' }}</label>
+        </div>
       </div>
 
       <div class="col-md-8">
         <div class="form-group">
-          <label for="cuerpomensaje">Cuerpo del mensaje</label>
-          <textarea class="form-control" formControlName="cuerpomensaje" name="cuerpomensaje" cols="30" rows="10"></textarea>
-          <small id="helpCuerpo" class="text-muted">Escribe el mensaje que deseas enviar</small>
+          <label for="cuerpo">Cuerpo del mensaje</label>
+          <textarea [attr.disabled]="dataModal.data" class="form-control" formControlName="cuerpo" name="cuerpo" cols="30"
+            rows="10"></textarea>
+          <small id="helpCuerpo" class="text-muted" *ngIf="!dataModal.data">Escribe el mensaje que deseas enviar</small>
         </div>
 
       </div>
@@ -40,6 +44,6 @@
   </div>
 
   <div class="modal-footer">
-    <button type="submit" class="btn btn-facebook btn-block">Enviar</button>
+    <button type="submit" [disabled]="mensajeForm.invalid" class="btn btn-facebook btn-block" *ngIf="!dataModal.data">Enviar</button>
   </div>
 </form>

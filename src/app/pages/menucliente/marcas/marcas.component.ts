@@ -109,7 +109,7 @@ export class MarcasComponent implements OnInit {
     const modalRef = this.modalService.show(MarcascuComponent, {
       class: 'modal-xl',
       initialState: {
-        title: 'Editar marca',
+        title: 'Editar institución',
         idmarca: id,
         idevento: evento
       }
